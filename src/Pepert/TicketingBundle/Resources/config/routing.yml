@@ -1,0 +1,3 @@
+pepert_ticketing_homepage:
+    path:     /
+    defaults: { _controller: PepertTicketingBundle:Default:index }
