@@ -50,6 +50,13 @@ class Ticket
     private $visitDay;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birthday", type="date")
+     */
+    private $birthday;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="price", type="integer")
@@ -222,5 +229,28 @@ class Ticket
     {
         return $this->ticketType;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \Pepert\TicketingBundle\Entity\User $user
+     *
+     * @return Ticket
+     */
+    public function setUser(\Pepert\TicketingBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Pepert\TicketingBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

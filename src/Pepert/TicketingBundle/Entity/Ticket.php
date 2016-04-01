@@ -50,6 +50,13 @@ class Ticket
     private $visitDay;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birthday", type="date")
+     */
+    private $birthday;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="price", type="integer")
@@ -245,5 +252,29 @@ class Ticket
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set birthday
+     *
+     * @param \DateTime $birthday
+     *
+     * @return Ticket
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    /**
+     * Get birthday
+     *
+     * @return \DateTime
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
     }
 }

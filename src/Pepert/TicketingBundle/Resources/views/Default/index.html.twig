@@ -1,1 +1,103 @@
-Hello World!
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Billetterie</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    {% endblock %}
+</head>
+
+<body>
+<div class="container text-center">
+    <div id="header">
+        <h1>Billetterie du Musée du Louvre</h1>
+    </div>
+
+    <hr/>
+
+    <div id="content" class="col-md-12">
+        <h3>Acheter un ticket</h3>
+
+        <div class="well">
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            {{ form_errors(form) }}
+
+            <div class="form-group">
+                {{ form_errors(form.name) }}
+                {{ form_label(form.name, "Nom", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+
+                <div class="col-sm-6">
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_errors(form.firstname) }}
+                {{ form_label(form.firstname, "Prénom", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                <div class="col-sm-6">
+                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_errors(form.email) }}
+                {{ form_label(form.email, "Adresse e-mail", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+
+                <div class="col-sm-6">
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_errors(form.visit_day) }}
+                {{ form_label(form.visit_day, "Date de votre visite", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                <div class="col-sm-6">
+                    {{ form_widget(form.visit_day) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_errors(form.ticket_type) }}
+                {{ form_label(form.ticket_type, "Type de ticket", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                <div class="col-sm-6">
+                    {{ form_widget(form.ticket_type, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_errors(form.ticket_number) }}
+                {{ form_label(form.ticket_number, "Nombre de tickets voulus", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                <div class="col-sm-6">
+                    {{ form_widget(form.ticket_number) }}
+                </div>
+            </div>
+
+            <hr/>
+
+            {{ form_widget(form.submit, {'label': 'Choisir un tarif', 'attr': {'class': 'btn btn-primary'}}) }}
+
+            {{ form_rest(form) }}
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <hr>
+
+    <footer>
+        <div>
+
+        </div>
+    </footer>
+</div>
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{% endblock %}
+
+</body>
+</html>
