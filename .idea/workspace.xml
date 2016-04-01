@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4196277d-8390-4481-aa39-75035a2258d7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/ticket.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/User.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Form/Type/TicketType.php" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Form/Type/TicketType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/ticket.html.twig" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/ticket.html.twig" />
     </list>
     <ignored path="BilletterieLouvre.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,8 +40,8 @@
       <file leaf-file-name="TicketingController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-22.076923">
-              <caret line="60" column="62" selection-start-line="60" selection-start-column="62" selection-end-line="60" selection-end-column="62" />
+            <state vertical-scroll-proportion="-16.192308">
+              <caret line="82" column="87" selection-start-line="82" selection-start-column="87" selection-end-line="82" selection-end-column="87" />
               <folding>
                 <element signature="e#53#110#0#PHP" expanded="true" />
               </folding>
@@ -51,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ticket.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ticket.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/ticket.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.76301616">
-              <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+            <state vertical-scroll-proportion="-43.807693">
+              <caret line="67" column="22" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -84,46 +82,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.115385">
-              <caret line="109" column="6" selection-start-line="109" selection-start-column="6" selection-end-line="109" selection-end-column="6" />
-              <folding>
-                <marker date="1459528994690" expanded="true" signature="86:209" placeholder=" User ..." />
-                <marker date="1459528994690" expanded="true" signature="222:3565" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="232:366" placeholder=" @var int ..." />
-                <marker date="1459528994690" expanded="true" signature="394:485" placeholder=" @var string ..." />
-                <marker date="1459528994690" expanded="true" signature="646:738" placeholder=" @var string ..." />
-                <marker date="1459528994690" expanded="true" signature="769:854" placeholder=" @var \DateTime ..." />
-                <marker date="1459528994690" expanded="true" signature="888:986" placeholder=" @var string ..." />
-                <marker date="1459528994690" expanded="true" signature="1022:1108" placeholder=" @var int ..." />
-                <marker date="1459528994690" expanded="true" signature="1146:1246" placeholder=" @ORM\OneToMany(targetEntity = &quot;Pepert\TicketingBundle\Entity\Ticket&quot;, mappedBy=&quot;user&quot;) ..." />
-                <marker date="1459528994690" expanded="true" signature="1280:1326" placeholder=" Get id ..." />
-                <marker date="1459528994690" expanded="true" signature="1356:1394" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="1403:1486" placeholder=" Set name ..." />
-                <marker date="1459528994690" expanded="true" signature="1523:1587" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="1596:1647" placeholder=" Get name ..." />
-                <marker date="1459528994690" expanded="true" signature="1679:1719" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="1728:1821" placeholder=" Set firstname ..." />
-                <marker date="1459528994690" expanded="true" signature="1868:1942" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="1951:2007" placeholder=" Get firstname ..." />
-                <marker date="1459528994690" expanded="true" signature="2044:2089" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="2098:2183" placeholder=" Set email ..." />
-                <marker date="1459528994690" expanded="true" signature="2222:2288" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="2297:2349" placeholder=" Get email ..." />
-                <marker date="1459528994690" expanded="true" signature="2382:2423" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="2432:2526" placeholder=" Set visitDay ..." />
-                <marker date="1459528994690" expanded="true" signature="2571:2643" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="2652:2710" placeholder=" Get visitDay ..." />
-                <marker date="1459528994690" expanded="true" signature="2746:2790" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="2799:2894" placeholder=" Set ticketType ..." />
-                <marker date="1459528994690" expanded="true" signature="2943:3019" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="3028:3085" placeholder=" Get ticketType ..." />
-                <marker date="1459528994690" expanded="true" signature="3123:3169" placeholder="{...}" />
-                <marker date="1459528994690" expanded="true" signature="3178:3278" placeholder=" Set ticketNumber ..." />
-                <marker date="1459528994690" expanded="true" signature="3331:3411" placeholder="{...}" />
-              </folding>
+            <state vertical-scroll-proportion="0.66247755">
+              <caret line="74" column="18" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -153,8 +117,8 @@
       <file leaf-file-name="TicketType.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Form/Type/TicketType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.384615">
-              <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+            <state vertical-scroll-proportion="-4.576923">
+              <caret line="10" column="60" selection-start-line="10" selection-start-column="60" selection-end-line="10" selection-end-column="60" />
               <folding>
                 <element signature="e#51#91#0#PHP" expanded="true" />
               </folding>
@@ -174,11 +138,11 @@
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Form/Type/UserType.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Default/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/config/routing.yml" />
+        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Form/Type/TicketType.php" />
+        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/ticket.html.twig" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/User.php" />
-        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php" />
-        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/ticket.html.twig" />
       </list>
     </option>
   </component>
@@ -194,7 +158,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1370" />
+    <option name="width" value="1382" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -483,10 +447,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1370" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26030535" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2579425" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -619,14 +583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-61.46154">
-          <caret line="94" column="6" selection-start-line="94" selection-start-column="6" selection-end-line="94" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Form/Type/UserType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.0">
@@ -637,55 +593,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-61.46154">
+          <caret line="94" column="6" selection-start-line="94" selection-start-column="6" selection-end-line="94" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Form/Type/TicketType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.384615">
-          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+        <state vertical-scroll-proportion="-4.576923">
+          <caret line="10" column="60" selection-start-line="10" selection-start-column="60" selection-end-line="10" selection-end-column="60" />
           <folding>
             <element signature="e#51#91#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/User.php">
+    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.115385">
-          <caret line="109" column="6" selection-start-line="109" selection-start-column="6" selection-end-line="109" selection-end-column="6" />
+        <state vertical-scroll-proportion="-16.192308">
+          <caret line="82" column="87" selection-start-line="82" selection-start-column="87" selection-end-line="82" selection-end-column="87" />
           <folding>
-            <marker date="1459528994690" expanded="true" signature="86:209" placeholder=" User ..." />
-            <marker date="1459528994690" expanded="true" signature="222:3565" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="232:366" placeholder=" @var int ..." />
-            <marker date="1459528994690" expanded="true" signature="394:485" placeholder=" @var string ..." />
-            <marker date="1459528994690" expanded="true" signature="646:738" placeholder=" @var string ..." />
-            <marker date="1459528994690" expanded="true" signature="769:854" placeholder=" @var \DateTime ..." />
-            <marker date="1459528994690" expanded="true" signature="888:986" placeholder=" @var string ..." />
-            <marker date="1459528994690" expanded="true" signature="1022:1108" placeholder=" @var int ..." />
-            <marker date="1459528994690" expanded="true" signature="1146:1246" placeholder=" @ORM\OneToMany(targetEntity = &quot;Pepert\TicketingBundle\Entity\Ticket&quot;, mappedBy=&quot;user&quot;) ..." />
-            <marker date="1459528994690" expanded="true" signature="1280:1326" placeholder=" Get id ..." />
-            <marker date="1459528994690" expanded="true" signature="1356:1394" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="1403:1486" placeholder=" Set name ..." />
-            <marker date="1459528994690" expanded="true" signature="1523:1587" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="1596:1647" placeholder=" Get name ..." />
-            <marker date="1459528994690" expanded="true" signature="1679:1719" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="1728:1821" placeholder=" Set firstname ..." />
-            <marker date="1459528994690" expanded="true" signature="1868:1942" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="1951:2007" placeholder=" Get firstname ..." />
-            <marker date="1459528994690" expanded="true" signature="2044:2089" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="2098:2183" placeholder=" Set email ..." />
-            <marker date="1459528994690" expanded="true" signature="2222:2288" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="2297:2349" placeholder=" Get email ..." />
-            <marker date="1459528994690" expanded="true" signature="2382:2423" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="2432:2526" placeholder=" Set visitDay ..." />
-            <marker date="1459528994690" expanded="true" signature="2571:2643" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="2652:2710" placeholder=" Get visitDay ..." />
-            <marker date="1459528994690" expanded="true" signature="2746:2790" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="2799:2894" placeholder=" Set ticketType ..." />
-            <marker date="1459528994690" expanded="true" signature="2943:3019" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="3028:3085" placeholder=" Get ticketType ..." />
-            <marker date="1459528994690" expanded="true" signature="3123:3169" placeholder="{...}" />
-            <marker date="1459528994690" expanded="true" signature="3178:3278" placeholder=" Set ticketNumber ..." />
-            <marker date="1459528994690" expanded="true" signature="3331:3411" placeholder="{...}" />
+            <element signature="e#53#110#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/ticket.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-43.807693">
+          <caret line="67" column="22" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -697,20 +637,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php">
+    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.076923">
-          <caret line="60" column="62" selection-start-line="60" selection-start-column="62" selection-end-line="60" selection-end-column="62" />
-          <folding>
-            <element signature="e#53#110#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/ticket.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.76301616">
-          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.66247755">
+          <caret line="74" column="18" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
           <folding />
         </state>
       </provider>

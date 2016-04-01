@@ -64,7 +64,7 @@ class User
     private $ticketNumber;
 
     /**
-     * @ORM\OneToMany(targetEntity = "Pepert\TicketingBundle\Entity\Ticket", mappedBy="user")
+     * @ORM\OneToMany(targetEntity = "Pepert\TicketingBundle\Entity\Ticket", mappedBy="user", cascade={"persist"})
      */
     private $tickets;
 
@@ -262,5 +262,15 @@ class User
     public function getTickets()
     {
         return $this->tickets;
+    }
+
+    /**
+     * Set tickets
+     *
+     * @param \Doctrine\Common\Collections\Collection $tickets
+     */
+    public function setTicket(\Doctrine\Common\Collections\Collection $tickets)
+    {
+        $this->tickets = $tickets;
     }
 }

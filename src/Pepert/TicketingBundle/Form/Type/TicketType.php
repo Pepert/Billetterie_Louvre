@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class TicketType extends AbstractType
 {
@@ -21,7 +20,6 @@ class TicketType extends AbstractType
             ->add('country',CountryType::class)
             ->add('birthday',BirthdayType::class)
             ->add('tarif_reduit',CheckboxType::class)
-            ->add('submit',SubmitType::class)
             ;
     }
 

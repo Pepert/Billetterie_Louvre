@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Pepert\TicketingBundle\Entity\User;
 use Pepert\TicketingBundle\Entity\Ticket;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Pepert\TicketingBundle\Form\Type\UserType;
 use Pepert\TicketingBundle\Form\Type\TicketType;
 
@@ -55,27 +57,27 @@ class TicketingController extends Controller
         for($i = 0; $i < $nbTickets; $i ++)
         {
             $ticket = new Ticket();
-            $ticket->setUser($buyer);
+            $buyer->addTicket($ticket);
         }
 
-        $form = $this->createForm(TicketType::class, $ticket);
+        $formBuilder = $this->createFormBuilder($buyer);
+
+        $formBuilder
+            ->add('tickets', CollectionType::class, array('entry_type' => TicketType::class))
+            ->add('submit',SubmitType::class)
+        ;
+
+        $form = $formBuilder->getForm();
+
 
         if ($form->handleRequest($request)->isValid())
         {
-            $tickets = $buyer->getTickets();
-
             $em = $this->getDoctrine()->getManager();
-
-            for($i = 0; $i < $nbTickets; $i ++)
-            {
-                $em->persist($tickets[$i]);
-                $tickets[$i]->setUser($buyer);
-            }
 
             $em->persist($buyer);
             $em->flush();
 
-            return $this->render('PepertTicketingBundle:Ticketing:validation.html.twig');
+            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
         }
 
         return $this->render('PepertTicketingBundle:Ticketing:ticket.html.twig', array(

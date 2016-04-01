@@ -25,6 +25,71 @@
 
     <h3>Acheter un ticket</h3>
 
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+    {% for form in form.tickets %}
+        {% set visitorNumber = visitorNumber + 1 %}
+
+        <div class="well visitorform">
+
+            <h3>Visiteur n°<span id="{{ 'visitor' ~ visitorNumber }}">{{ visitorNumber }}</span></h3>
+
+            {{ form_errors(form) }}
+
+            <div class="form-group">
+                {{ form_errors(form.name) }}
+                {{ form_label(form.name, "Nom", {'label_attr': {'class': 'col-sm-3 control-label' }}) }}
+                <div class="col-sm-6">
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_errors(form.firstname) }}
+                {{ form_label(form.firstname, "Prénom", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                <div class="col-sm-6">
+                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_errors(form.country) }}
+                {{ form_label(form.country, "Pays", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                <div class="col-sm-6">
+                    {{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_errors(form.birthday) }}
+                {{ form_label(form.birthday, "Date de naissance", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                <div class="col-sm-6">
+                    {{ form_widget(form.birthday) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_errors(form.tarif_reduit) }}
+                <div class="col-sm-offset-3 col-sm-6">
+                    {{ form_label(form.tarif_reduit, "Beneficier du tarif réduit", {'label_attr': {'class': 'control-label'}}) }}
+                </div>
+                <div class="col-sm-offset-3 col-sm-6">
+                    {{ form_widget(form.tarif_reduit) }}
+                </div>
+            </div>
+
+            {{ form_rest(form) }}
+
+        </div>
+
+    {% endfor %}
+
+    <hr/>
+
+    {{ form_widget(form.submit, {'label': 'Valider', 'attr': {'class': 'btn btn-primary'}}) }}
+
+    {{ form_end(form) }}
+
     <hr>
 
     <footer>
