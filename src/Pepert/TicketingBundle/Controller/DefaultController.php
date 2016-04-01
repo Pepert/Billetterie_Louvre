@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('PepertTicketingBundle:Default:index.html.twig');
+        return $this->render('PepertTicketingBundle:Ticketing:index.html.twig');
     }
 }

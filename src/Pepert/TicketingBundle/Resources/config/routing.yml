@@ -1,3 +1,9 @@
 pepert_ticketing_homepage:
     path:     /
     defaults: { _controller: PepertTicketingBundle:Ticketing:index }
+
+pepert_ticketing_tickets:
+    path:     /ticket/{nbTickets}
+    defaults: { _controller: PepertTicketingBundle:Ticketing:ticket }
+    requirements:
+        nbTickets: \d+

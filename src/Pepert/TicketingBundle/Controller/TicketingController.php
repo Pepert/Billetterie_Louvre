@@ -16,7 +16,25 @@ class TicketingController extends Controller
 
         $form = $this->createForm(UserType::class, $user);
 
-        return $this->render('PepertTicketingBundle:Default:index.html.twig', array(
+        if ($form->handleRequest($request)->isValid())
+        {
+            $nbTickets = $form["ticket_number"]->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $idBuyer = $user->getId();
+            $request->getSession()->set('idBuyer', $idBuyer);
+
+            $request->getSession()->getFlashBag()->add('validation', 'Votre identité à bien été enregistrée');
+
+            return $this->redirect($this->generateUrl('pepert_ticketing_tickets', array(
+                'nbTickets' => $nbTickets
+            )));
+        }
+
+        return $this->render('PepertTicketingBundle:Ticketing:index.html.twig', array(
             'form' => $form->createView(),
         ));
     }
