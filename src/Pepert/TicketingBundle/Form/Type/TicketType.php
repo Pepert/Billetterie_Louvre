@@ -20,7 +20,7 @@ class TicketType extends AbstractType
             ->add('firstname',TextType::class)
             ->add('country',CountryType::class)
             ->add('birthday',BirthdayType::class)
-            ->add('tarif',CheckboxType::class)
+            ->add('tarif_reduit',CheckboxType::class)
             ->add('submit',SubmitType::class)
             ;
     }

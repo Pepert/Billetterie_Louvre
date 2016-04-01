@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use Pepert\TicketingBundle\Entity\User;
+use Pepert\TicketingBundle\Entity\Ticket;
 use Pepert\TicketingBundle\Form\Type\UserType;
+use Pepert\TicketingBundle\Form\Type\TicketType;
 
 class TicketingController extends Controller
 {
@@ -36,6 +38,49 @@ class TicketingController extends Controller
 
         return $this->render('PepertTicketingBundle:Ticketing:index.html.twig', array(
             'form' => $form->createView(),
+        ));
+    }
+
+    public function ticketAction(Request $request, $nbTickets)
+    {
+        $idBuyer = $request->getSession()->get('idBuyer');
+
+        $buyer = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PepertTicketingBundle:User')
+            ->find($idBuyer)
+        ;
+
+        for($i = 0; $i < $nbTickets; $i ++)
+        {
+            $ticket = new Ticket();
+            $ticket->setUser($buyer);
+        }
+
+        $form = $this->createForm(TicketType::class, $ticket);
+
+        if ($form->handleRequest($request)->isValid())
+        {
+            $tickets = $buyer->getTickets();
+
+            $em = $this->getDoctrine()->getManager();
+
+            for($i = 0; $i < $nbTickets; $i ++)
+            {
+                $em->persist($tickets[$i]);
+                $tickets[$i]->setUser($buyer);
+            }
+
+            $em->persist($buyer);
+            $em->flush();
+
+            return $this->render('PepertTicketingBundle:Ticketing:validation.html.twig');
+        }
+
+        return $this->render('PepertTicketingBundle:Ticketing:ticket.html.twig', array(
+            'form' => $form->createView(),
+            'nbTickets' => $nbTickets,
         ));
     }
 }

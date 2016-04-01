@@ -222,45 +222,5 @@ class User
     {
         return $this->ticketNumber;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add ticket
-     *
-     * @param \Pepert\TicketingBundle\Entity\Ticket $ticket
-     *
-     * @return User
-     */
-    public function addTicket(\Pepert\TicketingBundle\Entity\Ticket $ticket)
-    {
-        $this->tickets[] = $ticket;
-
-        return $this;
-    }
-
-    /**
-     * Remove ticket
-     *
-     * @param \Pepert\TicketingBundle\Entity\Ticket $ticket
-     */
-    public function removeTicket(\Pepert\TicketingBundle\Entity\Ticket $ticket)
-    {
-        $this->tickets->removeElement($ticket);
-    }
-
-    /**
-     * Get tickets
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTickets()
-    {
-        return $this->tickets;
-    }
 }
+

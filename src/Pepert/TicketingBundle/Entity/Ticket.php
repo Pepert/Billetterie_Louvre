@@ -57,6 +57,13 @@ class Ticket
     private $birthday;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="tarif_reduit", type="boolean")
+     */
+    private $tarifReduit;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="price", type="integer")
@@ -71,7 +78,7 @@ class Ticket
     private $ticketType;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "Pepert\TicketingBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity = "Pepert\TicketingBundle\Entity\User",inversedBy="tickets")
      */
     private $user;
 
@@ -276,5 +283,53 @@ class Ticket
     public function getBirthday()
     {
         return $this->birthday;
+    }
+
+    /**
+     * Set tarif
+     *
+     * @param boolean $tarif
+     *
+     * @return Ticket
+     */
+    public function setTarif($tarif)
+    {
+        $this->tarif = $tarif;
+
+        return $this;
+    }
+
+    /**
+     * Get tarif
+     *
+     * @return boolean
+     */
+    public function getTarif()
+    {
+        return $this->tarif;
+    }
+
+    /**
+     * Set tarifReduit
+     *
+     * @param boolean $tarifReduit
+     *
+     * @return Ticket
+     */
+    public function setTarifReduit($tarifReduit)
+    {
+        $this->tarifReduit = $tarifReduit;
+
+        return $this;
+    }
+
+    /**
+     * Get tarifReduit
+     *
+     * @return boolean
+     */
+    public function getTarifReduit()
+    {
+        return $this->tarifReduit;
     }
 }
