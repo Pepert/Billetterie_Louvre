@@ -79,6 +79,7 @@ class Ticket
 
     /**
      * @ORM\ManyToOne(targetEntity = "Pepert\TicketingBundle\Entity\User",inversedBy="tickets")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 

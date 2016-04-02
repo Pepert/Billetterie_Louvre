@@ -72,7 +72,16 @@ class TicketingController extends Controller
 
         if ($form->handleRequest($request)->isValid())
         {
+            $tickets = $buyer->getTickets();
+
             $em = $this->getDoctrine()->getManager();
+
+            for($i = 0; $i < $nbTickets; $i ++)
+            {
+                $tickets[$i]->setVisitDay($buyer->getVisitDay());
+                $tickets[$i]->setPrice(25);
+                $tickets[$i]->setTicketType($buyer->getTicketType());
+            }
 
             $em->persist($buyer);
             $em->flush();

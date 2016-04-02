@@ -241,6 +241,8 @@ class User
     {
         $this->tickets[] = $ticket;
 
+        $ticket->setUser($this);
+
         return $this;
     }
 
@@ -262,15 +264,5 @@ class User
     public function getTickets()
     {
         return $this->tickets;
-    }
-
-    /**
-     * Set tickets
-     *
-     * @param \Doctrine\Common\Collections\Collection $tickets
-     */
-    public function setTicket(\Doctrine\Common\Collections\Collection $tickets)
-    {
-        $this->tickets = $tickets;
     }
 }
