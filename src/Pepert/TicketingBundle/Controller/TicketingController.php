@@ -76,11 +76,13 @@ class TicketingController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
+            $priceCalculator = $this->container->get('pepert_ticketing.price_calculator');
+
             for($i = 0; $i < $nbTickets; $i ++)
             {
                 $tickets[$i]->setVisitDay($buyer->getVisitDay());
-                $tickets[$i]->setPrice(25);
                 $tickets[$i]->setTicketType($buyer->getTicketType());
+                $priceCalculator->calculerTarif($tickets[$i]);
             }
 
             $em->persist($buyer);

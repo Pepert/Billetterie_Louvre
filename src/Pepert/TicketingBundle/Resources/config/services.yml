@@ -1,4 +1,6 @@
 services:
+    pepert_ticketing.price_calculator:
+        class: Pepert\TicketingBundle\PriceCalculator\PepertPriceCalculator
 #    pepert_ticketing.example:
 #        class: Pepert\TicketingBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
