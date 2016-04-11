@@ -64,11 +64,11 @@ class Ticket
     private $tarifReduit;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="tarif_name", type="string", length=255)
      */
-    private $price;
+    private $tarifName;
 
     /**
      * @var string
@@ -79,6 +79,7 @@ class Ticket
 
     /**
      * @ORM\ManyToOne(targetEntity = "Pepert\TicketingBundle\Entity\User",inversedBy="tickets")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
@@ -331,5 +332,29 @@ class Ticket
     public function getTarifReduit()
     {
         return $this->tarifReduit;
+    }
+
+    /**
+     * Set tarifName
+     *
+     * @param string $tarifName
+     *
+     * @return Ticket
+     */
+    public function setTarifName($tarifName)
+    {
+        $this->tarifName = $tarifName;
+
+        return $this;
+    }
+
+    /**
+     * Get tarifName
+     *
+     * @return string
+     */
+    public function getTarifName()
+    {
+        return $this->tarifName;
     }
 }

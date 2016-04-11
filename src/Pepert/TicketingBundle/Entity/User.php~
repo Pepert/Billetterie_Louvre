@@ -64,7 +64,14 @@ class User
     private $ticketNumber;
 
     /**
-     * @ORM\OneToMany(targetEntity = "Pepert\TicketingBundle\Entity\Ticket", mappedBy="user")
+     * @var double
+     *
+     * @ORM\Column(name="total_price", type="decimal")
+     */
+    private $totalPrice;
+
+    /**
+     * @ORM\OneToMany(targetEntity = "Pepert\TicketingBundle\Entity\Ticket", mappedBy="user", cascade={"persist"})
      */
     private $tickets;
 
@@ -222,5 +229,72 @@ class User
     {
         return $this->ticketNumber;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->totalPrice = 0;
+    }
 
+    /**
+     * Add ticket
+     *
+     * @param \Pepert\TicketingBundle\Entity\Ticket $ticket
+     *
+     * @return User
+     */
+    public function addTicket(\Pepert\TicketingBundle\Entity\Ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+
+        $ticket->setUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param \Pepert\TicketingBundle\Entity\Ticket $ticket
+     */
+    public function removeTicket(\Pepert\TicketingBundle\Entity\Ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * Set totalPrice
+     *
+     * @param integer $totalPrice
+     *
+     * @return User
+     */
+    public function setTotalPrice($totalPrice)
+    {
+        $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get totalPrice
+     *
+     * @return integer
+     */
+    public function getTotalPrice()
+    {
+        return $this->totalPrice;
+    }
+}

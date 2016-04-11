@@ -64,11 +64,11 @@ class Ticket
     private $tarifReduit;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="tarif_name", type="string", length=255)
      */
-    private $price;
+    private $tarifName;
 
     /**
      * @var string
@@ -191,30 +191,6 @@ class Ticket
     }
 
     /**
-     * Set price
-     *
-     * @param integer $price
-     *
-     * @return Ticket
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return int
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
      * Set ticketType
      *
      * @param string $ticketType
@@ -287,30 +263,6 @@ class Ticket
     }
 
     /**
-     * Set tarif
-     *
-     * @param boolean $tarif
-     *
-     * @return Ticket
-     */
-    public function setTarif($tarif)
-    {
-        $this->tarif = $tarif;
-
-        return $this;
-    }
-
-    /**
-     * Get tarif
-     *
-     * @return boolean
-     */
-    public function getTarif()
-    {
-        return $this->tarif;
-    }
-
-    /**
      * Set tarifReduit
      *
      * @param boolean $tarifReduit
@@ -332,5 +284,29 @@ class Ticket
     public function getTarifReduit()
     {
         return $this->tarifReduit;
+    }
+
+    /**
+     * Set tarifName
+     *
+     * @param string $tarifName
+     *
+     * @return Ticket
+     */
+    public function setTarifName($tarifName)
+    {
+        $this->tarifName = $tarifName;
+
+        return $this;
+    }
+
+    /**
+     * Get tarifName
+     *
+     * @return string
+     */
+    public function getTarifName()
+    {
+        return $this->tarifName;
     }
 }

@@ -20,7 +20,7 @@ class TicketingController extends Controller
 
         $form = $this->createForm(UserType::class, $user);
 
-        if ($form->handleRequest($request)->isValid())
+        if($form->handleRequest($request)->isValid())
         {
             $nbTickets = $form["ticket_number"]->getData();
 
@@ -70,9 +70,10 @@ class TicketingController extends Controller
         $form = $formBuilder->getForm();
 
 
-        if ($form->handleRequest($request)->isValid())
+        if($form->handleRequest($request)->isValid())
         {
             $tickets = $buyer->getTickets();
+            $type = $buyer->getTicketType();
 
             $em = $this->getDoctrine()->getManager();
 
@@ -82,8 +83,13 @@ class TicketingController extends Controller
             {
                 $tickets[$i]->setVisitDay($buyer->getVisitDay());
                 $tickets[$i]->setTicketType($buyer->getTicketType());
-                $priceCalculator->calculerTarif($tickets[$i]);
             }
+
+            $tickets = $priceCalculator->tarifFamille($tickets,$nbTickets);
+
+            $buyer->setTickets($tickets);
+
+            $buyer->setTotalPrice($priceCalculator->calculerPrixTotal($tickets,$type));
 
             $em->persist($buyer);
             $em->flush();
