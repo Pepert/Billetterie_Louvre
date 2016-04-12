@@ -75,6 +75,11 @@ class User
      */
     private $tickets;
 
+    /**
+     * @ORM\OneToMany(targetEntity = "Pepert\TicketingBundle\Entity\Transaction", mappedBy="user", cascade={"persist"})
+     */
+    private $transactions;
+
 
     /**
      * Get id
@@ -306,5 +311,39 @@ class User
     public function getTotalPrice()
     {
         return $this->totalPrice;
+    }
+
+    /**
+     * Add transaction
+     *
+     * @param \Pepert\TicketingBundle\Entity\Transaction $transaction
+     *
+     * @return User
+     */
+    public function addTransaction(\Pepert\TicketingBundle\Entity\Transaction $transaction)
+    {
+        $this->transactions[] = $transaction;
+
+        return $this;
+    }
+
+    /**
+     * Remove transaction
+     *
+     * @param \Pepert\TicketingBundle\Entity\Transaction $transaction
+     */
+    public function removeTransaction(\Pepert\TicketingBundle\Entity\Transaction $transaction)
+    {
+        $this->transactions->removeElement($transaction);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
     }
 }

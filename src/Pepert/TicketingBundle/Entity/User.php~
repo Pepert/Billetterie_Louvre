@@ -64,9 +64,9 @@ class User
     private $ticketNumber;
 
     /**
-     * @var double
+     * @var float
      *
-     * @ORM\Column(name="total_price", type="decimal")
+     * @ORM\Column(name="total_price", type="float")
      */
     private $totalPrice;
 
@@ -74,6 +74,11 @@ class User
      * @ORM\OneToMany(targetEntity = "Pepert\TicketingBundle\Entity\Ticket", mappedBy="user", cascade={"persist"})
      */
     private $tickets;
+
+    /**
+     * @ORM\OneToMany(targetEntity = "Pepert\TicketingBundle\Entity\Transaction", mappedBy="user", cascade={"persist"})
+     */
+    private $transactions;
 
 
     /**
@@ -272,6 +277,16 @@ class User
     public function getTickets()
     {
         return $this->tickets;
+    }
+
+    public function setTickets($tickets)
+    {
+        $this->tickets = $tickets;
+    }
+
+    public function removeAllTickets()
+    {
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
