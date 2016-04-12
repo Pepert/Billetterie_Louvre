@@ -279,6 +279,11 @@ class User
         $this->tickets = $tickets;
     }
 
+    public function removeAllTickets()
+    {
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Set totalPrice
      *

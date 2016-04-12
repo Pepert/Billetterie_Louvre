@@ -11,3 +11,11 @@ pepert_ticketing_tickets:
 pepert_ticketing_paiement:
     path:     /payment
     defaults: { _controller: PepertTicketingBundle:Ticketing:paiement }
+
+pepert_ticketing_paiement_paypal:
+    path:     /payment/paypal
+    defaults: { _controller: PepertTicketingBundle:Ticketing:paypal }
+
+pepert_ticketing_paiement_paypal_validated:
+    path:     /payment/paypal/validated
+    defaults: { _controller: PepertTicketingBundle:Ticketing:paypalValidated }
