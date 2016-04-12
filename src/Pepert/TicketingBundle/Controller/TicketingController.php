@@ -79,13 +79,13 @@ class TicketingController extends Controller
 
             $priceCalculator = $this->container->get('pepert_ticketing.price_calculator');
 
-            for($i = 0; $i < $nbTickets; $i ++)
+            foreach($tickets as $ticket)
             {
-                $tickets[$i]->setVisitDay($buyer->getVisitDay());
-                $tickets[$i]->setTicketType($buyer->getTicketType());
+                $ticket->setVisitDay($buyer->getVisitDay());
+                $ticket->setTicketType($buyer->getTicketType());
             }
 
-            $tickets = $priceCalculator->tarifFamille($tickets,$nbTickets);
+            $tickets = $priceCalculator->tarif($tickets,$nbTickets);
 
             $buyer->setTickets($tickets);
 

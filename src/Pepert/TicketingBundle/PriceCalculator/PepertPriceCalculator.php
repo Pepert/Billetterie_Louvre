@@ -7,7 +7,7 @@ use Pepert\TicketingBundle\Entity\Ticket;
 
 class PepertPriceCalculator
 {
-    public function tarifFamille($tickets,$nbTickets)
+    public function tarif($tickets,$nbTickets)
     {
         $ticketsSorted = $tickets->getValues();
 
@@ -22,7 +22,7 @@ class PepertPriceCalculator
             $name = $ticketsSorted[$i]->getName();
             $age = $ticketsSorted[$i]->getVisitDay()->diff($ticketsSorted[$i]->getBirthday())->y;
 
-            $nombreHomonymes = $this->occurrences($ticketsSorted,$name,$nbTickets,$i);
+            $nombreHomonymes = $this->occurrencesDepuisPosition($ticketsSorted,$name,$nbTickets,$i);
 
             if(($nombreHomonymes - $nombreHomonymesDispo) >= 0 && (($age >= 12 && $tarifFamilleAdulteDispo > 0)
                     || ($age < 12 && $tarifFamilleEnfantDispo > 0)))
@@ -144,7 +144,7 @@ class PepertPriceCalculator
         return strcmp($a->getName(), $b->getName());
     }
 
-    private function occurrences($tickets, $name, $nbTickets, $i)
+    private function occurrencesDepuisPosition($tickets, $name, $nbTickets, $i)
     {
         $occurrences = 0;
 

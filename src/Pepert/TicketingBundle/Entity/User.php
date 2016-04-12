@@ -64,9 +64,9 @@ class User
     private $ticketNumber;
 
     /**
-     * @var double
+     * @var float
      *
-     * @ORM\Column(name="total_price", type="decimal")
+     * @ORM\Column(name="total_price", type="float")
      */
     private $totalPrice;
 
