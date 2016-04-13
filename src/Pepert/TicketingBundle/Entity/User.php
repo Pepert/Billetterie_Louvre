@@ -324,6 +324,8 @@ class User
     {
         $this->transactions[] = $transaction;
 
+        $transaction->setUser($this);
+
         return $this;
     }
 

@@ -2,6 +2,7 @@
 
 namespace Pepert\TicketingBundle\Controller;
 
+use Pepert\TicketingBundle\Entity\Transaction;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -109,9 +110,9 @@ class TicketingController extends Controller
     {
         $idBuyer = $request->getSession()->get('idBuyer');
 
-        $buyer = $this
-            ->getDoctrine()
-            ->getManager()
+        $em = $this->getDoctrine()->getManager();
+
+        $buyer = $em
             ->getRepository('PepertTicketingBundle:User')
             ->find($idBuyer)
         ;
@@ -160,9 +161,9 @@ class TicketingController extends Controller
     {
         $idBuyer = $request->getSession()->get('idBuyer');
 
-        $buyer = $this
-            ->getDoctrine()
-            ->getManager()
+        $em = $this->getDoctrine()->getManager();
+
+        $buyer = $em
             ->getRepository('PepertTicketingBundle:User')
             ->find($idBuyer)
         ;
@@ -196,6 +197,15 @@ class TicketingController extends Controller
                 && $liste_param_paypal['CURRENCYCODE'] == 'EUR'
             )
             {
+                $transaction = new Transaction();
+
+                $transaction->setTransactionDate(new \DateTime());
+                $transaction->setTransactionInfos($resultat_paypal);
+                $buyer->addTransaction($transaction);
+
+                $em->persist($buyer);
+                $em->flush();
+
                 return $this->render('PepertTicketingBundle:Ticketing:paypalValidated.html.twig');
             }
             else
