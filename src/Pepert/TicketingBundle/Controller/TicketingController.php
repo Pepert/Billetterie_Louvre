@@ -197,6 +197,13 @@ class TicketingController extends Controller
                 && $liste_param_paypal['CURRENCYCODE'] == 'EUR'
             )
             {
+                $tickets = $buyer->getTickets();
+
+                foreach($tickets as $ticket)
+                {
+                    $ticket->setPaiementDay(new \DateTime());
+                }
+
                 $transaction = new Transaction();
 
                 $transaction->setTransactionDate(new \DateTime());

@@ -78,6 +78,13 @@ class Ticket
     private $ticketType;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="paiement_day", type="date")
+     */
+    private $paiementDay;
+
+    /**
      * @ORM\ManyToOne(targetEntity = "Pepert\TicketingBundle\Entity\User",inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -308,5 +315,29 @@ class Ticket
     public function getTarifName()
     {
         return $this->tarifName;
+    }
+
+    /**
+     * Set paiementDay
+     *
+     * @param \DateTime $paiementDay
+     *
+     * @return Ticket
+     */
+    public function setPaiementDay($paiementDay)
+    {
+        $this->paiementDay = $paiementDay;
+
+        return $this;
+    }
+
+    /**
+     * Get paiementDay
+     *
+     * @return \DateTime
+     */
+    public function getPaiementDay()
+    {
+        return $this->paiementDay;
     }
 }
