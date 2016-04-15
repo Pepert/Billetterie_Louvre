@@ -71,6 +71,13 @@ class Ticket
     private $tarifName;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="price", type="integer")
+     */
+    private $price;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="ticket_type", type="string", length=255)
@@ -80,7 +87,7 @@ class Ticket
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="paiement_day", type="date")
+     * @ORM\Column(name="paiement_day", type="date", nullable=true)
      */
     private $paiementDay;
 
@@ -315,5 +322,29 @@ class Ticket
     public function getTarifName()
     {
         return $this->tarifName;
+    }
+
+    /**
+     * Set paiementDay
+     *
+     * @param \DateTime $paiementDay
+     *
+     * @return Ticket
+     */
+    public function setPaiementDay($paiementDay)
+    {
+        $this->paiementDay = $paiementDay;
+
+        return $this;
+    }
+
+    /**
+     * Get paiementDay
+     *
+     * @return \DateTime
+     */
+    public function getPaiementDay()
+    {
+        return $this->paiementDay;
     }
 }

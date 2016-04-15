@@ -22,11 +22,11 @@ class Transaction
     private $id;
 
     /**
-     * @var string
+     * @var object
      *
-     * @ORM\Column(name="transaction_infos", type="text")
+     * @ORM\Column(name="transaction_object", type="object")
      */
-    private $transactionInfos;
+    private $transactionObject;
 
     /**
      * @var \DateTime
@@ -50,30 +50,6 @@ class Transaction
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set transactionInfos
-     *
-     * @param string $transactionInfos
-     *
-     * @return Transaction
-     */
-    public function setTransactionInfos($transactionInfos)
-    {
-        $this->transactionInfos = $transactionInfos;
-
-        return $this;
-    }
-
-    /**
-     * Get transactionInfos
-     *
-     * @return string
-     */
-    public function getTransactionInfos()
-    {
-        return $this->transactionInfos;
     }
 
     /**
@@ -122,5 +98,29 @@ class Transaction
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set transactionObject
+     *
+     * @param \stdClass $transactionObject
+     *
+     * @return Transaction
+     */
+    public function setTransactionObject($transactionObject)
+    {
+        $this->transactionObject = $transactionObject;
+
+        return $this;
+    }
+
+    /**
+     * Get transactionObject
+     *
+     * @return \stdClass
+     */
+    public function getTransactionObject()
+    {
+        return $this->transactionObject;
     }
 }

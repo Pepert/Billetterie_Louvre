@@ -28,6 +28,7 @@ class PepertPriceCalculator
                     || ($age < 12 && $tarifFamilleEnfantDispo > 0)))
             {
                 $ticketsSorted[$i]->setTarifName('famille');
+                $ticketsSorted[$i]->setPrice(0);
                 if($age < 12)
                 {
                     $tarifFamilleEnfantDispo --;
@@ -44,6 +45,7 @@ class PepertPriceCalculator
                     $nombreHomonymesDispo = 4;
                     $tarifFamilleAdulteDispo = 2;
                     $tarifFamilleEnfantDispo = 2;
+                    $ticketsSorted[$i]->setPrice(35);
                 }
             }
             else
@@ -63,28 +65,39 @@ class PepertPriceCalculator
         if($tarifReduit)
         {
             $tarifName = 'reduit';
+            $price = 10;
         }
         else
         {
             if($age < 4)
             {
                 $tarifName = 'gratuit';
+                $price = 0;
             }
             else if($age < 12)
             {
                 $tarifName = 'enfant';
+                $price = 8;
             }
             else if($age >= 60)
             {
                 $tarifName = 'senior';
+                $price = 12;
             }
             else
             {
                 $tarifName = 'normal';
+                $price = 16;
             }
         }
 
+        if($ticket->getTicketType() !== "Journée")
+        {
+            $price = $price/2;
+        }
+
         $ticket->setTarifName($tarifName);
+        $ticket->setPrice($price);
     }
 
     public function calculerPrixTotal($tickets,$type)

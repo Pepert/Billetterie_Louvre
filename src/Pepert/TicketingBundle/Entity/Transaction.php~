@@ -22,11 +22,11 @@ class Transaction
     private $id;
 
     /**
-     * @var string
+     * @var object
      *
-     * @ORM\Column(name="transaction_infos", type="text", unique=true)
+     * @ORM\Column(name="transaction_object", type="object")
      */
-    private $transactionInfos;
+    private $transactionObject;
 
     /**
      * @var \DateTime
@@ -75,5 +75,52 @@ class Transaction
     {
         return $this->transactionInfos;
     }
-}
 
+    /**
+     * Set transactionDate
+     *
+     * @param \DateTime $transactionDate
+     *
+     * @return Transaction
+     */
+    public function setTransactionDate($transactionDate)
+    {
+        $this->transactionDate = $transactionDate;
+
+        return $this;
+    }
+
+    /**
+     * Get transactionDate
+     *
+     * @return \DateTime
+     */
+    public function getTransactionDate()
+    {
+        return $this->transactionDate;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Pepert\TicketingBundle\Entity\User $user
+     *
+     * @return Transaction
+     */
+    public function setUser(\Pepert\TicketingBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Pepert\TicketingBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

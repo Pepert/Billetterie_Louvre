@@ -121,40 +121,8 @@ class TicketingController extends Controller
 
         $requete = $service->setCheckoutApi($buyer);
 
-        $ch = curl_init($requete);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        $resultat_paypal = curl_exec($ch);
-
-        if (!$resultat_paypal)
-        {
-            //redirigé vers page d'erreur
-        }
-        else
-        {
-            $liste_param_paypal = [];
-
-            $liste_parametres = explode("&",$resultat_paypal);
-            foreach($liste_parametres as $param_paypal)
-            {
-                list($nom, $valeur) = explode("=", $param_paypal);
-                $liste_param_paypal[$nom]=urldecode($valeur);
-            }
-
-            if ($liste_param_paypal['ACK'] == 'Success')
-            {
-                header("Location: https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=".
-                    $liste_param_paypal['TOKEN']);
-                exit();
-            }
-            else
-            {
-                echo "<p>Erreur de communication avec le serveur PayPal.<br />".$liste_param_paypal['L_SHORTMESSAGE0'].
-                    "<br />".$liste_param_paypal['L_LONGMESSAGE0']."</p>";
-            }
-        }
-        curl_close($ch);
+        header("Location:".$requete);
+        exit();
     }
 
     public function paypalValidatedAction(Request $request)
@@ -170,55 +138,17 @@ class TicketingController extends Controller
 
         $service = $this->container->get('pepert_ticketing.paypal_api');
 
-        $requete = $service->doCheckoutApi($buyer);
+        $requete = $service->doCheckoutApi();
 
-        $ch = curl_init($requete);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $resultat_paypal = curl_exec($ch);
+        $transaction = new Transaction();
 
-        if (!$resultat_paypal)
-        {
-            return $this->render('PepertTicketingBundle:Ticketing:cancel.html.twig');
-        }
-        else
-        {
-            $liste_param_paypal = [];
+        $transaction->setTransactionDate(new \DateTime());
+        $transaction->setTransactionObject($requete);
+        $buyer->addTransaction($transaction);
 
-            $liste_parametres = explode("&",$resultat_paypal);
-            foreach($liste_parametres as $param_paypal)
-            {
-                list($nom, $valeur) = explode("=", $param_paypal);
-                $liste_param_paypal[$nom]=urldecode($valeur);
-            }
+        $em->persist($buyer);
+        $em->flush();
 
-            if ($liste_param_paypal['ACK'] == 'Success'
-                && $liste_param_paypal['AMT'] == $buyer->getTotalPrice()
-                && $liste_param_paypal['CURRENCYCODE'] == 'EUR'
-            )
-            {
-                $tickets = $buyer->getTickets();
-
-                foreach($tickets as $ticket)
-                {
-                    $ticket->setPaiementDay(new \DateTime());
-                }
-
-                $transaction = new Transaction();
-
-                $transaction->setTransactionDate(new \DateTime());
-                $transaction->setTransactionInfos($resultat_paypal);
-                $buyer->addTransaction($transaction);
-
-                $em->persist($buyer);
-                $em->flush();
-
-                return $this->render('PepertTicketingBundle:Ticketing:paypalValidated.html.twig');
-            }
-            else
-            {
-                return $this->render('PepertTicketingBundle:Ticketing:cancel.html.twig');
-            }
-        }
+        return $this->render('PepertTicketingBundle:Ticketing:paypalValidated.html.twig');
     }
 }
