@@ -4,6 +4,9 @@ services:
 
     pepert_ticketing.paypal_api:
         class: Pepert\TicketingBundle\GenerateApi\GenerateApi
+
+    pepert_ticketing.stripe:
+            class: Pepert\TicketingBundle\StripePaymentSystem\StripePayment
 #    pepert_ticketing.example:
 #        class: Pepert\TicketingBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]

@@ -19,3 +19,7 @@ pepert_ticketing_paiement_paypal:
 pepert_ticketing_paiement_paypal_validated:
     path:     /payment/paypal/validated
     defaults: { _controller: PepertTicketingBundle:Ticketing:paypalValidated }
+
+pepert_ticketing_paiement_stripe_validated:
+    path:     /payment/stripe/validated
+    defaults: { _controller: PepertTicketingBundle:Ticketing:stripeValidated }

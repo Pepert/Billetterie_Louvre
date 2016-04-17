@@ -13,6 +13,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Pepert\TicketingBundle\Form\Type\UserType;
 use Pepert\TicketingBundle\Form\Type\TicketType;
 
+use Stripe\Stripe;
+use Stripe\Customer;
+use Stripe\Charge;
+
 class TicketingController extends Controller
 {
     public function indexAction(Request $request)
@@ -97,7 +101,13 @@ class TicketingController extends Controller
             $em->persist($buyer);
             $em->flush();
 
-            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+            $service = $this->container->get('pepert_ticketing.stripe');
+
+            $pk = $service->setStripeApi();
+
+            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig', array(
+                'publishable_key' => $pk,
+            ));
         }
 
         return $this->render('PepertTicketingBundle:Ticketing:ticket.html.twig', array(
@@ -150,5 +160,36 @@ class TicketingController extends Controller
         $em->flush();
 
         return $this->render('PepertTicketingBundle:Ticketing:paypalValidated.html.twig');
+    }
+
+    public function stripeValidatedAction(Request $request)
+    {
+        $idBuyer = $request->getSession()->get('idBuyer');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $buyer = $em
+            ->getRepository('PepertTicketingBundle:User')
+            ->find($idBuyer)
+        ;
+
+        $service = $this->container->get('pepert_ticketing.stripe');
+
+        $service->setStripeApi();
+
+        $token  = $_POST['stripeToken'];
+
+        $customer = Customer::create(array(
+            'email' => 'playpero@hotmail.com',
+            'card'  => $token
+        ));
+
+        Charge::create(array(
+            'customer' => $customer->id,
+            'amount'   => $buyer->getTotalPrice()*100,
+            'currency' => 'eur'
+        ));
+
+        return $this->render('PepertTicketingBundle:Ticketing:stripeValidated.html.twig');
     }
 }

@@ -45,7 +45,14 @@ class PepertPriceCalculator
                     $nombreHomonymesDispo = 4;
                     $tarifFamilleAdulteDispo = 2;
                     $tarifFamilleEnfantDispo = 2;
-                    $ticketsSorted[$i]->setPrice(35);
+                    if($ticketsSorted[$i]->getTicketType() !== "Journée")
+                    {
+                        $ticketsSorted[$i]->setPrice(17.5);
+                    }
+                    else
+                    {
+                        $ticketsSorted[$i]->setPrice(35);
+                    }
                 }
             }
             else
@@ -160,12 +167,24 @@ class PepertPriceCalculator
     private function occurrencesDepuisPosition($tickets, $name, $nbTickets, $i)
     {
         $occurrences = 0;
+        $enfantDispo = 2;
+        $adulteDispo = 2;
 
         for($a = $i; $a < $nbTickets; $a ++)
         {
             if($tickets[$a]->getName() == $name)
             {
-                $occurrences ++;
+                $age = $tickets[$a]->getVisitDay()->diff($tickets[$a]->getBirthday())->y;
+                if($age < 12 && $enfantDispo > 0)
+                {
+                    $occurrences ++;
+                    $enfantDispo --;
+                }
+                else if($age >= 12 && $adulteDispo > 0)
+                {
+                    $occurrences ++;
+                    $adulteDispo --;
+                }
             }
         }
 
