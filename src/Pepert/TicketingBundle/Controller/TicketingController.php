@@ -13,7 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Pepert\TicketingBundle\Form\Type\UserType;
 use Pepert\TicketingBundle\Form\Type\TicketType;
 
-use Stripe\Stripe;
 use Stripe\Customer;
 use Stripe\Charge;
 
@@ -21,19 +20,37 @@ class TicketingController extends Controller
 {
     public function indexAction(Request $request)
     {
-        $user = new User();
+        $request->getSession()->remove('idBuyer');
+        $request->getSession()->remove('idTransaction');
 
-        $form = $this->createForm(UserType::class, $user);
+        $buyer = new User();
+
+        $form = $this->createForm(UserType::class, $buyer);
 
         if($form->handleRequest($request)->isValid())
         {
             $nbTickets = $form["ticket_number"]->getData();
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $buyerExists = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('PepertTicketingBundle:User')
+                ->findOneBy(
+                    array('email' => $form["email"]->getData())
+                );
 
-            $idBuyer = $user->getId();
+            if($buyerExists)
+            {
+                $buyer = $buyerExists;
+            }
+            else
+            {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($buyer);
+                $em->flush();
+            }
+
+            $idBuyer = $buyer->getId();
             $request->getSession()->set('idBuyer', $idBuyer);
 
             $request->getSession()->getFlashBag()->add('validation', 'Votre identité à bien été enregistrée');
@@ -59,15 +76,19 @@ class TicketingController extends Controller
             ->find($idBuyer)
         ;
 
-        $buyer->removeAllTickets();
+
+        $transaction = new Transaction();
+        $buyer->addTransaction($transaction);
+
+        $transaction->setTicketNumber($nbTickets);
 
         for($i = 0; $i < $nbTickets; $i ++)
         {
             $ticket = new Ticket();
-            $buyer->addTicket($ticket);
+            $transaction->addTicket($ticket);
         }
 
-        $formBuilder = $this->createFormBuilder($buyer);
+        $formBuilder = $this->createFormBuilder($transaction);
 
         $formBuilder
             ->add('tickets', CollectionType::class, array('entry_type' => TicketType::class))
@@ -76,10 +97,9 @@ class TicketingController extends Controller
 
         $form = $formBuilder->getForm();
 
-
         if($form->handleRequest($request)->isValid())
         {
-            $tickets = $buyer->getTickets();
+            $tickets = $transaction->getTickets();
             $type = $buyer->getTicketType();
 
             $em = $this->getDoctrine()->getManager();
@@ -89,17 +109,20 @@ class TicketingController extends Controller
             foreach($tickets as $ticket)
             {
                 $ticket->setVisitDay($buyer->getVisitDay());
-                $ticket->setTicketType($buyer->getTicketType());
+                $ticket->setTicketType($type);
             }
 
             $tickets = $priceCalculator->tarif($tickets,$nbTickets);
 
-            $buyer->setTickets($tickets);
+            $transaction->setTotalPrice($priceCalculator->calculerPrixTotal($tickets,$type));
 
-            $buyer->setTotalPrice($priceCalculator->calculerPrixTotal($tickets,$type));
+            $transaction->setTickets($tickets);
 
             $em->persist($buyer);
             $em->flush();
+
+            $idTransaction = $transaction->getId();
+            $request->getSession()->set('idTransaction', $idTransaction);
 
             $service = $this->container->get('pepert_ticketing.stripe');
 
@@ -107,6 +130,7 @@ class TicketingController extends Controller
 
             return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig', array(
                 'publishable_key' => $pk,
+                'price' => $transaction->getTotalPrice()*100,
             ));
         }
 
@@ -118,18 +142,18 @@ class TicketingController extends Controller
 
     public function paypalAction(Request $request)
     {
-        $idBuyer = $request->getSession()->get('idBuyer');
+        $idTransaction = $request->getSession()->get('idTransaction');
 
         $em = $this->getDoctrine()->getManager();
 
-        $buyer = $em
-            ->getRepository('PepertTicketingBundle:User')
-            ->find($idBuyer)
+        $transaction = $em
+            ->getRepository('PepertTicketingBundle:Transaction')
+            ->find($idTransaction)
         ;
 
         $service = $this->container->get('pepert_ticketing.paypal_api');
 
-        $requete = $service->setCheckoutApi($buyer);
+        $requete = $service->setCheckoutApi($transaction);
 
         header("Location:".$requete);
         exit();
@@ -137,26 +161,23 @@ class TicketingController extends Controller
 
     public function paypalValidatedAction(Request $request)
     {
-        $idBuyer = $request->getSession()->get('idBuyer');
+        $idTransaction = $request->getSession()->get('idTransaction');
 
         $em = $this->getDoctrine()->getManager();
 
-        $buyer = $em
-            ->getRepository('PepertTicketingBundle:User')
-            ->find($idBuyer)
+        $transaction = $em
+            ->getRepository('PepertTicketingBundle:Transaction')
+            ->find($idTransaction)
         ;
 
         $service = $this->container->get('pepert_ticketing.paypal_api');
 
         $requete = $service->doCheckoutApi();
 
-        $transaction = new Transaction();
-
         $transaction->setTransactionDate(new \DateTime());
-        $transaction->setTransactionObject($requete);
-        $buyer->addTransaction($transaction);
+        $transaction->setTransactionId($requete);
 
-        $em->persist($buyer);
+        $em->persist($transaction);
         $em->flush();
 
         return $this->render('PepertTicketingBundle:Ticketing:paypalValidated.html.twig');
@@ -164,13 +185,13 @@ class TicketingController extends Controller
 
     public function stripeValidatedAction(Request $request)
     {
-        $idBuyer = $request->getSession()->get('idBuyer');
+        $idTransaction = $request->getSession()->get('idTransaction');
 
         $em = $this->getDoctrine()->getManager();
 
-        $buyer = $em
-            ->getRepository('PepertTicketingBundle:User')
-            ->find($idBuyer)
+        $transaction = $em
+            ->getRepository('PepertTicketingBundle:Transaction')
+            ->find($idTransaction)
         ;
 
         $service = $this->container->get('pepert_ticketing.stripe');
@@ -184,11 +205,17 @@ class TicketingController extends Controller
             'card'  => $token
         ));
 
-        Charge::create(array(
+        $charge = Charge::create(array(
             'customer' => $customer->id,
-            'amount'   => $buyer->getTotalPrice()*100,
+            'amount'   => $transaction->getTotalPrice()*100,
             'currency' => 'eur'
         ));
+
+        $transaction->setTransactionDate(new \DateTime());
+        $transaction->setTransactionId($charge->id);
+
+        $em->persist($transaction);
+        $em->flush();
 
         return $this->render('PepertTicketingBundle:Ticketing:stripeValidated.html.twig');
     }

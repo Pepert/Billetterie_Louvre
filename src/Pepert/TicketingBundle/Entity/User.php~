@@ -24,20 +24,6 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="firstname", type="string", length=255)
-     */
-    private $firstname;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
@@ -311,5 +297,41 @@ class User
     public function getTotalPrice()
     {
         return $this->totalPrice;
+    }
+
+    /**
+     * Add transaction
+     *
+     * @param \Pepert\TicketingBundle\Entity\Transaction $transaction
+     *
+     * @return User
+     */
+    public function addTransaction(\Pepert\TicketingBundle\Entity\Transaction $transaction)
+    {
+        $this->transactions[] = $transaction;
+
+        $transaction->setUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove transaction
+     *
+     * @param \Pepert\TicketingBundle\Entity\Transaction $transaction
+     */
+    public function removeTransaction(\Pepert\TicketingBundle\Entity\Transaction $transaction)
+    {
+        $this->transactions->removeElement($transaction);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
     }
 }

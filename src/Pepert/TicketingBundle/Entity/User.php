@@ -22,27 +22,6 @@ class User
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="firstname", type="string", length=255)
-     */
-    private $firstname;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255)
-     */
-    private $email;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="visit_day", type="date")
@@ -64,22 +43,25 @@ class User
     private $ticketNumber;
 
     /**
-     * @var float
+     * @var string
      *
-     * @ORM\Column(name="total_price", type="float")
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
-    private $totalPrice;
-
-    /**
-     * @ORM\OneToMany(targetEntity = "Pepert\TicketingBundle\Entity\Ticket", mappedBy="user", cascade={"persist"})
-     */
-    private $tickets;
+    private $email;
 
     /**
      * @ORM\OneToMany(targetEntity = "Pepert\TicketingBundle\Entity\Transaction", mappedBy="user", cascade={"persist"})
      */
     private $transactions;
 
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -89,78 +71,6 @@ class User
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return User
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set firstname
-     *
-     * @param string $firstname
-     *
-     * @return User
-     */
-    public function setFirstname($firstname)
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    /**
-     * Get firstname
-     *
-     * @return string
-     */
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**
@@ -234,83 +144,29 @@ class User
     {
         return $this->ticketNumber;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->totalPrice = 0;
-    }
 
     /**
-     * Add ticket
+     * Set email
      *
-     * @param \Pepert\TicketingBundle\Entity\Ticket $ticket
+     * @param string $email
      *
      * @return User
      */
-    public function addTicket(\Pepert\TicketingBundle\Entity\Ticket $ticket)
+    public function setEmail($email)
     {
-        $this->tickets[] = $ticket;
-
-        $ticket->setUser($this);
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Remove ticket
+     * Get email
      *
-     * @param \Pepert\TicketingBundle\Entity\Ticket $ticket
+     * @return string
      */
-    public function removeTicket(\Pepert\TicketingBundle\Entity\Ticket $ticket)
+    public function getEmail()
     {
-        $this->tickets->removeElement($ticket);
-    }
-
-    /**
-     * Get tickets
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTickets()
-    {
-        return $this->tickets;
-    }
-
-    public function setTickets($tickets)
-    {
-        $this->tickets = $tickets;
-    }
-
-    public function removeAllTickets()
-    {
-        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Set totalPrice
-     *
-     * @param integer $totalPrice
-     *
-     * @return User
-     */
-    public function setTotalPrice($totalPrice)
-    {
-        $this->totalPrice = $totalPrice;
-
-        return $this;
-    }
-
-    /**
-     * Get totalPrice
-     *
-     * @return integer
-     */
-    public function getTotalPrice()
-    {
-        return $this->totalPrice;
+        return $this->email;
     }
 
     /**

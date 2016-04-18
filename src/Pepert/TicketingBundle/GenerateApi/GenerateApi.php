@@ -2,8 +2,6 @@
 
 namespace Pepert\TicketingBundle\GenerateApi;
 
-use Pepert\TicketingBundle\Entity\User;
-
 use PayPal\Api\Amount;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
@@ -16,7 +14,7 @@ use Exception;
 
 class GenerateApi
 {
-    public function setCheckoutApi(User $buyer)
+    public function setCheckoutApi(\Pepert\TicketingBundle\Entity\Transaction $currentTransaction)
     {
         require __DIR__ . '/../../../../vendor/paypal/rest-api-sdk-php/sample/bootstrap.php';
 
@@ -24,7 +22,7 @@ class GenerateApi
         $payer->setPaymentMethod("paypal");
 
         $ticketArray = [];
-        $tickets = $buyer->getTickets();
+        $tickets = $currentTransaction->getTickets();
         foreach($tickets as $ticket)
         {
             $item = new Item();
@@ -40,12 +38,12 @@ class GenerateApi
 
         $amount = new Amount();
         $amount->setCurrency("EUR")
-            ->setTotal($buyer->getTotalPrice());
+            ->setTotal($currentTransaction->getTotalPrice());
 
         $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($itemList)
-            ->setDescription($buyer->getTicketNumber().' ticket(s) pour le musée')
+            ->setDescription($currentTransaction->getTicketNumber().' ticket(s) pour le musée')
             ->setInvoiceNumber(uniqid());
 
         $baseUrl = "http://127.0.0.1/BilletterieLouvre/web/app_dev.php";
@@ -91,7 +89,7 @@ class GenerateApi
             } catch (Exception $ex) {
                 exit(1);
             }
-            return $payment;
+            return $payment->id;
         } else {
             exit;
         }

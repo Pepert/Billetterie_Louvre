@@ -71,9 +71,9 @@ class Ticket
     private $tarifName;
 
     /**
-     * @var integer
+     * @var float
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="price", type="float")
      */
     private $price;
 
@@ -85,17 +85,16 @@ class Ticket
     private $ticketType;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="paiement_day", type="date", nullable=true)
-     */
-    private $paiementDay;
-
-    /**
      * @ORM\ManyToOne(targetEntity = "Pepert\TicketingBundle\Entity\User",inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "Pepert\TicketingBundle\Entity\Transaction",inversedBy="tickets")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $transaction;
 
 
     /**
@@ -205,54 +204,6 @@ class Ticket
     }
 
     /**
-     * Set ticketType
-     *
-     * @param string $ticketType
-     *
-     * @return Ticket
-     */
-    public function setTicketType($ticketType)
-    {
-        $this->ticketType = $ticketType;
-
-        return $this;
-    }
-
-    /**
-     * Get ticketType
-     *
-     * @return string
-     */
-    public function getTicketType()
-    {
-        return $this->ticketType;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Pepert\TicketingBundle\Entity\User $user
-     *
-     * @return Ticket
-     */
-    public function setUser(\Pepert\TicketingBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Pepert\TicketingBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
      * Set birthday
      *
      * @param \DateTime $birthday
@@ -325,6 +276,54 @@ class Ticket
     }
 
     /**
+     * Set price
+     *
+     * @param integer $price
+     *
+     * @return Ticket
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return integer
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set ticketType
+     *
+     * @param string $ticketType
+     *
+     * @return Ticket
+     */
+    public function setTicketType($ticketType)
+    {
+        $this->ticketType = $ticketType;
+
+        return $this;
+    }
+
+    /**
+     * Get ticketType
+     *
+     * @return string
+     */
+    public function getTicketType()
+    {
+        return $this->ticketType;
+    }
+
+    /**
      * Set paiementDay
      *
      * @param \DateTime $paiementDay
@@ -346,5 +345,29 @@ class Ticket
     public function getPaiementDay()
     {
         return $this->paiementDay;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Pepert\TicketingBundle\Entity\User $user
+     *
+     * @return Ticket
+     */
+    public function setUser(\Pepert\TicketingBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Pepert\TicketingBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
