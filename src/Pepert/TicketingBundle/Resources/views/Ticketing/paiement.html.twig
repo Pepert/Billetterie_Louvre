@@ -17,8 +17,16 @@
 
     <hr/>
 
+    {% for message in app.session.flashbag.get('information') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+    {% for message in app.session.flashbag.get('error') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
     <div id="content" class="col-md-12">
-        <p>Les tickets sont validés. Sélectionnez votre système de paiement :</p>
+        <p>Merci de sélectionner un système de paiement :</p>
         <a href="{{ path('pepert_ticketing_paiement_paypal') }}">
             <button class="btn btn-primary">Paypal</button>
         </a>

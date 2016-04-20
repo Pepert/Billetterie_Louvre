@@ -15,6 +15,13 @@ use Pepert\TicketingBundle\Form\Type\TicketType;
 
 use Stripe\Customer;
 use Stripe\Charge;
+use Stripe\Error\Card;
+use Stripe\Error\RateLimit;
+use Stripe\Error\InvalidRequest;
+use Stripe\Error\Authentication;
+use Stripe\Error\ApiConnection;
+use Stripe\Error\Base;
+use Exception;
 
 class TicketingController extends Controller
 {
@@ -29,9 +36,6 @@ class TicketingController extends Controller
 
         if($form->handleRequest($request)->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
-            $nbTickets = $form["ticket_number"]->getData();
             $typeTickets = $form["ticket_type"]->getData();
             $dateVisite = $form["visit_day"]->getData();
             $today = new \DateTime();
@@ -70,6 +74,8 @@ class TicketingController extends Controller
                     'form' => $form->createView(),
                 ));
             }
+
+            $em = $this->getDoctrine()->getManager();
 
             $compteurTickets = $em
                 ->getRepository('PepertTicketingBundle:Ticket')
@@ -112,6 +118,8 @@ class TicketingController extends Controller
 
             $request->getSession()->getFlashBag()->add('validation', 'Votre identité à bien été enregistrée');
 
+            $nbTickets = $form["ticket_number"]->getData();
+
             return $this->redirect($this->generateUrl('pepert_ticketing_tickets', array(
                 'nbTickets' => $nbTickets
             )));
@@ -135,6 +143,7 @@ class TicketingController extends Controller
 
 
         $transaction = new Transaction();
+        $transaction->setTransactionDate(new \DateTime());
         $buyer->addTransaction($transaction);
 
         $transaction->setTicketNumber($nbTickets);
@@ -184,6 +193,8 @@ class TicketingController extends Controller
             $service = $this->container->get('pepert_ticketing.stripe');
 
             $pk = $service->setStripeApi();
+
+            $request->getSession()->getFlashBag()->add('information', 'Les tickets sont validés.');
 
             return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig', array(
                 'publishable_key' => $pk,
@@ -264,16 +275,46 @@ class TicketingController extends Controller
 
         $token  = $_POST['stripeToken'];
 
-        $customer = Customer::create(array(
-            'email' => 'playpero@hotmail.com',
-            'card'  => $token
-        ));
+        try {
+            $customer = Customer::create(array(
+                'email' => 'playpero@hotmail.com',
+                'card'  => $token
+            ));
 
-        $charge = Charge::create(array(
-            'customer' => $customer->id,
-            'amount'   => $transaction->getTotalPrice()*100,
-            'currency' => 'eur'
-        ));
+            $charge = Charge::create(array(
+                'customer' => $customer->id,
+                'amount'   => $transaction->getTotalPrice()*100,
+                'currency' => 'eur'
+            ));
+        } catch(Card $e) {
+            $body = $e->getJsonBody();
+            $err  = $body['error'];
+            $messageErr = '';
+
+            $messageErr .= 'Status is:' . $e->getHttpStatus() . "\n";
+            $messageErr .='Type is:' . $err['type'] . "\n";
+            $messageErr .='Code is:' . $err['code'] . "\n";
+            $messageErr .='Param is:' . $err['param'] . "\n";
+            $messageErr .='Message is:' . $err['message'] . "\n";
+
+            $request->getSession()->getFlashBag()->add('erreur', $messageErr);
+
+            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+        } catch (RateLimit $e) {
+            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+        } catch (InvalidRequest $e) {
+            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+        } catch (Authentication $e) {
+            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+        } catch (ApiConnection $e) {
+            $request->getSession()->getFlashBag()->add('erreur', 'Un problème de connexion avec Stripe est survenu.');
+
+            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+        } catch (Base $e) {
+            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+        } catch (Exception $e) {
+            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+        }
 
         $transaction->setTransactionDate(new \DateTime());
         $transaction->setTransactionId($charge->id);
@@ -289,5 +330,29 @@ class TicketingController extends Controller
         $em->flush();
 
         return $this->render('PepertTicketingBundle:Ticketing:stripeValidated.html.twig');
+    }
+
+    public function paymentErrorAction(Request $request)
+    {
+        $idTransaction = $request->getSession()->get('idTransaction');
+
+        $transaction = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PepertTicketingBundle:Transaction')
+            ->find($idTransaction)
+        ;
+
+        $service = $this->container->get('pepert_ticketing.stripe');
+
+        $pk = $service->setStripeApi();
+
+        $request->getSession()->getFlashBag()->add('information', 'La transaction n\'a pas pu être effectuée. Merci
+         de réessayer.');
+
+        return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig', array(
+            'publishable_key' => $pk,
+            'price' => $transaction->getTotalPrice()*100,
+        ));
     }
 }

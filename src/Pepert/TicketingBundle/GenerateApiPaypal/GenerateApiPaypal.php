@@ -1,6 +1,6 @@
 <?php
 
-namespace Pepert\TicketingBundle\GenerateApi;
+namespace Pepert\TicketingBundle\GenerateApiPaypal;
 
 use PayPal\Api\Amount;
 use PayPal\Api\Item;
@@ -12,7 +12,7 @@ use PayPal\Api\Transaction;
 use PayPal\Api\PaymentExecution;
 use Exception;
 
-class GenerateApi
+class GenerateApiPaypal
 {
     public function setCheckoutApi(\Pepert\TicketingBundle\Entity\Transaction $currentTransaction)
     {
@@ -49,7 +49,7 @@ class GenerateApi
         $baseUrl = "http://127.0.0.1/BilletterieLouvre/web/app_dev.php";
         $redirectUrls = new RedirectUrls();
         $redirectUrls->setReturnUrl("$baseUrl/payment/paypal/validated?success=true")
-            ->setCancelUrl("$baseUrl/ExecutePayment.php?success=false");
+            ->setCancelUrl("$baseUrl/payment/error");
 
         $payment = new Payment();
         $payment->setIntent("sale")
@@ -60,7 +60,8 @@ class GenerateApi
         try {
             $payment->create($apiContext);
         } catch (Exception $ex) {
-            exit(1);
+            header('Location: '.$baseUrl.'/payment/error');
+            exit();
         }
 
         return $payment->getApprovalLink();
@@ -69,6 +70,8 @@ class GenerateApi
     public function doCheckoutApi()
     {
         require __DIR__ . '/../../../../vendor/paypal/rest-api-sdk-php/sample/bootstrap.php';
+
+        $baseUrl = "http://127.0.0.1/BilletterieLouvre/web/app_dev.php";
 
         if (isset($_GET['success']) && $_GET['success'] == 'true') {
 
@@ -84,14 +87,17 @@ class GenerateApi
                 try {
                     $payment = Payment::get($paymentId, $apiContext);
                 } catch (Exception $ex) {
-                    exit(1);
+                    header('Location: '.$baseUrl.'/payment/error');
+                    exit();
                 }
             } catch (Exception $ex) {
-                exit(1);
+                header('Location: '.$baseUrl.'/payment/error');
+                exit();
             }
             return $payment->id;
         } else {
-            exit;
+            header('Location: '.$baseUrl.'/payment/error');
+            exit();
         }
     }
 }

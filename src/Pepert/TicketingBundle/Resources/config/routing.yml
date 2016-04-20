@@ -8,10 +8,6 @@ pepert_ticketing_tickets:
     requirements:
         nbTickets: \d+
 
-pepert_ticketing_paiement:
-    path:     /payment
-    defaults: { _controller: PepertTicketingBundle:Ticketing:paiement }
-
 pepert_ticketing_paiement_paypal:
     path:     /payment/paypal
     defaults: { _controller: PepertTicketingBundle:Ticketing:paypal }
@@ -23,3 +19,7 @@ pepert_ticketing_paiement_paypal_validated:
 pepert_ticketing_paiement_stripe_validated:
     path:     /payment/stripe/validated
     defaults: { _controller: PepertTicketingBundle:Ticketing:stripeValidated }
+
+pepert_ticketing_paiement_payment_error:
+    path:     /payment/error
+    defaults: { _controller: PepertTicketingBundle:Ticketing:paymentError }

@@ -3,7 +3,7 @@ services:
         class: Pepert\TicketingBundle\PriceCalculator\PepertPriceCalculator
 
     pepert_ticketing.paypal_api:
-        class: Pepert\TicketingBundle\GenerateApi\GenerateApi
+        class: Pepert\TicketingBundle\GenerateApiPaypal\GenerateApiPaypal
 
     pepert_ticketing.stripe:
             class: Pepert\TicketingBundle\StripePaymentSystem\StripePayment
