@@ -29,11 +29,68 @@ class TicketingController extends Controller
 
         if($form->handleRequest($request)->isValid())
         {
-            $nbTickets = $form["ticket_number"]->getData();
+            $em = $this->getDoctrine()->getManager();
 
-            $buyerExists = $this
-                ->getDoctrine()
-                ->getManager()
+            $nbTickets = $form["ticket_number"]->getData();
+            $typeTickets = $form["ticket_type"]->getData();
+            $dateVisite = $form["visit_day"]->getData();
+            $today = new \DateTime();
+            $todayTime = (int)$today->format('G');
+            $visitDay = $dateVisite->format('D');
+            $todayDate = $today->setTime(0,0,0);
+
+            if($dateVisite < $todayDate)
+            {
+                $request->getSession()->getFlashBag()->add('erreur', 'Il est impossible de sélectionner une date
+                déjà passée. Merci de choisir un autre jour de visite.');
+
+                return $this->render('PepertTicketingBundle:Ticketing:index.html.twig', array(
+                    'form' => $form->createView(),
+                ));
+            }
+            else if($visitDay == 'Tue'
+                || $dateVisite->format('d-m') == '01-05'
+                || $dateVisite->format('d-m') == '01-11'
+                || $dateVisite->format('d-m') == '25-12')
+            {
+                $request->getSession()->getFlashBag()->add('erreur', 'Le musée est fermé le mardi, le 1er mai, le 1er
+                novembre et le 25 décembre. Merci de sélectionner une autre date de visite.');
+
+                return $this->render('PepertTicketingBundle:Ticketing:index.html.twig', array(
+                    'form' => $form->createView(),
+                ));
+            }
+            else if($dateVisite == $todayDate && $todayTime >= 12 && $typeTickets === 'Journée')
+            {
+                $request->getSession()->getFlashBag()->add('erreur', 'Les tickets \'Journée\' ne sont disponible qu\'avant
+                14 heures pour le jour en cours. Merci de selectionner le type \'Demi-journée\' si vous souhaitez
+                visiter le musée aujourd\'hui.');
+
+                return $this->render('PepertTicketingBundle:Ticketing:index.html.twig', array(
+                    'form' => $form->createView(),
+                ));
+            }
+
+            $compteurTickets = $em
+                ->getRepository('PepertTicketingBundle:Ticket')
+                ->findBy(
+                    array(
+                        'visitDay' => $dateVisite,
+                        'status' => 'Payé'
+                    )
+                );
+
+            if(count($compteurTickets) >= 1000)
+            {
+                $request->getSession()->getFlashBag()->add('erreur', 'Il n\'y a plus de ticket disponible ce jour là.
+            Merci de choisir une autre date de visite.');
+
+                return $this->render('PepertTicketingBundle:Ticketing:index.html.twig', array(
+                    'form' => $form->createView(),
+                ));
+            }
+
+            $buyerExists = $em
                 ->getRepository('PepertTicketingBundle:User')
                 ->findOneBy(
                     array('email' => $form["email"]->getData())
@@ -177,6 +234,13 @@ class TicketingController extends Controller
         $transaction->setTransactionDate(new \DateTime());
         $transaction->setTransactionId($requete);
 
+        $tickets = $transaction->getTickets();
+
+        foreach($tickets as $ticket)
+        {
+            $ticket->setStatus('Payé');
+        }
+
         $em->persist($transaction);
         $em->flush();
 
@@ -213,6 +277,13 @@ class TicketingController extends Controller
 
         $transaction->setTransactionDate(new \DateTime());
         $transaction->setTransactionId($charge->id);
+
+        $tickets = $transaction->getTickets();
+
+        foreach($tickets as $ticket)
+        {
+            $ticket->setStatus('Payé');
+        }
 
         $em->persist($transaction);
         $em->flush();

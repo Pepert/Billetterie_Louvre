@@ -17,6 +17,10 @@
 
     <hr/>
 
+    {% for message in app.session.flashbag.get('erreur') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
     <div id="content" class="col-md-12">
         <h3>Acheter un ticket</h3>
 
@@ -58,6 +62,7 @@
                 </div>
             </div>
 
+            <p><strong>Votre adresse e-mail est nécessaire pour pouvoir reçevoir les tickets achetés.</strong></p>
 
             <hr/>
 

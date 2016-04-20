@@ -15,10 +15,13 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $today = new \DateTime();
+        $year = (int)$today->format('Y');
+
         $builder
             ->add('email',EmailType::class)
             ->add('visit_day', DateType::class, array(
-                'years' => range(2016,2018),
+                'years' => range($year,$year+1),
                 'format' => 'dd MMMM yyyy',
             ))
             ->add('ticket_type', ChoiceType::class, array(

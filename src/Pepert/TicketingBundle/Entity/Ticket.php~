@@ -85,10 +85,11 @@ class Ticket
     private $ticketType;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "Pepert\TicketingBundle\Entity\User",inversedBy="tickets")
-     * @ORM\JoinColumn(nullable=false)
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255)
      */
-    private $user;
+    private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity = "Pepert\TicketingBundle\Entity\Transaction",inversedBy="tickets")
@@ -324,50 +325,26 @@ class Ticket
     }
 
     /**
-     * Set paiementDay
+     * Set transaction
      *
-     * @param \DateTime $paiementDay
+     * @param \Pepert\TicketingBundle\Entity\Transaction $transaction
      *
      * @return Ticket
      */
-    public function setPaiementDay($paiementDay)
+    public function setTransaction(\Pepert\TicketingBundle\Entity\Transaction $transaction)
     {
-        $this->paiementDay = $paiementDay;
+        $this->transaction = $transaction;
 
         return $this;
     }
 
     /**
-     * Get paiementDay
+     * Get transaction
      *
-     * @return \DateTime
+     * @return \Pepert\TicketingBundle\Entity\Transaction
      */
-    public function getPaiementDay()
+    public function getTransaction()
     {
-        return $this->paiementDay;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Pepert\TicketingBundle\Entity\User $user
-     *
-     * @return Ticket
-     */
-    public function setUser(\Pepert\TicketingBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Pepert\TicketingBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
+        return $this->transaction;
     }
 }

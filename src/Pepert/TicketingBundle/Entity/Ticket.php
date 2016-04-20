@@ -85,6 +85,13 @@ class Ticket
     private $ticketType;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255, nullable=true)
+     */
+    private $status;
+
+    /**
      * @ORM\ManyToOne(targetEntity = "Pepert\TicketingBundle\Entity\Transaction",inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -315,6 +322,30 @@ class Ticket
     public function getTicketType()
     {
         return $this->ticketType;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return Ticket
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**
