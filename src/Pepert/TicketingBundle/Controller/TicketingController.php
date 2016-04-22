@@ -288,6 +288,14 @@ class TicketingController extends Controller
 
         foreach($tickets as $ticket)
         {
+            $infos = $ticket->getFirstName()
+                .$ticket->getName()
+                .$ticket->getTarifName()
+                .$ticket->getTicketType()
+                .$ticket->getVisitDay()->format('d-m-Y')
+                .$idBuyer;
+            $reservationCode = md5($infos);
+            $ticket->setReservationCode($reservationCode);
             $ticket->setStatus('Payé');
         }
 
@@ -388,6 +396,14 @@ class TicketingController extends Controller
 
         foreach($tickets as $ticket)
         {
+            $infos = $ticket->getFirstName()
+                .$ticket->getName()
+                .$ticket->getTarifName()
+                .$ticket->getTicketType()
+                .$ticket->getVisitDay()->format('d-m-Y')
+                .$idBuyer;
+            $reservationCode = md5($infos);
+            $ticket->setReservationCode($reservationCode);
             $ticket->setStatus('Payé');
         }
 
@@ -446,10 +462,10 @@ class TicketingController extends Controller
                 }
             </style>
 
-            <page backtop="5mm" backleft="10mm" backright="10mm" backbottom="5mm">
+            <page backtop="20mm" backleft="10mm" backright="10mm" backbottom="5mm">
 
         <?php foreach($tickets as $ticket){ ?>
-                <table style="border-bottom: none; padding-top: 4mm; padding-bottom: 10mm; margin-top: 18mm;">
+                <table style="border-bottom: none; padding-top: 4mm; padding-bottom: 10mm;">
                     <tr>
                         <td style="width: 65%; font-size: 12pt; text-align: center;">
                             <strong style="font-size: 25pt;">Musée du Louvre</strong>
@@ -464,7 +480,7 @@ class TicketingController extends Controller
                 <table style="border-top: none; padding-bottom: 8mm; padding-left: 4mm; text-align: center;">
                     <tr>
                         <td style="width: 20%;">
-                            <qrcode value="1" ec="H" style="width: 25mm; background-color: white; color: black;"></qrcode>
+                            <qrcode value="<?php echo $ticket->getReservationCode(); ?>" ec="H" style="width: 25mm; background-color: white; color: black;"></qrcode>
                         </td>
                         <td style="width: 50%; font-size: 18pt; text-align: center;">
                             <?php echo $ticket->getFirstName(); ?> <?php echo strtoupper($ticket->getName()); ?>
@@ -476,6 +492,11 @@ class TicketingController extends Controller
                         </td>
                     </tr>
                 </table>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
         <?php } ?>
 
             </page>

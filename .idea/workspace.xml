@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4196277d-8390-4481-aa39-75035a2258d7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/end.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/error.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PayPal.log" afterPath="$PROJECT_DIR$/PayPal.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Form/Type/UserType.php" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Form/Type/UserType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/config/routing.yml" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/paymentValidated.html.twig" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/paymentValidated.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php" />
     </list>
     <ignored path="BilletterieLouvre.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,20 +29,20 @@
       <file leaf-file-name="TicketingController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4580292">
-              <caret line="466" column="44" selection-start-line="466" selection-start-column="44" selection-end-line="466" selection-end-column="44" />
+            <state vertical-scroll-proportion="1.9927007">
+              <caret line="498" column="17" selection-start-line="498" selection-start-column="17" selection-end-line="498" selection-end-column="17" />
               <folding>
                 <element signature="e#53#99#0#PHP" expanded="true" />
-                <element signature="e#15093#15179#0#HTML" expanded="true" />
-                <element signature="e#15234#15290#0#HTML" expanded="true" />
-                <element signature="e#15328#15352#0#HTML" expanded="true" />
-                <element signature="e#15573#15592#0#HTML" expanded="true" />
-                <element signature="e#15814#15899#0#HTML" expanded="true" />
-                <element signature="e#15954#15973#0#HTML" expanded="true" />
-                <element signature="e#16028#16087#0#HTML" expanded="true" />
-                <element signature="e#16156#16212#0#HTML" expanded="true" />
-                <element signature="e#16385#16421#0#HTML" expanded="true" />
-                <element signature="e#16602#16626#0#HTML" expanded="true" />
+                <element signature="e#15796#15864#0#HTML" expanded="true" />
+                <element signature="e#15919#15975#0#HTML" expanded="true" />
+                <element signature="e#16013#16037#0#HTML" expanded="true" />
+                <element signature="e#16258#16277#0#HTML" expanded="true" />
+                <element signature="e#16499#16584#0#HTML" expanded="true" />
+                <element signature="e#16639#16658#0#HTML" expanded="true" />
+                <element signature="e#16756#16815#0#HTML" expanded="true" />
+                <element signature="e#16884#16940#0#HTML" expanded="true" />
+                <element signature="e#17113#17149#0#HTML" expanded="true" />
+                <element signature="e#17330#17354#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -58,7 +51,7 @@
       <file leaf-file-name="html2pdf.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/spipu/html2pdf/html2pdf.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.153846">
+            <state vertical-scroll-proportion="-7.230769">
               <caret line="5681" column="39" selection-start-line="5681" selection-start-column="39" selection-end-line="5681" selection-end-column="39" />
               <folding>
                 <marker date="1461262656276" expanded="true" signature="19117:19406" placeholder="..." />
@@ -74,8 +67,8 @@
       <file leaf-file-name="Ticket.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.192307">
-              <caret line="89" column="74" selection-start-line="89" selection-start-column="74" selection-end-line="89" selection-end-column="74" />
+            <state vertical-scroll-proportion="-16.346153">
+              <caret line="97" column="7" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -147,7 +140,6 @@
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Transaction.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/DateChecker/DateChecker.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/GenerateApiPaypal/GenerateApiPaypal.php" />
@@ -160,6 +152,7 @@
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/error.html.twig" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/vendor/spipu/html2pdf/html2pdf.class.php" />
+        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php" />
       </list>
     </option>
@@ -611,16 +604,16 @@
           <caret line="159" column="37" selection-start-line="159" selection-start-column="37" selection-end-line="159" selection-end-column="37" />
           <folding>
             <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#15093#15179#0#HTML" expanded="true" />
-            <element signature="e#15234#15290#0#HTML" expanded="true" />
-            <element signature="e#15328#15352#0#HTML" expanded="true" />
-            <element signature="e#15573#15592#0#HTML" expanded="true" />
-            <element signature="e#15814#15899#0#HTML" expanded="true" />
-            <element signature="e#15954#15973#0#HTML" expanded="true" />
-            <element signature="e#16028#16087#0#HTML" expanded="true" />
-            <element signature="e#16156#16212#0#HTML" expanded="true" />
-            <element signature="e#16385#16421#0#HTML" expanded="true" />
-            <element signature="e#16602#16626#0#HTML" expanded="true" />
+            <element signature="e#15796#15864#0#HTML" expanded="true" />
+            <element signature="e#15919#15975#0#HTML" expanded="true" />
+            <element signature="e#16013#16037#0#HTML" expanded="true" />
+            <element signature="e#16258#16277#0#HTML" expanded="true" />
+            <element signature="e#16499#16584#0#HTML" expanded="true" />
+            <element signature="e#16639#16658#0#HTML" expanded="true" />
+            <element signature="e#16756#16815#0#HTML" expanded="true" />
+            <element signature="e#16884#16940#0#HTML" expanded="true" />
+            <element signature="e#17113#17149#0#HTML" expanded="true" />
+            <element signature="e#17330#17354#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -646,16 +639,16 @@
           <caret line="196" column="0" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
           <folding>
             <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#15093#15179#0#HTML" expanded="true" />
-            <element signature="e#15234#15290#0#HTML" expanded="true" />
-            <element signature="e#15328#15352#0#HTML" expanded="true" />
-            <element signature="e#15573#15592#0#HTML" expanded="true" />
-            <element signature="e#15814#15899#0#HTML" expanded="true" />
-            <element signature="e#15954#15973#0#HTML" expanded="true" />
-            <element signature="e#16028#16087#0#HTML" expanded="true" />
-            <element signature="e#16156#16212#0#HTML" expanded="true" />
-            <element signature="e#16385#16421#0#HTML" expanded="true" />
-            <element signature="e#16602#16626#0#HTML" expanded="true" />
+            <element signature="e#15796#15864#0#HTML" expanded="true" />
+            <element signature="e#15919#15975#0#HTML" expanded="true" />
+            <element signature="e#16013#16037#0#HTML" expanded="true" />
+            <element signature="e#16258#16277#0#HTML" expanded="true" />
+            <element signature="e#16499#16584#0#HTML" expanded="true" />
+            <element signature="e#16639#16658#0#HTML" expanded="true" />
+            <element signature="e#16756#16815#0#HTML" expanded="true" />
+            <element signature="e#16884#16940#0#HTML" expanded="true" />
+            <element signature="e#17113#17149#0#HTML" expanded="true" />
+            <element signature="e#17330#17354#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -688,16 +681,16 @@
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
             <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#15093#15179#0#HTML" expanded="true" />
-            <element signature="e#15234#15290#0#HTML" expanded="true" />
-            <element signature="e#15328#15352#0#HTML" expanded="true" />
-            <element signature="e#15573#15592#0#HTML" expanded="true" />
-            <element signature="e#15814#15899#0#HTML" expanded="true" />
-            <element signature="e#15954#15973#0#HTML" expanded="true" />
-            <element signature="e#16028#16087#0#HTML" expanded="true" />
-            <element signature="e#16156#16212#0#HTML" expanded="true" />
-            <element signature="e#16385#16421#0#HTML" expanded="true" />
-            <element signature="e#16602#16626#0#HTML" expanded="true" />
+            <element signature="e#15796#15864#0#HTML" expanded="true" />
+            <element signature="e#15919#15975#0#HTML" expanded="true" />
+            <element signature="e#16013#16037#0#HTML" expanded="true" />
+            <element signature="e#16258#16277#0#HTML" expanded="true" />
+            <element signature="e#16499#16584#0#HTML" expanded="true" />
+            <element signature="e#16639#16658#0#HTML" expanded="true" />
+            <element signature="e#16756#16815#0#HTML" expanded="true" />
+            <element signature="e#16884#16940#0#HTML" expanded="true" />
+            <element signature="e#17113#17149#0#HTML" expanded="true" />
+            <element signature="e#17330#17354#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -715,16 +708,16 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#15093#15179#0#HTML" expanded="true" />
-            <element signature="e#15234#15290#0#HTML" expanded="true" />
-            <element signature="e#15328#15352#0#HTML" expanded="true" />
-            <element signature="e#15573#15592#0#HTML" expanded="true" />
-            <element signature="e#15814#15899#0#HTML" expanded="true" />
-            <element signature="e#15954#15973#0#HTML" expanded="true" />
-            <element signature="e#16028#16087#0#HTML" expanded="true" />
-            <element signature="e#16156#16212#0#HTML" expanded="true" />
-            <element signature="e#16385#16421#0#HTML" expanded="true" />
-            <element signature="e#16602#16626#0#HTML" expanded="true" />
+            <element signature="e#15796#15864#0#HTML" expanded="true" />
+            <element signature="e#15919#15975#0#HTML" expanded="true" />
+            <element signature="e#16013#16037#0#HTML" expanded="true" />
+            <element signature="e#16258#16277#0#HTML" expanded="true" />
+            <element signature="e#16499#16584#0#HTML" expanded="true" />
+            <element signature="e#16639#16658#0#HTML" expanded="true" />
+            <element signature="e#16756#16815#0#HTML" expanded="true" />
+            <element signature="e#16884#16940#0#HTML" expanded="true" />
+            <element signature="e#17113#17149#0#HTML" expanded="true" />
+            <element signature="e#17330#17354#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -763,16 +756,16 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#15093#15179#0#HTML" expanded="true" />
-            <element signature="e#15234#15290#0#HTML" expanded="true" />
-            <element signature="e#15328#15352#0#HTML" expanded="true" />
-            <element signature="e#15573#15592#0#HTML" expanded="true" />
-            <element signature="e#15814#15899#0#HTML" expanded="true" />
-            <element signature="e#15954#15973#0#HTML" expanded="true" />
-            <element signature="e#16028#16087#0#HTML" expanded="true" />
-            <element signature="e#16156#16212#0#HTML" expanded="true" />
-            <element signature="e#16385#16421#0#HTML" expanded="true" />
-            <element signature="e#16602#16626#0#HTML" expanded="true" />
+            <element signature="e#15796#15864#0#HTML" expanded="true" />
+            <element signature="e#15919#15975#0#HTML" expanded="true" />
+            <element signature="e#16013#16037#0#HTML" expanded="true" />
+            <element signature="e#16258#16277#0#HTML" expanded="true" />
+            <element signature="e#16499#16584#0#HTML" expanded="true" />
+            <element signature="e#16639#16658#0#HTML" expanded="true" />
+            <element signature="e#16756#16815#0#HTML" expanded="true" />
+            <element signature="e#16884#16940#0#HTML" expanded="true" />
+            <element signature="e#17113#17149#0#HTML" expanded="true" />
+            <element signature="e#17330#17354#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -991,15 +984,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.192307">
-          <caret line="89" column="74" selection-start-line="89" selection-start-column="74" selection-end-line="89" selection-end-column="74" />
+        <state vertical-scroll-proportion="-16.346153">
+          <caret line="97" column="7" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/spipu/html2pdf/html2pdf.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.153846">
+        <state vertical-scroll-proportion="-7.230769">
           <caret line="5681" column="39" selection-start-line="5681" selection-start-column="39" selection-end-line="5681" selection-end-column="39" />
           <folding>
             <marker date="1461262656276" expanded="true" signature="19117:19406" placeholder="..." />
@@ -1013,20 +1006,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4580292">
-          <caret line="466" column="44" selection-start-line="466" selection-start-column="44" selection-end-line="466" selection-end-column="44" />
+        <state vertical-scroll-proportion="1.9927007">
+          <caret line="498" column="17" selection-start-line="498" selection-start-column="17" selection-end-line="498" selection-end-column="17" />
           <folding>
             <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#15093#15179#0#HTML" expanded="true" />
-            <element signature="e#15234#15290#0#HTML" expanded="true" />
-            <element signature="e#15328#15352#0#HTML" expanded="true" />
-            <element signature="e#15573#15592#0#HTML" expanded="true" />
-            <element signature="e#15814#15899#0#HTML" expanded="true" />
-            <element signature="e#15954#15973#0#HTML" expanded="true" />
-            <element signature="e#16028#16087#0#HTML" expanded="true" />
-            <element signature="e#16156#16212#0#HTML" expanded="true" />
-            <element signature="e#16385#16421#0#HTML" expanded="true" />
-            <element signature="e#16602#16626#0#HTML" expanded="true" />
+            <element signature="e#15796#15864#0#HTML" expanded="true" />
+            <element signature="e#15919#15975#0#HTML" expanded="true" />
+            <element signature="e#16013#16037#0#HTML" expanded="true" />
+            <element signature="e#16258#16277#0#HTML" expanded="true" />
+            <element signature="e#16499#16584#0#HTML" expanded="true" />
+            <element signature="e#16639#16658#0#HTML" expanded="true" />
+            <element signature="e#16756#16815#0#HTML" expanded="true" />
+            <element signature="e#16884#16940#0#HTML" expanded="true" />
+            <element signature="e#17113#17149#0#HTML" expanded="true" />
+            <element signature="e#17330#17354#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -92,6 +92,13 @@ class Ticket
     private $status;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="reservation_code", type="string", length=255, nullable=true)
+     */
+    private $reservationCode;
+
+    /**
      * @ORM\ManyToOne(targetEntity = "Pepert\TicketingBundle\Entity\Transaction",inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -346,6 +353,30 @@ class Ticket
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set reservationCode
+     *
+     * @param string $reservationCode
+     *
+     * @return Ticket
+     */
+    public function setReservationCode($reservationCode)
+    {
+        $this->reservationCode = $reservationCode;
+
+        return $this;
+    }
+
+    /**
+     * Get reservationCode
+     *
+     * @return string
+     */
+    public function getReservationCode()
+    {
+        return $this->reservationCode;
     }
 
     /**
