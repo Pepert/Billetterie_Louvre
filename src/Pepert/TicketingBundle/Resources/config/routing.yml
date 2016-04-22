@@ -23,3 +23,7 @@ pepert_ticketing_paiement_stripe_validated:
 pepert_ticketing_paiement_payment_error:
     path:     /payment/error
     defaults: { _controller: PepertTicketingBundle:Ticketing:paymentError }
+
+pepert_ticketing_final:
+    path:     /final
+    defaults: { _controller: PepertTicketingBundle:Ticketing:generateMail }

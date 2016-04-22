@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Pepert\TicketingBundle\Form\Type\UserType;
 use Pepert\TicketingBundle\Form\Type\TicketType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 use Stripe\Customer;
 use Stripe\Charge;
@@ -244,8 +245,32 @@ class TicketingController extends Controller
     public function paypalValidatedAction(Request $request)
     {
         $idTransaction = $request->getSession()->get('idTransaction');
+        $idBuyer = $request->getSession()->get('idBuyer');
 
         $em = $this->getDoctrine()->getManager();
+
+        $buyer = $em
+            ->getRepository('PepertTicketingBundle:User')
+            ->find($idBuyer)
+        ;
+
+        $form = $this->createFormBuilder($buyer)
+            ->add('email',EmailType::class)
+            ->add('submit',SubmitType::class)
+            ->getForm();
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $email = $form["email"]->getData();
+
+            if($email !== $buyer->getEmail())
+            {
+                $em->persist($buyer);
+                $em->flush();
+            }
+
+            return $this->render('PepertTicketingBundle:Ticketing:end.html.twig');
+        }
 
         $transaction = $em
             ->getRepository('PepertTicketingBundle:Transaction')
@@ -269,14 +294,40 @@ class TicketingController extends Controller
         $em->persist($transaction);
         $em->flush();
 
-        return $this->render('PepertTicketingBundle:Ticketing:paymentValidated.html.twig');
+        return $this->render('PepertTicketingBundle:Ticketing:paymentValidated.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     public function stripeValidatedAction(Request $request)
     {
         $idTransaction = $request->getSession()->get('idTransaction');
+        $idBuyer = $request->getSession()->get('idBuyer');
 
         $em = $this->getDoctrine()->getManager();
+
+        $buyer = $em
+            ->getRepository('PepertTicketingBundle:User')
+            ->find($idBuyer)
+        ;
+
+        $form = $this->createFormBuilder($buyer)
+            ->add('email',EmailType::class)
+            ->add('submit',SubmitType::class)
+            ->getForm();
+
+        if($form->handleRequest($request)->isValid())
+        {
+            $email = $form["email"]->getData();
+
+            if($email !== $buyer->getEmail())
+            {
+                $em->persist($buyer);
+                $em->flush();
+            }
+
+            return $this->redirectToRoute('pepert_ticketing_final');
+        }
 
         $transaction = $em
             ->getRepository('PepertTicketingBundle:Transaction')
@@ -313,21 +364,21 @@ class TicketingController extends Controller
 
             $request->getSession()->getFlashBag()->add('erreur', $messageErr);
 
-            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
         } catch (RateLimit $e) {
-            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
         } catch (InvalidRequest $e) {
-            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
         } catch (Authentication $e) {
-            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
         } catch (ApiConnection $e) {
             $request->getSession()->getFlashBag()->add('erreur', 'Un problème de connexion avec Stripe est survenu.');
 
-            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
         } catch (Base $e) {
-            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
         } catch (Exception $e) {
-            return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig');
+            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
         }
 
         $transaction->setTransactionDate(new \DateTime());
@@ -343,7 +394,9 @@ class TicketingController extends Controller
         $em->persist($transaction);
         $em->flush();
 
-        return $this->render('PepertTicketingBundle:Ticketing:paymentValidated.html.twig');
+        return $this->render('PepertTicketingBundle:Ticketing:paymentValidated.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     public function paymentErrorAction(Request $request)
@@ -368,5 +421,75 @@ class TicketingController extends Controller
             'publishable_key' => $pk,
             'price' => $transaction->getTotalPrice()*100,
         ));
+    }
+
+    public function generateMailAction(Request $request)
+    {
+        $idTransaction = $request->getSession()->get('idTransaction');
+
+        $transaction = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PepertTicketingBundle:Transaction')
+            ->find($idTransaction)
+        ;
+
+        $tickets = $transaction->getTickets();
+
+        ob_start();
+        ?>
+            <style type="text/css">
+                table{
+                    width: 100%;
+                    border: solid 1px #000000;
+                    vertical-align: middle;
+                }
+            </style>
+
+            <page backtop="5mm" backleft="10mm" backright="10mm" backbottom="5mm">
+
+        <?php foreach($tickets as $ticket){ ?>
+                <table style="border-bottom: none; padding-top: 4mm; padding-bottom: 10mm; margin-top: 18mm;">
+                    <tr>
+                        <td style="width: 65%; font-size: 12pt; text-align: center;">
+                            <strong style="font-size: 25pt;">Musée du Louvre</strong>
+                            <br/>
+                            Date de la visite : <?php echo $ticket->getVisitDay()->format('d-m-Y'); ?>
+                        </td>
+                        <td style="width: 35%;">
+                            <img src="BilletterieLouvre/web/bundles/pepertticketing/images/logo_louvre_ticket.png">
+                        </td>
+                    </tr>
+                </table>
+                <table style="border-top: none; padding-bottom: 8mm; padding-left: 4mm; text-align: center;">
+                    <tr>
+                        <td style="width: 20%;">
+                            <qrcode value="1" ec="H" style="width: 25mm; background-color: white; color: black;"></qrcode>
+                        </td>
+                        <td style="width: 50%; font-size: 18pt; text-align: center;">
+                            <?php echo $ticket->getFirstName(); ?> <?php echo strtoupper($ticket->getName()); ?>
+                        </td>
+                        <td style="width: 30%; font-size: 12pt;">
+                            <?php echo $ticket->getTicketType(); ?> - <?php echo $ticket->getTarifName(); ?>
+                            <br/>
+                            <strong style="font-size: 25pt;"><?php echo $ticket->getPrice(); ?> €</strong>
+                        </td>
+                    </tr>
+                </table>
+        <?php } ?>
+
+            </page>
+
+<?php
+        $content = ob_get_clean();
+        try{
+            $pdf = new \HTML2PDF('P','A4','fr');
+            $pdf->writeHTML($content);
+            $pdf->Output('test.pdf');
+        }catch(\HTML2PDF_exception $e){
+            die($e);
+        }
+
+        return $this->render('PepertTicketingBundle:Ticketing:end.html.twig');
     }
 }

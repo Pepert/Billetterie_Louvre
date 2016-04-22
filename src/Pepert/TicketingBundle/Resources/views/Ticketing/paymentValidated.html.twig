@@ -22,8 +22,28 @@
     </div>
 
     <div id="content" class="col-md-12">
-        <p>Merci de confirmer votre adresse e-mail afin de bien reçevoir les tickets achetés :</p>
+        <p>Merci de vérifier votre adresse e-mail afin de bien reçevoir les tickets achetés :</p>
 
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+        {{ form_errors(form) }}
+
+        <div class="form-group">
+            {{ form_errors(form.email) }}
+            {{ form_label(form.email, "Adresse e-mail", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+
+            <div class="col-sm-6">
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <hr/>
+
+        {{ form_widget(form.submit, {'label': 'Valider cette adresse', 'attr': {'class': 'btn btn-primary'}}) }}
+
+        {{ form_rest(form) }}
+
+        {{ form_end(form) }}
     </div>
 
     <hr>

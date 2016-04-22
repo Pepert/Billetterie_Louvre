@@ -16,6 +16,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $today = new \DateTime();
+        $today->setTimezone(new \DateTimeZone('Europe/Paris'));
         $year = (int)$today->format('Y');
 
         $builder
