@@ -29,6 +29,13 @@ class Transaction
     private $transactionId;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="transaction_system", type="string", length=255, nullable=true)
+     */
+    private $transactionSystem;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="transaction_date", type="date", nullable=true)
@@ -68,6 +75,7 @@ class Transaction
     {
         $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
         $this->transactionId = 'Pas de transaction effectuée';
+        $this->transactionSystem = 'Aucune';
         $this->totalPrice = 0;
     }
 
@@ -103,6 +111,30 @@ class Transaction
     public function getTransactionId()
     {
         return $this->transactionId;
+    }
+
+    /**
+     * Set transactionSystem
+     *
+     * @param string $transactionSystem
+     *
+     * @return Transaction
+     */
+    public function setTransactionSystem($transactionSystem)
+    {
+        $this->transactionSystem = $transactionSystem;
+
+        return $this;
+    }
+
+    /**
+     * Get transactionSystem
+     *
+     * @return string
+     */
+    public function getTransactionSystem()
+    {
+        return $this->transactionSystem;
     }
 
     /**

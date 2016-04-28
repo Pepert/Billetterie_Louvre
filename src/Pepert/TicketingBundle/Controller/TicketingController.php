@@ -106,14 +106,14 @@ class TicketingController extends Controller
 
             if($buyerExists)
             {
+                $buyerExists->setVisitDay($buyer->getVisitDay());
+                $buyerExists->setTicketType($buyer->getTicketType());
+                $buyerExists->setTicketNumber($buyer->getTicketNumber());
                 $buyer = $buyerExists;
             }
-            else
-            {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($buyer);
-                $em->flush();
-            }
+
+            $em->persist($buyer);
+            $em->flush();
 
             $idBuyer = $buyer->getId();
             $request->getSession()->set('idBuyer', $idBuyer);
@@ -190,6 +190,8 @@ class TicketingController extends Controller
             {
                 $ticket->setVisitDay($buyer->getVisitDay());
                 $ticket->setTicketType($type);
+                $ticket->setFirstName(ucfirst(strtolower($ticket->getFirstname())));
+                $ticket->setName(ucfirst(strtolower($ticket->getName())));
             }
 
             $tickets = $priceCalculator->tarif($tickets,$nbTickets);
@@ -253,6 +255,7 @@ class TicketingController extends Controller
             ->getRepository('PepertTicketingBundle:User')
             ->find($idBuyer)
         ;
+        $oldEmail = $buyer->getEmail();
 
         $form = $this->createFormBuilder($buyer)
             ->add('email',EmailType::class)
@@ -263,13 +266,13 @@ class TicketingController extends Controller
         {
             $email = $form["email"]->getData();
 
-            if($email !== $buyer->getEmail())
+            if($email !== $oldEmail)
             {
                 $em->persist($buyer);
                 $em->flush();
             }
 
-            return $this->render('PepertTicketingBundle:Ticketing:end.html.twig');
+            return $this->redirectToRoute('pepert_ticketing_final');
         }
 
         $transaction = $em
@@ -282,13 +285,15 @@ class TicketingController extends Controller
         $requete = $service->doCheckoutApi();
 
         $transaction->setTransactionDate(new \DateTime());
+        $transaction->setTransactionSystem('Paypal');
         $transaction->setTransactionId($requete);
 
         $tickets = $transaction->getTickets();
 
         foreach($tickets as $ticket)
         {
-            $infos = $ticket->getFirstName()
+            $infos = $ticket->getId()
+                .$ticket->getFirstName()
                 .$ticket->getName()
                 .$ticket->getTarifName()
                 .$ticket->getTicketType()
@@ -318,6 +323,7 @@ class TicketingController extends Controller
             ->getRepository('PepertTicketingBundle:User')
             ->find($idBuyer)
         ;
+        $oldEmail = $buyer->getEmail();
 
         $form = $this->createFormBuilder($buyer)
             ->add('email',EmailType::class)
@@ -328,7 +334,7 @@ class TicketingController extends Controller
         {
             $email = $form["email"]->getData();
 
-            if($email !== $buyer->getEmail())
+            if($email !== $oldEmail)
             {
                 $em->persist($buyer);
                 $em->flush();
@@ -346,7 +352,7 @@ class TicketingController extends Controller
 
         $service->setStripeApi();
 
-        $token  = $_POST['stripeToken'];
+        $token  = $request->get('stripeToken');
 
         try {
             $customer = Customer::create(array(
@@ -390,6 +396,7 @@ class TicketingController extends Controller
         }
 
         $transaction->setTransactionDate(new \DateTime());
+        $transaction->setTransactionSystem('Stripe');
         $transaction->setTransactionId($charge->id);
 
         $tickets = $transaction->getTickets();
@@ -442,12 +449,20 @@ class TicketingController extends Controller
     public function generateMailAction(Request $request)
     {
         $idTransaction = $request->getSession()->get('idTransaction');
+        $idBuyer = $request->getSession()->get('idBuyer');
 
         $transaction = $this
+        ->getDoctrine()
+        ->getManager()
+        ->getRepository('PepertTicketingBundle:Transaction')
+        ->find($idTransaction)
+        ;
+
+        $buyer = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('PepertTicketingBundle:Transaction')
-            ->find($idTransaction)
+            ->getRepository('PepertTicketingBundle:User')
+            ->find($idBuyer)
         ;
 
         $tickets = $transaction->getTickets();
@@ -506,10 +521,22 @@ class TicketingController extends Controller
         try{
             $pdf = new \HTML2PDF('P','A4','fr');
             $pdf->writeHTML($content);
-            $pdf->Output('test.pdf');
+            $pdf->Output('billets.pdf',true);
         }catch(\HTML2PDF_exception $e){
-            die($e);
+            $request->getSession()->getFlashBag()->add('erreur', '$e');
+            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
         }
+
+        $attachment = \Swift_Attachment::newInstance($pdf, 'billets.pdf', 'application/pdf');
+
+        $mail = \Swift_Message::newInstance()
+            ->setSubject('Billets Musée du Louvre')
+            ->setFrom('test@test.com')
+            ->setTo($buyer->getEmail())
+            ->setBody('Bonne visite !')
+            ->attach($attachment);
+
+        $this->get('mailer')->send($mail);
 
         return $this->render('PepertTicketingBundle:Ticketing:end.html.twig');
     }

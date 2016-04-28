@@ -29,6 +29,13 @@ class Transaction
     private $transactionId;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="transaction_system", type="string", length=255, nullable=true)
+     */
+    private $transactionSystem;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="transaction_date", type="date", nullable=true)
@@ -203,6 +210,11 @@ class Transaction
         $this->tickets->removeElement($ticket);
     }
 
+    public function removeAllTickets()
+    {
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get tickets
      *
@@ -216,5 +228,29 @@ class Transaction
     public function setTickets($tickets)
     {
         $this->tickets = $tickets;
+    }
+
+    /**
+     * Set ticketNumber
+     *
+     * @param integer $ticketNumber
+     *
+     * @return Transaction
+     */
+    public function setTicketNumber($ticketNumber)
+    {
+        $this->ticketNumber = $ticketNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get ticketNumber
+     *
+     * @return integer
+     */
+    public function getTicketNumber()
+    {
+        return $this->ticketNumber;
     }
 }
