@@ -1,0 +1,46 @@
+body{
+    background-color: white;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 0px 90px;
+}
+
+header{
+    background-color: #fffee0;
+    height: 92px;
+    border-bottom: 8px solid #b93d18;
+}
+
+#logo{
+    height: 60px;
+    margin: 10px;
+    margin-left: 30px;
+}
+
+#tickets{
+    height: 120px;
+    margin: 10px;
+}
+
+#maintitle{
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 2.2em;
+    color: black;
+}
+
+#smallmaintitle{
+    font-size: 0.5em;
+}
+
+#content{
+    background-color: #fffee0;
+    opacity: 0.8;
+}
+
+.btn-primary{
+    background-color: #331107;
+    border-radius: 0px;
+    border: none;
+}

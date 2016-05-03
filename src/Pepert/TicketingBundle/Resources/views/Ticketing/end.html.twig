@@ -10,6 +10,16 @@
 </head>
 
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.6";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
 <div class="container text-center">
     <div id="header">
         <h1>Billetterie du Musée du Louvre</h1>
@@ -21,14 +31,33 @@
         <p>{{ message }}</p>
     {% endfor %}
 
-    <p>Vos billets ont été envoyés sur votre boite mail. Bonne visite !</p>
+    <p>Vos billets ont été envoyés sur votre boite mail.</p>
+    <p>Partagez la bonne nouvelle avec vos amis :</p>
+    <div class="fb-share-button col-md-6" data-href="http://localhost/BilletterieLouvre/web/app_dev.php"
+         data-layout="button" data-mobile-iframe="true">
+    </div>
+    <a href="https://twitter.com/share" class="twitter-share-button col-md-6"
+       data-url="http://localhost/BilletterieLouvre/web/app_dev.php/final"
+       data-text="Je viens d'acheter mes billets pour le Musée du Louvre !"
+       data-hashtags="MuséeDuLouvre">
+        Tweet
+    </a>
+    <script>
+        !function(d,s,id) {
+            var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+            if(!d.getElementById(id))
+            {
+                js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
+                fjs.parentNode.insertBefore(js,fjs);
+            }
+        }(document, 'script', 'twitter-wjs');
+    </script>
+    <p>Bonne visite !</p>
 
     <hr>
 
     <footer>
-        <div>
 
-        </div>
     </footer>
 </div>
 
