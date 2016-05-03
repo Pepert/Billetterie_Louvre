@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4196277d-8390-4481-aa39-75035a2258d7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/public/css/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/end.html.twig" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/end.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/PriceCalculator/PepertPriceCalculator.php" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/PriceCalculator/PepertPriceCalculator.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/index.html.twig" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/paiement.html.twig" afterPath="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/paiement.html.twig" />
     </list>
     <ignored path="BilletterieLouvre.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,18 +31,18 @@
       <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40328467">
-              <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.34124088">
+              <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="end.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/end.html.twig">
+      <file leaf-file-name="paiement.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/paiement.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-28.76923">
-              <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
+            <state vertical-scroll-proportion="-8.5">
+              <caret line="37" column="42" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -51,32 +51,45 @@
       <file leaf-file-name="TicketingController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.538462">
-              <caret line="538" column="42" selection-start-line="538" selection-start-column="42" selection-end-line="538" selection-end-column="42" />
+            <state vertical-scroll-proportion="-8.345454">
+              <caret line="213" column="96" selection-start-line="213" selection-start-column="96" selection-end-line="213" selection-end-column="96" />
               <folding>
                 <element signature="e#53#99#0#PHP" expanded="true" />
-                <element signature="e#8023#8073#0#PHP" expanded="true" />
-                <element signature="e#8993#9021#1#PHP" expanded="true" />
+                <element signature="e#3277#3307#1#PHP" expanded="true" />
+                <element signature="e#3981#4009#1#PHP" expanded="true" />
+                <element signature="e#5311#5339#1#PHP" expanded="true" />
+                <element signature="e#5651#5686#1#PHP" expanded="true" />
+                <element signature="e#8151#8201#0#PHP" expanded="true" />
+                <element signature="e#8546#8581#1#PHP" expanded="true" />
+                <element signature="e#9121#9149#1#PHP" expanded="true" />
+                <element signature="e#9778#9813#1#PHP" expanded="true" />
+                <element signature="e#11193#11221#1#PHP" expanded="true" />
+                <element signature="e#11850#11885#1#PHP" expanded="true" />
+                <element signature="e#15052#15087#1#PHP" expanded="true" />
+                <element signature="e#15888#15923#1#PHP" expanded="true" />
+                <element signature="e#16073#16101#1#PHP" expanded="true" />
+                <element signature="e#18760#18809#1#PHP" expanded="true" />
+                <element signature="e#19249#19296#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/config/routing.yml">
+      <file leaf-file-name="PepertPriceCalculator.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/PriceCalculator/PepertPriceCalculator.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="70" selection-start-line="28" selection-start-column="70" selection-end-line="28" selection-end-column="70" />
+            <state vertical-scroll-proportion="44.345455">
+              <caret line="73" column="28" selection-start-line="73" selection-start-column="28" selection-end-line="73" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/public/css/main.css">
+      <file leaf-file-name="Ticket.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+            <state vertical-scroll-proportion="140.53847">
+              <caret line="97" column="7" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -96,7 +109,6 @@
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/paypalValidated.html.twig" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/PaypalPayment/CreatePaypalPayment.php" />
         <option value="$PROJECT_DIR$/vendor/paypal/rest-api-sdk-php/sample/bootstrap.php" />
-        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/PriceCalculator/PepertPriceCalculator.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/config.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/charge.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/stripe.php" />
@@ -110,7 +122,6 @@
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/GenerateApiPaypal/GenerateApiPaypal.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/ticket.html.twig" />
-        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/paiement.html.twig" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Form/Type/UserType.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/test.html.twig" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/paymentValidated.html.twig" />
@@ -120,10 +131,12 @@
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Transaction.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/public/css/main.css" />
-        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/end.html.twig" />
+        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php" />
+        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/paiement.html.twig" />
+        <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/PriceCalculator/PepertPriceCalculator.php" />
         <option value="$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/index.html.twig" />
       </list>
     </option>
@@ -219,6 +232,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="TicketingBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BilletterieLouvre" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BilletterieLouvre" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pepert" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TicketingBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StripePaymentSystem" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -533,7 +572,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6694352" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -564,14 +603,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="323" column="5" selection-start-line="323" selection-start-column="5" selection-end-line="323" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Transaction.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -586,8 +617,21 @@
           <caret line="159" column="37" selection-start-line="159" selection-start-column="37" selection-end-line="159" selection-end-column="37" />
           <folding>
             <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#8023#8073#0#PHP" expanded="true" />
-            <element signature="e#8993#9021#1#PHP" expanded="true" />
+            <element signature="e#3277#3307#1#PHP" expanded="true" />
+            <element signature="e#3981#4009#1#PHP" expanded="true" />
+            <element signature="e#5311#5339#1#PHP" expanded="true" />
+            <element signature="e#5651#5686#1#PHP" expanded="true" />
+            <element signature="e#8151#8201#0#PHP" expanded="true" />
+            <element signature="e#8546#8581#1#PHP" expanded="true" />
+            <element signature="e#9121#9149#1#PHP" expanded="true" />
+            <element signature="e#9778#9813#1#PHP" expanded="true" />
+            <element signature="e#11193#11221#1#PHP" expanded="true" />
+            <element signature="e#11850#11885#1#PHP" expanded="true" />
+            <element signature="e#15052#15087#1#PHP" expanded="true" />
+            <element signature="e#15888#15923#1#PHP" expanded="true" />
+            <element signature="e#16073#16101#1#PHP" expanded="true" />
+            <element signature="e#18760#18809#1#PHP" expanded="true" />
+            <element signature="e#19249#19296#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -613,8 +657,21 @@
           <caret line="196" column="0" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
           <folding>
             <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#8023#8073#0#PHP" expanded="true" />
-            <element signature="e#8993#9021#1#PHP" expanded="true" />
+            <element signature="e#3277#3307#1#PHP" expanded="true" />
+            <element signature="e#3981#4009#1#PHP" expanded="true" />
+            <element signature="e#5311#5339#1#PHP" expanded="true" />
+            <element signature="e#5651#5686#1#PHP" expanded="true" />
+            <element signature="e#8151#8201#0#PHP" expanded="true" />
+            <element signature="e#8546#8581#1#PHP" expanded="true" />
+            <element signature="e#9121#9149#1#PHP" expanded="true" />
+            <element signature="e#9778#9813#1#PHP" expanded="true" />
+            <element signature="e#11193#11221#1#PHP" expanded="true" />
+            <element signature="e#11850#11885#1#PHP" expanded="true" />
+            <element signature="e#15052#15087#1#PHP" expanded="true" />
+            <element signature="e#15888#15923#1#PHP" expanded="true" />
+            <element signature="e#16073#16101#1#PHP" expanded="true" />
+            <element signature="e#18760#18809#1#PHP" expanded="true" />
+            <element signature="e#19249#19296#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -647,8 +704,21 @@
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
             <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#8023#8073#0#PHP" expanded="true" />
-            <element signature="e#8993#9021#1#PHP" expanded="true" />
+            <element signature="e#3277#3307#1#PHP" expanded="true" />
+            <element signature="e#3981#4009#1#PHP" expanded="true" />
+            <element signature="e#5311#5339#1#PHP" expanded="true" />
+            <element signature="e#5651#5686#1#PHP" expanded="true" />
+            <element signature="e#8151#8201#0#PHP" expanded="true" />
+            <element signature="e#8546#8581#1#PHP" expanded="true" />
+            <element signature="e#9121#9149#1#PHP" expanded="true" />
+            <element signature="e#9778#9813#1#PHP" expanded="true" />
+            <element signature="e#11193#11221#1#PHP" expanded="true" />
+            <element signature="e#11850#11885#1#PHP" expanded="true" />
+            <element signature="e#15052#15087#1#PHP" expanded="true" />
+            <element signature="e#15888#15923#1#PHP" expanded="true" />
+            <element signature="e#16073#16101#1#PHP" expanded="true" />
+            <element signature="e#18760#18809#1#PHP" expanded="true" />
+            <element signature="e#19249#19296#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -666,8 +736,21 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#8023#8073#0#PHP" expanded="true" />
-            <element signature="e#8993#9021#1#PHP" expanded="true" />
+            <element signature="e#3277#3307#1#PHP" expanded="true" />
+            <element signature="e#3981#4009#1#PHP" expanded="true" />
+            <element signature="e#5311#5339#1#PHP" expanded="true" />
+            <element signature="e#5651#5686#1#PHP" expanded="true" />
+            <element signature="e#8151#8201#0#PHP" expanded="true" />
+            <element signature="e#8546#8581#1#PHP" expanded="true" />
+            <element signature="e#9121#9149#1#PHP" expanded="true" />
+            <element signature="e#9778#9813#1#PHP" expanded="true" />
+            <element signature="e#11193#11221#1#PHP" expanded="true" />
+            <element signature="e#11850#11885#1#PHP" expanded="true" />
+            <element signature="e#15052#15087#1#PHP" expanded="true" />
+            <element signature="e#15888#15923#1#PHP" expanded="true" />
+            <element signature="e#16073#16101#1#PHP" expanded="true" />
+            <element signature="e#18760#18809#1#PHP" expanded="true" />
+            <element signature="e#19249#19296#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -706,8 +789,21 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#8023#8073#0#PHP" expanded="true" />
-            <element signature="e#8993#9021#1#PHP" expanded="true" />
+            <element signature="e#3277#3307#1#PHP" expanded="true" />
+            <element signature="e#3981#4009#1#PHP" expanded="true" />
+            <element signature="e#5311#5339#1#PHP" expanded="true" />
+            <element signature="e#5651#5686#1#PHP" expanded="true" />
+            <element signature="e#8151#8201#0#PHP" expanded="true" />
+            <element signature="e#8546#8581#1#PHP" expanded="true" />
+            <element signature="e#9121#9149#1#PHP" expanded="true" />
+            <element signature="e#9778#9813#1#PHP" expanded="true" />
+            <element signature="e#11193#11221#1#PHP" expanded="true" />
+            <element signature="e#11850#11885#1#PHP" expanded="true" />
+            <element signature="e#15052#15087#1#PHP" expanded="true" />
+            <element signature="e#15888#15923#1#PHP" expanded="true" />
+            <element signature="e#16073#16101#1#PHP" expanded="true" />
+            <element signature="e#18760#18809#1#PHP" expanded="true" />
+            <element signature="e#19249#19296#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -810,13 +906,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/StripePaymentSystem/StripePayment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18312387">
-          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/GenerateApiPaypal/GenerateApiPaypal.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08438061">
@@ -846,21 +935,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/PriceCalculator/PepertPriceCalculator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.2335765">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.031021899">
-          <caret line="97" column="7" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Form/Type/TicketType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40328467">
@@ -884,21 +958,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Transaction.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.031021899">
-          <caret line="78" column="30" selection-start-line="78" selection-start-column="30" selection-end-line="78" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/paiement.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3029197">
-          <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/public/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -912,32 +971,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="70" selection-start-line="28" selection-start-column="70" selection-end-line="28" selection-end-column="70" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/spipu/html2pdf/html2pdf.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2810219">
-          <caret line="5680" column="51" selection-start-line="5680" selection-start-column="51" selection-end-line="5680" selection-end-column="51" />
-          <folding>
-            <marker date="1461262656276" expanded="true" signature="19117:19406" placeholder="..." />
-            <marker date="1461262656276" expanded="true" signature="19128:19294" placeholder="..." />
-            <marker date="1461262656276" expanded="false" signature="19313:19368" placeholder="..." />
-            <marker date="1461262656276" expanded="true" signature="19369:19398" placeholder="..." />
-            <marker date="1461262656276" expanded="true" signature="25423:25442" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.538462">
-          <caret line="538" column="42" selection-start-line="538" selection-start-column="42" selection-end-line="538" selection-end-column="42" />
-          <folding>
-            <element signature="e#53#99#0#PHP" expanded="true" />
-            <element signature="e#8023#8073#0#PHP" expanded="true" />
-            <element signature="e#8993#9021#1#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -957,18 +990,105 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/spipu/html2pdf/html2pdf.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.653846">
+          <caret line="5680" column="34" selection-start-line="5680" selection-start-column="34" selection-end-line="5680" selection-end-column="34" />
+          <folding>
+            <marker date="1462271518259" expanded="true" signature="19117:19406" placeholder="..." />
+            <marker date="1462271518259" expanded="true" signature="19128:19294" placeholder="..." />
+            <marker date="1462271518259" expanded="false" signature="19313:19368" placeholder="..." />
+            <marker date="1462271518259" expanded="true" signature="19369:19398" placeholder="..." />
+            <marker date="1462271518259" expanded="true" signature="25423:25442" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/StripePaymentSystem/StripePayment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18613139">
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/PepertTicketingBundle.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Transaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="60.115383">
+          <caret line="78" column="30" selection-start-line="78" selection-start-column="30" selection-end-line="78" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/end.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.76923">
+        <state vertical-scroll-proportion="1.3649635">
           <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/paiement.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.5">
+          <caret line="37" column="42" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Entity/Ticket.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="140.53847">
+          <caret line="97" column="7" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Controller/TicketingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.345454">
+          <caret line="213" column="96" selection-start-line="213" selection-start-column="96" selection-end-line="213" selection-end-column="96" />
+          <folding>
+            <element signature="e#53#99#0#PHP" expanded="true" />
+            <element signature="e#3277#3307#1#PHP" expanded="true" />
+            <element signature="e#3981#4009#1#PHP" expanded="true" />
+            <element signature="e#5311#5339#1#PHP" expanded="true" />
+            <element signature="e#5651#5686#1#PHP" expanded="true" />
+            <element signature="e#8151#8201#0#PHP" expanded="true" />
+            <element signature="e#8546#8581#1#PHP" expanded="true" />
+            <element signature="e#9121#9149#1#PHP" expanded="true" />
+            <element signature="e#9778#9813#1#PHP" expanded="true" />
+            <element signature="e#11193#11221#1#PHP" expanded="true" />
+            <element signature="e#11850#11885#1#PHP" expanded="true" />
+            <element signature="e#15052#15087#1#PHP" expanded="true" />
+            <element signature="e#15888#15923#1#PHP" expanded="true" />
+            <element signature="e#16073#16101#1#PHP" expanded="true" />
+            <element signature="e#18760#18809#1#PHP" expanded="true" />
+            <element signature="e#19249#19296#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/PriceCalculator/PepertPriceCalculator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="44.345455">
+          <caret line="73" column="28" selection-start-line="73" selection-start-column="28" selection-end-line="73" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Pepert/TicketingBundle/Resources/views/Ticketing/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40328467">
-          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.34124088">
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
           <folding />
         </state>
       </provider>

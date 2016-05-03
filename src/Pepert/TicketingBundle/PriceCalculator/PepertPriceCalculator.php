@@ -71,7 +71,7 @@ class PepertPriceCalculator
 
         if($tarifReduit)
         {
-            $tarifName = 'reduit';
+            $tarifName = 'réduit';
             $price = 10;
         }
         else
@@ -128,7 +128,7 @@ class PepertPriceCalculator
             {
                 $price += 12;
             }
-            else if($tarifName == 'reduit')
+            else if($tarifName == 'réduit')
             {
                 $price += 10;
             }
@@ -159,9 +159,58 @@ class PepertPriceCalculator
         return $price;
     }
 
+    public function stringResumeAchat($tickets){
+        $ticketsSorted = $tickets->getValues();
+        usort($ticketsSorted, array($this, "cmpTarif"));
+
+        $listeAchatString = [];
+        $descriptionTemp = '';
+        $tarifTemp = '';
+        $quantity = 1;
+        $price = 0;
+
+        $taille = count($ticketsSorted);
+        $compteur = 0;
+
+        foreach($ticketsSorted as $ticket)
+        {
+            if($ticket->getTarifName() == $tarifTemp)
+            {
+                $quantity ++;
+                $price += $ticket->getPrice();
+                $descriptionTemp = $quantity.' x Tarif '.mb_strtolower($ticket->getTicketType(), 'UTF-8').' '.$ticket->getTarifName().' = '.$price.' Euros';
+                $compteur ++;
+            }
+            else
+            {
+                if($descriptionTemp != '')
+                {
+                    $listeAchatString[] = $descriptionTemp;
+                }
+                $tarifTemp = $ticket->getTarifName();
+                $price = $ticket->getPrice();
+                $quantity = 1;
+                $descriptionTemp = $quantity.' x Tarif '.mb_strtolower($ticket->getTicketType(), 'UTF-8').' '.$ticket->getTarifName().' = '.$ticket->getPrice().' Euros';
+                $compteur ++;
+            }
+
+            if($compteur === $taille)
+            {
+                $listeAchatString[] = $descriptionTemp;
+            }
+        }
+
+        return $listeAchatString;
+    }
+
     private function cmp($a, $b)
     {
         return strcmp($a->getName(), $b->getName());
+    }
+
+    private function cmpTarif($a, $b)
+    {
+        return strcmp($a->getTarifName(), $b->getTarifName());
     }
 
     private function occurrencesDepuisPosition($tickets, $name, $nbTickets, $i)

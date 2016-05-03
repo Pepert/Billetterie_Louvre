@@ -195,6 +195,7 @@ class TicketingController extends Controller
             }
 
             $tickets = $priceCalculator->tarif($tickets,$nbTickets);
+            $resumeTransaction = $priceCalculator->stringResumeAchat($tickets);
 
             $transaction->setTotalPrice($priceCalculator->calculerPrixTotal($tickets,$type));
 
@@ -214,6 +215,7 @@ class TicketingController extends Controller
 
             return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig', array(
                 'publishable_key' => $pk,
+                'resume' => $resumeTransaction,
                 'price' => $transaction->getTotalPrice()*100,
                 'nbTickets' => $nbTickets,
             ));
@@ -488,7 +490,7 @@ class TicketingController extends Controller
                             Date de la visite : <?php echo $ticket->getVisitDay()->format('d-m-Y'); ?>
                         </td>
                         <td style="width: 35%;">
-                            <img src="BilletterieLouvre/web/bundles/pepertticketing/images/logo_louvre_ticket.png">
+                            <img src="http://localhost/BilletterieLouvre/web/bundles/pepertticketing/images/logo_louvre_ticket.png">
                         </td>
                     </tr>
                 </table>
@@ -521,9 +523,9 @@ class TicketingController extends Controller
         try{
             $pdf = new \HTML2PDF('P','A4','fr');
             $pdf->writeHTML($content);
-            $pdf->Output('billets.pdf',true);
+            $pdf->Output('billets.pdf');
         }catch(\HTML2PDF_exception $e){
-            $request->getSession()->getFlashBag()->add('erreur', '$e');
+            $request->getSession()->getFlashBag()->add('erreur', $e);
             return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
         }
 
@@ -531,7 +533,7 @@ class TicketingController extends Controller
 
         $mail = \Swift_Message::newInstance()
             ->setSubject('Billets Musée du Louvre')
-            ->setFrom('test@test.com')
+            ->setFrom('billets@louvre.com')
             ->setTo($buyer->getEmail())
             ->setBody('Bonne visite !')
             ->attach($attachment);

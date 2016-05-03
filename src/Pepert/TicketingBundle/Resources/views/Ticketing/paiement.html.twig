@@ -26,6 +26,13 @@
     {% endfor %}
 
     <div id="content" class="col-md-12">
+        <hr/>
+        <p>Commande en cours :</p>
+        {% for item in resume %}
+            <p>{{ item }}</p>
+        {% endfor %}
+        <hr/>
+        <p>Le montant total est de {{ price / 100 }} Euros.</p>
         <p>Merci de sélectionner un système de paiement :</p>
         <a href="{{ path('pepert_ticketing_paiement_paypal') }}">
             <button class="btn btn-primary">Paypal</button>
