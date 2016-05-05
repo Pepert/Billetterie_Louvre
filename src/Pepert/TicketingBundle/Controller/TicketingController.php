@@ -134,24 +134,11 @@ class TicketingController extends Controller
 
     public function ticketAction(Request $request, $nbTickets)
     {
-        $idBuyer = $request->getSession()->get('idBuyer');
-
-        $buyer = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('PepertTicketingBundle:User')
-            ->find($idBuyer)
-        ;
+        $buyer = $this->getBuyer($request);
 
         if($request->getSession()->get('idTransaction'))
         {
-            $idTransaction = $request->getSession()->get('idTransaction');
-            $transaction = $this
-                ->getDoctrine()
-                ->getManager()
-                ->getRepository('PepertTicketingBundle:Transaction')
-                ->find($idTransaction)
-            ;
+            $transaction = $this->getTransaction($request);
             $transaction->removeAllTickets();
         }
         else{
@@ -195,7 +182,7 @@ class TicketingController extends Controller
             }
 
             $tickets = $priceCalculator->tarif($tickets,$nbTickets);
-            $resumeTransaction = $priceCalculator->stringResumeAchat($tickets);
+            $resumeTransaction = $priceCalculator->afficherCommande($tickets);
 
             $transaction->setTotalPrice($priceCalculator->calculerPrixTotal($tickets,$type));
 
@@ -215,7 +202,7 @@ class TicketingController extends Controller
 
             return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig', array(
                 'publishable_key' => $pk,
-                'resume' => $resumeTransaction,
+                'commande' => $resumeTransaction,
                 'price' => $transaction->getTotalPrice()*100,
                 'nbTickets' => $nbTickets,
             ));
@@ -227,20 +214,41 @@ class TicketingController extends Controller
         ));
     }
 
+    public function paymentRetryAction(Request $request)
+    {
+        $idTransaction = $request->query->get('idTransaction');
+        $idBuyer = $request->query->get('idBuyer');
+
+        $request->getSession()->set('idTransaction', $idTransaction);
+        $request->getSession()->set('idBuyer', $idBuyer);
+
+        $transaction = $this->getTransaction($request);
+
+        $tickets = $transaction->getTickets();
+
+        $priceCalculator = $this->container->get('pepert_ticketing.price_calculator');
+        $resumeTransaction = $priceCalculator->afficherCommande($tickets);
+
+        $service = $this->container->get('pepert_ticketing.stripe');
+
+        $pk = $service->setStripeApi();
+
+        return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig', array(
+            'publishable_key' => $pk,
+            'commande' => $resumeTransaction,
+            'price' => $transaction->getTotalPrice()*100,
+            'nbTickets' => $transaction->getTicketNumber(),
+        ));
+    }
+
     public function paypalAction(Request $request)
     {
-        $idTransaction = $request->getSession()->get('idTransaction');
-
-        $em = $this->getDoctrine()->getManager();
-
-        $transaction = $em
-            ->getRepository('PepertTicketingBundle:Transaction')
-            ->find($idTransaction)
-        ;
+        $transaction = $this->getTransaction($request);
+        $buyer = $this->getBuyer($request);
 
         $service = $this->container->get('pepert_ticketing.paypal_api');
 
-        $requete = $service->setCheckoutApi($transaction);
+        $requete = $service->setCheckoutApi($transaction, $buyer);
 
         header("Location:".$requete);
         exit();
@@ -248,15 +256,16 @@ class TicketingController extends Controller
 
     public function paypalValidatedAction(Request $request)
     {
-        $idTransaction = $request->getSession()->get('idTransaction');
-        $idBuyer = $request->getSession()->get('idBuyer');
+        $idTransaction = $request->query->get('idTransaction');
+        $idBuyer = $request->query->get('idBuyer');
+
+        $request->getSession()->set('idTransaction', $idTransaction);
+        $request->getSession()->set('idBuyer', $idBuyer);
 
         $em = $this->getDoctrine()->getManager();
 
-        $buyer = $em
-            ->getRepository('PepertTicketingBundle:User')
-            ->find($idBuyer)
-        ;
+        $buyer = $this->getBuyer($request);
+
         $oldEmail = $buyer->getEmail();
 
         $form = $this->createFormBuilder($buyer)
@@ -277,10 +286,7 @@ class TicketingController extends Controller
             return $this->redirectToRoute('pepert_ticketing_final');
         }
 
-        $transaction = $em
-            ->getRepository('PepertTicketingBundle:Transaction')
-            ->find($idTransaction)
-        ;
+        $transaction = $this->getTransaction($request);
 
         $service = $this->container->get('pepert_ticketing.paypal_api');
 
@@ -316,15 +322,11 @@ class TicketingController extends Controller
 
     public function stripeValidatedAction(Request $request)
     {
-        $idTransaction = $request->getSession()->get('idTransaction');
-        $idBuyer = $request->getSession()->get('idBuyer');
+        $transaction = $this->getTransaction($request);
+        $buyer = $this->getBuyer($request);
 
         $em = $this->getDoctrine()->getManager();
 
-        $buyer = $em
-            ->getRepository('PepertTicketingBundle:User')
-            ->find($idBuyer)
-        ;
         $oldEmail = $buyer->getEmail();
 
         $form = $this->createFormBuilder($buyer)
@@ -344,11 +346,6 @@ class TicketingController extends Controller
 
             return $this->redirectToRoute('pepert_ticketing_final');
         }
-
-        $transaction = $em
-            ->getRepository('PepertTicketingBundle:Transaction')
-            ->find($idTransaction)
-        ;
 
         $service = $this->container->get('pepert_ticketing.stripe');
 
@@ -410,7 +407,7 @@ class TicketingController extends Controller
                 .$ticket->getTarifName()
                 .$ticket->getTicketType()
                 .$ticket->getVisitDay()->format('d-m-Y')
-                .$idBuyer;
+                .$ticket->getId();
             $reservationCode = md5($infos);
             $ticket->setReservationCode($reservationCode);
             $ticket->setStatus('Payé');
@@ -426,14 +423,7 @@ class TicketingController extends Controller
 
     public function paymentErrorAction(Request $request)
     {
-        $idTransaction = $request->getSession()->get('idTransaction');
-
-        $transaction = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('PepertTicketingBundle:Transaction')
-            ->find($idTransaction)
-        ;
+        $transaction = $this->getTransaction($request);
 
         $service = $this->container->get('pepert_ticketing.stripe');
 
@@ -450,80 +440,18 @@ class TicketingController extends Controller
 
     public function generateMailAction(Request $request)
     {
-        $idTransaction = $request->getSession()->get('idTransaction');
-        $idBuyer = $request->getSession()->get('idBuyer');
-
-        $transaction = $this
-        ->getDoctrine()
-        ->getManager()
-        ->getRepository('PepertTicketingBundle:Transaction')
-        ->find($idTransaction)
-        ;
-
-        $buyer = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('PepertTicketingBundle:User')
-            ->find($idBuyer)
-        ;
+        $buyer = $this->getBuyer($request);
+        $transaction = $this->getTransaction($request);
 
         $tickets = $transaction->getTickets();
 
-        ob_start();
-        ?>
-            <style type="text/css">
-                table{
-                    width: 100%;
-                    border: solid 1px #000000;
-                    vertical-align: middle;
-                }
-            </style>
+        $service = $this->container->get('pepert_ticketing.generate_pdf');
+        $content = $service->generateHtmlToPdf($tickets);
 
-            <page backtop="20mm" backleft="10mm" backright="10mm" backbottom="5mm">
-
-        <?php foreach($tickets as $ticket){ ?>
-                <table style="border-bottom: none; padding-top: 4mm; padding-bottom: 10mm;">
-                    <tr>
-                        <td style="width: 65%; font-size: 12pt; text-align: center;">
-                            <strong style="font-size: 25pt;">Musée du Louvre</strong>
-                            <br/>
-                            Date de la visite : <?php echo $ticket->getVisitDay()->format('d-m-Y'); ?>
-                        </td>
-                        <td style="width: 35%;">
-                            <img src="http://localhost/BilletterieLouvre/web/bundles/pepertticketing/images/logo_louvre_ticket.png">
-                        </td>
-                    </tr>
-                </table>
-                <table style="border-top: none; padding-bottom: 8mm; padding-left: 4mm; text-align: center;">
-                    <tr>
-                        <td style="width: 20%;">
-                            <qrcode value="<?php echo $ticket->getReservationCode(); ?>" ec="H" style="width: 25mm; background-color: white; color: black;"></qrcode>
-                        </td>
-                        <td style="width: 50%; font-size: 18pt; text-align: center;">
-                            <?php echo $ticket->getFirstName(); ?> <?php echo strtoupper($ticket->getName()); ?>
-                        </td>
-                        <td style="width: 30%; font-size: 12pt;">
-                            <?php echo $ticket->getTicketType(); ?> - <?php echo $ticket->getTarifName(); ?>
-                            <br/>
-                            <strong style="font-size: 25pt;"><?php echo $ticket->getPrice(); ?> €</strong>
-                        </td>
-                    </tr>
-                </table>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-        <?php } ?>
-
-            </page>
-
-<?php
-        $content = ob_get_clean();
         try{
             $pdf = new \HTML2PDF('P','A4','fr');
             $pdf->writeHTML($content);
-            $pdf->Output('billets.pdf');
+            $pdf->Output('billets.pdf',true);
         }catch(\HTML2PDF_exception $e){
             $request->getSession()->getFlashBag()->add('erreur', $e);
             return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
@@ -541,5 +469,47 @@ class TicketingController extends Controller
         $this->get('mailer')->send($mail);
 
         return $this->render('PepertTicketingBundle:Ticketing:end.html.twig');
+    }
+
+    private function getBuyer(Request $request)
+    {
+        $idBuyer = $request->getSession()->get('idBuyer');
+
+        if(!$idBuyer)
+        {
+            $request->getSession()->getFlashBag()->clear();
+            $request->getSession()->getFlashBag()->add('erreur', 'La session a expirée. Merci de réitérer votre commande.');
+            return $this->redirectToRoute('pepert_ticketing_homepage');
+        }
+
+        $buyer = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PepertTicketingBundle:User')
+            ->find($idBuyer)
+        ;
+
+        return $buyer;
+    }
+
+    private function getTransaction(Request $request)
+    {
+        $idTransaction = $request->getSession()->get('idTransaction');
+
+        if(!$idTransaction)
+        {
+            $request->getSession()->getFlashBag()->clear();
+            $request->getSession()->getFlashBag()->add('erreur', 'La session a expirée. Merci de réitérer votre commande.');
+            return $this->redirectToRoute('pepert_ticketing_homepage');
+        }
+
+        $transaction = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PepertTicketingBundle:Transaction')
+            ->find($idTransaction)
+        ;
+
+        return $transaction;
     }
 }

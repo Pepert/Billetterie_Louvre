@@ -28,7 +28,7 @@
     <div id="content" class="col-md-12">
         <hr/>
         <p>Commande en cours :</p>
-        {% for item in resume %}
+        {% for item in commande %}
             <p>{{ item }}</p>
         {% endfor %}
         <hr/>
@@ -42,7 +42,7 @@
         </span>
     </div>
 
-    <a href="javascript:history.go(-1)"><button class="btn btn-primary">Retour</button></a>
+    <a href="{{ path('pepert_ticketing_tickets', {'nbTickets': nbTickets }) }}"><button class="btn btn-primary">Retour</button></a>
 
     <hr>
 

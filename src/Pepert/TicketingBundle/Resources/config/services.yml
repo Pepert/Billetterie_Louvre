@@ -6,7 +6,10 @@ services:
         class: Pepert\TicketingBundle\GenerateApiPaypal\GenerateApiPaypal
 
     pepert_ticketing.stripe:
-            class: Pepert\TicketingBundle\StripePaymentSystem\StripePayment
+        class: Pepert\TicketingBundle\StripePaymentSystem\StripePayment
+
+    pepert_ticketing.generate_pdf:
+        class: Pepert\TicketingBundle\GeneratePdf\GeneratePdf
 #    pepert_ticketing.example:
 #        class: Pepert\TicketingBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]

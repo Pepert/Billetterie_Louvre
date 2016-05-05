@@ -159,7 +159,7 @@ class PepertPriceCalculator
         return $price;
     }
 
-    public function stringResumeAchat($tickets){
+    public function afficherCommande($tickets){
         $ticketsSorted = $tickets->getValues();
         usort($ticketsSorted, array($this, "cmpTarif"));
 

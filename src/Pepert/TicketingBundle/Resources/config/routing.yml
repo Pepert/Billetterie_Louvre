@@ -8,6 +8,10 @@ pepert_ticketing_tickets:
     requirements:
         nbTickets: \d+
 
+pepert_ticketing_paiement_retry:
+    path:     /payment
+    defaults: { _controller: PepertTicketingBundle:Ticketing:paymentRetry }
+
 pepert_ticketing_paiement_paypal:
     path:     /payment/paypal
     defaults: { _controller: PepertTicketingBundle:Ticketing:paypal }

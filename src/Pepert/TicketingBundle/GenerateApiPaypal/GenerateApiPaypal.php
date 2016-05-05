@@ -12,9 +12,11 @@ use PayPal\Api\Transaction;
 use PayPal\Api\PaymentExecution;
 use Exception;
 
+use Pepert\TicketingBundle\Entity\User;
+
 class GenerateApiPaypal
 {
-    public function setCheckoutApi(\Pepert\TicketingBundle\Entity\Transaction $currentTransaction)
+    public function setCheckoutApi(\Pepert\TicketingBundle\Entity\Transaction $currentTransaction, User $buyer)
     {
         require __DIR__ . '/../../../../vendor/paypal/rest-api-sdk-php/sample/bootstrap.php';
 
@@ -48,8 +50,10 @@ class GenerateApiPaypal
 
         $baseUrl = "http://127.0.0.1/BilletterieLouvre/web/app_dev.php";
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl("$baseUrl/payment/paypal/validated?success=true")
-            ->setCancelUrl("$baseUrl/payment/error");
+        $redirectUrls->setReturnUrl("$baseUrl/payment/paypal/validated?success=true&idTransaction="
+            .$currentTransaction->getId()."&idBuyer=".$buyer->getId())
+            ->setCancelUrl("$baseUrl/payment?idTransaction="
+            .$currentTransaction->getId()."&idBuyer=".$buyer->getId());
 
         $payment = new Payment();
         $payment->setIntent("sale")
