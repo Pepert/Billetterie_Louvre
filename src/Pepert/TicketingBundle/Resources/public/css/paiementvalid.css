@@ -1,0 +1,78 @@
+.container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    text-align: center;
+}
+
+#title{
+    color: white;
+    font-size: 2.2em;
+}
+
+#content{
+    background: rgba(255, 255, 255, 0.5);
+    padding-bottom: 15px;
+    border: solid black 1px;
+}
+
+#steps{
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+#step-final{
+    font-size: 1.2em;
+}
+
+.well{
+    background-color: #d5dae1;
+    position: relative;
+    border-radius: 0;
+}
+
+.form-horizontal .control-label{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+input {
+    text-align: center;
+}
+
+.btn-choice,
+.btn-choice:visited,
+.btn-choice:focus {
+    width: 180px;
+    height: 30px;
+    background-color: #b93d18;
+    border-radius: 0;
+    border: none;
+    color: white;
+}
+
+.btn-choice:hover {
+    background-color: #331107;
+}
+
+@media (min-width: 440px) {
+    #content{
+        margin-top: 10px;
+    }
+
+    #steps{
+        font-size: 1.8em;
+    }
+}
+
+@media (min-width: 540px) {
+    #content{
+        margin-top: 15px;
+    }
+}
+
+@media (min-width: 992px) {
+    #steps{
+        padding-top: 0;
+    }
+}

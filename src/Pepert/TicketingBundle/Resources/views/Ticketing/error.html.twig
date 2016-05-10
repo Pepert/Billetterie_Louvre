@@ -1,41 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Billetterie</title>
+{% extends "PepertTicketingBundle::layout.html.twig" %}
 
-    {% block stylesheets %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    {% endblock %}
-</head>
+{% block content %}
 
-<body>
-<div class="container text-center">
-    <div id="header">
-        <h1>Billetterie du Musée du Louvre</h1>
-    </div>
+    <link rel="stylesheet" href="{{ asset('bundles/pepertticketing/css/error.css') }}" type="text/css">
 
-    <hr/>
+    <div class="container">
+        <span id="title">Erreur</span>
 
-    {% for message in app.session.flashbag.get('erreur') %}
-        <p>{{ message }}</p>
-    {% endfor %}
+        {% for message in app.session.flashbag.get('erreur') %}
+            <br/>
+            <div  class="flashbag">
+                <span>{{ message }}</span>
+            </div>
+        {% endfor %}
 
-    <p>La transaction n'a pas été validée. Merci de réitérer votre achat.</p>
+        <div id="content" class="col-md-12">
+            <h3 id="subtitle">
+                <span id="subtitleend">Une erreur est survenue</span>
+            </h3>
 
-    <hr>
+            <div class="well">
 
-    <footer>
-        <div>
+                <p>La transaction n'a pas été validée</p>
+                <p>Merci de réitérer votre achat</p>
+
+            </div>
+
+            <a href="{{ path('pepert_ticketing_homepage') }}"><button class="btn-choice btn-bottom">Retour à l'accueil</button></a>
 
         </div>
-    </footer>
-</div>
+    </div>
 
-{% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-{% endblock %}
 
-</body>
-</html>
+{% endblock %}

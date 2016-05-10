@@ -1,92 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Billetterie</title>
+{% extends "PepertTicketingBundle::layout.html.twig" %}
 
-    {% block stylesheets %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    {% endblock %}
-</head>
+{% block content %}
 
-<body>
-<div class="container text-center">
-    <div id="header">
-        <h1>Billetterie du Musée du Louvre</h1>
-    </div>
+    <link rel="stylesheet" href="{{ asset('bundles/pepertticketing/css/paiement.css') }}" type="text/css">
 
-    <hr/>
+    <div class="container">
+        <span id="title">Paiement</span>
 
-    {% for message in app.session.flashbag.get('information') %}
-        <p>{{ message }}</p>
-    {% endfor %}
-
-    {% for message in app.session.flashbag.get('error') %}
-        <p>{{ message }}</p>
-    {% endfor %}
-
-    <div id="content" class="col-md-12">
-        <hr/>
-        <p>Commande en cours :</p>
-        {% for item in commande %}
-            <p>{{ item }}</p>
+        {% for message in app.session.flashbag.get('information') %}
+            <br/>
+            <div  class="flashbag">
+                <span>{{ message }}</span>
+            </div>
         {% endfor %}
-        <hr/>
-        <p>Le montant total est de {{ price / 100 }} Euros.</p>
-        <p>Merci de sélectionner un système de paiement :</p>
-        <a href="{{ path('pepert_ticketing_paiement_paypal') }}">
-            <button class="btn btn-primary">Paypal</button>
-        </a>
-        <span id="content" class="col-md-12">
-            <button id="customButton" class="btn btn-primary">Stripe (Carte bancaire)</button>
-        </span>
-    </div>
 
-    <a href="{{ path('pepert_ticketing_tickets', {'nbTickets': nbTickets }) }}"><button class="btn btn-primary">Retour</button></a>
+        {% for message in app.session.flashbag.get('error') %}
+            <br/>
+            <div  class="flashbag">
+                <span>{{ message }}</span>
+            </div>
+        {% endfor %}
 
-    <hr>
+        <div id="content" class="col-md-12">
+            <h3 id="steps">
+                <span id="step1">Étape 1</span>
+                >
+                <span id="step2">Étape 2</span>
+                >
+                <span id="step3">Étape 3</span>
+            </h3>
 
-    <footer>
-        <div>
+            <div class="well">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>Commande en cours :</p>
+                        {% for item in commande %}
+                            <p>{{ item }}</p>
+                        {% endfor %}
+                        <hr/>
+                        <p>Le montant total est de <strong>{{ price / 100 }} Euros</strong></p>
+                        <p>Merci de sélectionner un système de paiement :</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <img class="logo" src="{{ asset('bundles/pepertticketing/images/logo_paypal.png') }}" alt="Paypal"/>
+                        </div>
+                        <div class="row">
+                            <a href="{{ path('pepert_ticketing_paiement_paypal') }}">
+                                <button class="btn-choice">Paypal</button>
+                            </a>
+                        </div>
+                    </div>
+                    <hr class="visible-xs"/>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <img class="logo" src="{{ asset('bundles/pepertticketing/images/logo_stripe.png') }}" alt="Paypal"/>
+                        </div>
+                        <div class="row">
+                            <button id="customButton" class="btn-choice">Stripe (Carte bancaire)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="{{ path('pepert_ticketing_tickets', {'nbTickets': nbTickets }) }}"><button class="btn-choice">Retour</button></a>
 
         </div>
-    </footer>
-</div>
+    </div>
 
-{% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://checkout.stripe.com/checkout.js"></script>
-
     <script>
-        var handler = StripeCheckout.configure({
-            key: '{{ publishable_key }}',
-            locale: 'auto',
-            token: function(token) {
-                var url = '{{ path('pepert_ticketing_paiement_stripe_validated') }}';
-                var form = $('<form action="' + url + '" method="post">' +
-                        '<input type="hidden" name="stripeToken" value="' + token.id + '" />' +
-                        '</form>');
-                $('body').append(form);
-                form.submit();
-            }
-        });
-
-        $('#customButton').on('click', function(e) {
-            // Open Checkout with further options
-            handler.open({
-                currency: "eur",
-                amount: {{ price }}
-            });
-            e.preventDefault();
-        });
-
-        // Close Checkout on page navigation
-        $(window).on('popstate', function() {
-            handler.close();
-        });
+        {% if price is defined %}
+        var price = {{ price }};
+        var url = '{{ path('pepert_ticketing_paiement_stripe_validated') }}';
+        var pk = '{{ publishable_key }}';
+        {% endif %}
     </script>
+    <script src="{{ asset('bundles/pepertticketing/js/paiement.js') }}"></script>
 {% endblock %}
-
-</body>
-</html>

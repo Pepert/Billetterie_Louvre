@@ -1,0 +1,109 @@
+.container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    text-align: center;
+}
+
+#title{
+    color: white;
+    font-size: 2.2em;
+}
+
+.flashbag{
+    color: #b93d18;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+}
+
+#content{
+    background: rgba(255, 255, 255, 0.5);
+    padding-bottom: 15px;
+    border: solid black 1px;
+}
+
+#steps{
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+#step1{
+    opacity: 0.3;
+}
+
+#step2{
+    opacity: 0.3;
+}
+
+#step3{
+    font-size: 1.2em;
+}
+
+.well{
+    background-color: #d5dae1;
+    position: relative;
+    border-radius: 0;
+}
+
+.form-horizontal .control-label{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.logo{
+    max-height: 40px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.btn-choice,
+.btn-choice:visited,
+.btn-choice:focus {
+    width: 180px;
+    height: 30px;
+    background-color: #b93d18;
+    border-radius: 0;
+    border: none;
+    color: white;
+}
+
+.btn-choice:hover {
+    background-color: #331107;
+}
+
+.btn-top {
+    margin-top: 15px;
+}
+
+#overlay {
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 999;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+@media (min-width: 440px) {
+    #content{
+        margin-top: 10px;
+    }
+
+    #steps{
+        font-size: 1.8em;
+    }
+}
+
+@media (min-width: 540px) {
+    #content{
+        margin-top: 15px;
+    }
+}
+
+@media (min-width: 992px) {
+    #steps{
+        padding-top: 0;
+    }
+}

@@ -134,6 +134,12 @@ class TicketingController extends Controller
 
     public function ticketAction(Request $request, $nbTickets)
     {
+        if($nbTickets <= 0)
+        {
+            $request->getSession()->getFlashBag()->add('erreur', 'Vous devez acheter au moins un billet');
+            return $this->redirectToRoute('pepert_ticketing_homepage');
+        }
+
         $buyer = $this->getBuyer($request);
 
         if($request->getSession()->get('idTransaction'))
@@ -198,6 +204,7 @@ class TicketingController extends Controller
 
             $pk = $service->setStripeApi();
 
+            $request->getSession()->getFlashBag()->clear();
             $request->getSession()->getFlashBag()->add('information', 'Les tickets sont validés.');
 
             return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig', array(
@@ -451,7 +458,7 @@ class TicketingController extends Controller
         try{
             $pdf = new \HTML2PDF('P','A4','fr');
             $pdf->writeHTML($content);
-            $pdf->Output('billets.pdf',true);
+            $pdf->Output('billets.pdf', true);
         }catch(\HTML2PDF_exception $e){
             $request->getSession()->getFlashBag()->add('erreur', $e);
             return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');

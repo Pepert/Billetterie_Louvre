@@ -1,74 +1,110 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Billetterie</title>
+{% extends "PepertTicketingBundle::layout.html.twig" %}
 
-    {% block stylesheets %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+{% block content %}
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('bundles/pepertticketing/css/jquery.bootstrap-touchspin.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/pepertticketing/css/index.css') }}" type="text/css">
+
+    {% block javascripts %}
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="{{ asset('bundles/pepertticketing/js/datepicker-fr.js') }}"></script>
+        <script src="{{ asset('bundles/pepertticketing/js/jquery.bootstrap-touchspin.min.js') }}"></script>
     {% endblock %}
-</head>
 
-<body>
-<header>
-</header>
-<div class="container text-center">
-    <div id="header">
-        <h1>Billetterie du Musée du Louvre</h1>
-    </div>
+    <div class="container">
+        <span id="title">Type de billets</span>
 
-    <hr/>
-
-    {% for message in app.session.flashbag.get('erreur') %}
-        <p>{{ message }}</p>
-    {% endfor %}
-
-    <div id="content" class="col-md-12">
-        <h3>Acheter un ticket</h3>
-
-        <div class="well">
-            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-
-            {{ form_errors(form) }}
-
-            <div class="form-group">
-                {{ form_errors(form.visit_day) }}
-                {{ form_label(form.visit_day, "Date de votre visite", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                <div class="col-sm-6">
-                    {{ form_widget(form.visit_day) }}
-                </div>
+        {% for message in app.session.flashbag.get('erreur') %}
+            <br/>
+            <div  class="flashbag">
+                <span>{{ message }}</span>
             </div>
+        {% endfor %}
 
-            <div class="form-group">
-                {{ form_errors(form.ticket_type) }}
-                {{ form_label(form.ticket_type, "Type de ticket", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                <div class="col-sm-6">
-                    {{ form_widget(form.ticket_type, {'attr': {'class': 'form-control'}}) }}
+        <div id="content" class="col-md-12">
+            <h3 id="steps">
+                <span id="step1">Étape 1</span>
+                >
+                <span id="step2">Étape 2</span>
+                >
+                <span id="step3">Étape 3</span>
+            </h3>
+
+            <div class="well">
+                {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+                {{ form_errors(form) }}
+
+                <div class="row">
+                    <div class="col-sm-offset-2 col-sm-4">
+                        <div class="form-group">
+                            <br/>
+                            {{ form_errors(form.visit_day) }}
+                            {{ form_label(form.visit_day, "Date de votre visite", {'label_attr': {'class': 'control-label'}}) }}
+                            <div class="row">
+                                <br class="hidden-xs"/>
+                                <div class="col-xs-offset-3 col-xs-6 col-lg-offset-4 col-lg-4">
+                                    {{ form_widget(form.visit_day, {'attr': {'class': 'form-control', 'readonly': 'readonly'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <br/>
+                            {{ form_errors(form.ticket_number) }}
+                            {{ form_label(form.ticket_number, "Nombre de billets voulus", {'label_attr': {'class': 'control-label'}}) }}
+                            <div class="row">
+                                <br class="hidden-xs"/>
+                                <div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4">
+                                    {{ form_widget(form.ticket_number, {'attr': {'class': 'form-control', 'value': '1'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                {{ form_errors(form.ticket_number) }}
-                {{ form_label(form.ticket_number, "Nombre de tickets voulus", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                <div class="col-sm-6">
-                    {{ form_widget(form.ticket_number) }}
+                <div class="row">
+                    <div class="form-group">
+                        <br/>
+                        {{ form_errors(form.ticket_type) }}
+                        {{ form_label(form.ticket_type, "Sélectionnez le type de billet souhaité", {'label_attr': {'class': 'control-label'}}) }}
+                        <div class="row">
+                            <br class="hidden-xs"/>
+                            <div class="col-xs-12">
+                                {{ form_widget(form.ticket_type.0, {'attr': {'class': 'form-control', 'checked': 'true'}}) }}
+                                <label for="user_ticket_type_0" class="btn-choice">Journée</label>
+                                {{ form_widget(form.ticket_type.1, {'attr': {'class': 'form-control'}}) }}
+                                <label for="user_ticket_type_1" class="btn-choice">Demi-journée</label>
+                            </div>
+                        </div>
+                        <br/>
+                        <p class="col-xs-12">Le type de billet "demi-journée" n'autorise l'accès au musée qu'à partir de 14h00</p>
+                        <p class="col-xs-12">Les prix des billets "demi-journée" bénéficient d'une réduction de 50%</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                {{ form_errors(form.email) }}
-                {{ form_label(form.email, "Adresse e-mail", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-
-                <div class="col-sm-6">
-                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                <div class="row">
+                    <div class="form-group">
+                        <br/>
+                        {{ form_errors(form.email) }}
+                        {{ form_label(form.email, "Adresse e-mail", {'label_attr': {'class': 'control-label'}}) }}
+                        <div class="row">
+                            <br class="hidden-xs"/>
+                            <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <p><strong>Les billets vous seront envoyés sur cette adresse e-mail</strong></p>
+
             </div>
-
-            <p><strong>Votre adresse e-mail est nécessaire pour pouvoir reçevoir les tickets achetés.</strong></p>
-
-            <hr/>
-
-            {{ form_widget(form.submit, {'label': 'Choisir un tarif', 'attr': {'class': 'btn btn-primary'}}) }}
+            {{ form_widget(form.submit, {'label': 'Valider', 'attr': {'class': 'btn-choice'}}) }}
 
             {{ form_rest(form) }}
 
@@ -76,19 +112,7 @@
         </div>
     </div>
 
-    <hr>
-
-    <footer>
-        <div>
-
-        </div>
-    </footer>
-</div>
-
-{% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-{% endblock %}
+    <script src="{{ asset('bundles/pepertticketing/js/index.js') }}"></script>
 
-</body>
-</html>
+{% endblock %}

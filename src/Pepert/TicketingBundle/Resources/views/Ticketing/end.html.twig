@@ -1,70 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Billetterie</title>
+{% extends "PepertTicketingBundle::layout.html.twig" %}
 
-    {% block stylesheets %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    {% endblock %}
-</head>
+{% block content %}
 
-<body>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.6";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    <link rel="stylesheet" href="{{ asset('bundles/pepertticketing/css/end.css') }}" type="text/css">
 
+    <div class="container">
+        <span id="title">Merci !</span>
 
-<div class="container text-center">
-    <div id="header">
-        <h1>Billetterie du Musée du Louvre</h1>
+        {% for message in app.session.flashbag.get('erreur') %}
+            <br/>
+            <div  class="flashbag">
+                <span>{{ message }}</span>
+            </div>
+        {% endfor %}
+
+        <div id="content" class="col-md-12">
+            <h3 id="subtitle">
+                <span id="subtitleend">La transaction est terminée</span>
+            </h3>
+
+            <div class="well">
+                <div class="row">
+                    <p>Vos billets ont été envoyés sur votre boite mail</p>
+                    <p>Partagez la bonne nouvelle !</p>
+                </div>
+                <div class="row">
+                    <div class="col-sm-offset-4 col-sm-2">
+                        <div class="fb-share-button" data-href="http://localhost/BilletterieLouvre/web/app_dev.php"
+                             data-layout="button" data-mobile-iframe="true">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="https://twitter.com/share" class="twitter-share-button"
+                           data-url="http://localhost/BilletterieLouvre/web/app_dev.php/final"
+                           data-text="Je viens d'acheter mes billets pour le Musée du Louvre !"
+                           data-hashtags="MuséeDuLouvre">
+                            Tweet
+                        </a>
+                    </div>
+                </div>
+
+                <hr/>
+
+                <h4>Bonne visite !</h4>
+
+                <div id="fb-root"></div>
+
+            </div>
+
+            <a href="{{ path('pepert_ticketing_homepage') }}"><button class="btn-choice btn-bottom">Retour à l'accueil</button></a>
+
+        </div>
     </div>
 
-    <hr/>
-
-    {% for message in app.session.flashbag.get('erreur') %}
-        <p>{{ message }}</p>
-    {% endfor %}
-
-    <p>Vos billets ont été envoyés sur votre boite mail.</p>
-    <p>Partagez la bonne nouvelle avec vos amis :</p>
-    <div class="fb-share-button col-md-6" data-href="http://localhost/BilletterieLouvre/web/app_dev.php"
-         data-layout="button" data-mobile-iframe="true">
-    </div>
-    <a href="https://twitter.com/share" class="twitter-share-button col-md-6"
-       data-url="http://localhost/BilletterieLouvre/web/app_dev.php/final"
-       data-text="Je viens d'acheter mes billets pour le Musée du Louvre !"
-       data-hashtags="MuséeDuLouvre">
-        Tweet
-    </a>
-    <script>
-        !function(d,s,id) {
-            var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
-            if(!d.getElementById(id))
-            {
-                js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
-                fjs.parentNode.insertBefore(js,fjs);
-            }
-        }(document, 'script', 'twitter-wjs');
-    </script>
-    <p>Bonne visite !</p>
-
-    <hr>
-
-    <footer>
-
-    </footer>
-</div>
-
-{% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-{% endblock %}
+    <script src="{{ asset('bundles/pepertticketing/js/end.js') }}"></script>
 
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Billetterie</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('bundles/pepertticketing/css/main.css') }}" type="text/css">
+    {% endblock %}
+</head>
+
+<body style="background-image: url( {{ asset('bundles/pepertticketing/images/louvre_general_blur.jpg') }} ); height: 100%; ">
+<header>
+    <img id="logo" src="{{ asset('bundles/pepertticketing/images/logo_louvre.png') }}" alt="Musée du Louvre"/>
+    <div id="maintitle">
+        <p id="smallmaintitle">Billetterie officielle</p>
+        <p id="bigmaintitle">Musée du Louvre</p>
+    </div>
+    <img id="tickets" src="{{ asset('bundles/pepertticketing/images/tickets_stylises.png') }}" alt="Tickets"/>
+</header>
+
+{% block content %}
+{% endblock %}
+
+<footer>
+    <div>
+
+    </div>
+</footer>
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{% endblock %}
+
+</body>
+</html>

@@ -8,30 +8,28 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $today = new \DateTime();
-        $today->setTimezone(new \DateTimeZone('Europe/Paris'));
-        $year = (int)$today->format('Y');
-
         $builder
             ->add('email',EmailType::class)
             ->add('visit_day', DateType::class, array(
-                'years' => range($year,$year+1),
-                'format' => 'dd MMMM yyyy',
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
             ))
             ->add('ticket_type', ChoiceType::class, array(
                 'choices'  => array(
                     'Journée' => 'Journée',
                     'Demi-journée' => 'Demi-journée',
-                )
+                ),
+                'expanded' => true,
+                'multiple' => false,
             ))
-            ->add('ticket_number',IntegerType::class, array(
+            ->add('ticket_number',TextType::class, array(
                 'attr' => array(
                     'min' => 1,
                     'max' => 25
