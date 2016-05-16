@@ -14,11 +14,11 @@
     {% endblock %}
 
     <div class="container">
-        <span id="title">Type de billets</span>
+        <span id="title">Bienvenue</span>
 
         {% for message in app.session.flashbag.get('erreur') %}
             <br/>
-            <div  class="flashbag">
+            <div class="flashbag">
                 <span>{{ message }}</span>
             </div>
         {% endfor %}
@@ -32,8 +32,9 @@
                 <span id="step3">Étape 3</span>
             </h3>
 
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
             <div class="well">
-                {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
                 {{ form_errors(form) }}
 
@@ -56,7 +57,7 @@
                         <div class="form-group">
                             <br/>
                             {{ form_errors(form.ticket_number) }}
-                            {{ form_label(form.ticket_number, "Nombre de billets voulus", {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_label(form.ticket_number, "Nombre de billets souhaité", {'label_attr': {'class': 'control-label'}}) }}
                             <div class="row">
                                 <br class="hidden-xs"/>
                                 <div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4">

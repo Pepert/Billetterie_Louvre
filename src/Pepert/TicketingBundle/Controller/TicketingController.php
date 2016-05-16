@@ -2,12 +2,13 @@
 
 namespace Pepert\TicketingBundle\Controller;
 
-use Pepert\TicketingBundle\Entity\Transaction;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use Pepert\TicketingBundle\Entity\User;
 use Pepert\TicketingBundle\Entity\Ticket;
+use Pepert\TicketingBundle\Entity\Transaction;
+
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Pepert\TicketingBundle\Form\Type\UserType;
@@ -88,7 +89,9 @@ class TicketingController extends Controller
                     )
                 );
 
-            if(count($compteurTickets) >= 1000)
+            $nbTickets = $form["ticket_number"]->getData();
+
+            if((count($compteurTickets) + $nbTickets) >= 1000)
             {
                 $request->getSession()->getFlashBag()->add('erreur', 'Il n\'y a plus de ticket disponible ce jour là.
             Merci de choisir une autre date de visite.');
@@ -119,8 +122,6 @@ class TicketingController extends Controller
             $request->getSession()->set('idBuyer', $idBuyer);
 
             $request->getSession()->getFlashBag()->add('validation', 'Votre identité à bien été enregistrée');
-
-            $nbTickets = $form["ticket_number"]->getData();
 
             return $this->redirect($this->generateUrl('pepert_ticketing_tickets', array(
                 'nbTickets' => $nbTickets
@@ -183,8 +184,8 @@ class TicketingController extends Controller
             {
                 $ticket->setVisitDay($buyer->getVisitDay());
                 $ticket->setTicketType($type);
-                $ticket->setFirstName(ucfirst(strtolower($ticket->getFirstname())));
-                $ticket->setName(ucfirst(strtolower($ticket->getName())));
+                $ticket->setFirstName(ucfirst(mb_strtolower($ticket->getFirstname(),'UTF-8')));
+                $ticket->setName(ucfirst(mb_strtolower($ticket->getName(), 'UTF-8')));
             }
 
             $tickets = $priceCalculator->tarif($tickets,$nbTickets);

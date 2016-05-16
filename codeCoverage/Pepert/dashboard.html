@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\wamp64\www\BilletterieLouvre\src/Pepert</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/nv.d3.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../js/html5shiv.min.js"></script>
+  <script src="../js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../index.html">C:\wamp64\www\BilletterieLouvre\src</a></li>
+        <li><a href="index.html">Pepert</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TicketingBundle/GeneratePdf/GeneratePdf.php.html#5">GeneratePdf</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#8">PepertPriceCalculator</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/StripePaymentSystem/StripePayment.php.html#7">StripePayment</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/GenerateApiPaypal/GenerateApiPaypal.php.html#17">GenerateApiPaypal</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Form/Type/TicketType.php.html#13">TicketType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/DependencyInjection/Configuration.php.html#13">Configuration</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/DependencyInjection/PepertTicketingExtension.php.html#15">PepertTicketingExtension</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#27">TicketingController</a></td><td class="text-right">20%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#8">PepertPriceCalculator</a></td><td class="text-right">1560</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#27">TicketingController</a></td><td class="text-right">930</td></tr>
+       <tr><td><a href="TicketingBundle/GenerateApiPaypal/GenerateApiPaypal.php.html#17">GenerateApiPaypal</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="TicketingBundle/GeneratePdf/GeneratePdf.php.html#5">GeneratePdf</a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TicketingBundle/GeneratePdf/GeneratePdf.php.html#7"><abbr title="GeneratePdf::generateHtmlToPdf">generateHtmlToPdf</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#10"><abbr title="PepertPriceCalculator::tarif">tarif</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/GenerateApiPaypal/GenerateApiPaypal.php.html#74"><abbr title="GenerateApiPaypal::doCheckoutApi">doCheckoutApi</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/GenerateApiPaypal/GenerateApiPaypal.php.html#19"><abbr title="GenerateApiPaypal::setCheckoutApi">setCheckoutApi</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Form/Type/TicketType.php.html#26"><abbr title="TicketType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#67"><abbr title="PepertPriceCalculator::definirTarifName">definirTarifName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#110"><abbr title="PepertPriceCalculator::calculerPrixTotal">calculerPrixTotal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#216"><abbr title="PepertPriceCalculator::occurrencesDepuisPosition">occurrencesDepuisPosition</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/StripePaymentSystem/StripePayment.php.html#9"><abbr title="StripePayment::setStripeApi">setStripeApi</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#211"><abbr title="PepertPriceCalculator::cmpTarif">cmpTarif</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#206"><abbr title="PepertPriceCalculator::cmp">cmp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#162"><abbr title="PepertPriceCalculator::afficherCommande">afficherCommande</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Form/Type/TicketType.php.html#15"><abbr title="TicketType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Entity/Transaction.php.html#87"><abbr title="Transaction::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#330"><abbr title="TicketingController::stripeValidatedAction">stripeValidatedAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#431"><abbr title="TicketingController::paymentErrorAction">paymentErrorAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#264"><abbr title="TicketingController::paypalValidatedAction">paypalValidatedAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#251"><abbr title="TicketingController::paypalAction">paypalAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#224"><abbr title="TicketingController::paymentRetryAction">paymentRetryAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#448"><abbr title="TicketingController::generateMailAction">generateMailAction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#481"><abbr title="TicketingController::getBuyer">getBuyer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Entity/Ticket.php.html#113"><abbr title="Ticket::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/DependencyInjection/PepertTicketingExtension.php.html#20"><abbr title="PepertTicketingExtension::load">load</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/DependencyInjection/Configuration.php.html#18"><abbr title="Configuration::getConfigTreeBuilder">getConfigTreeBuilder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#502"><abbr title="TicketingController::getTransaction">getTransaction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#135"><abbr title="TicketingController::ticketAction">ticketAction</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#330"><abbr title="TicketingController::stripeValidatedAction">stripeValidatedAction</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#10"><abbr title="PepertPriceCalculator::tarif">tarif</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#110"><abbr title="PepertPriceCalculator::calculerPrixTotal">calculerPrixTotal</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#216"><abbr title="PepertPriceCalculator::occurrencesDepuisPosition">occurrencesDepuisPosition</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#135"><abbr title="TicketingController::ticketAction">ticketAction</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#67"><abbr title="PepertPriceCalculator::definirTarifName">definirTarifName</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="TicketingBundle/GenerateApiPaypal/GenerateApiPaypal.php.html#74"><abbr title="GenerateApiPaypal::doCheckoutApi">doCheckoutApi</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="TicketingBundle/PriceCalculator/PepertPriceCalculator.php.html#162"><abbr title="PepertPriceCalculator::afficherCommande">afficherCommande</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#264"><abbr title="TicketingController::paypalValidatedAction">paypalValidatedAction</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="TicketingBundle/GenerateApiPaypal/GenerateApiPaypal.php.html#19"><abbr title="GenerateApiPaypal::setCheckoutApi">setCheckoutApi</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#448"><abbr title="TicketingController::generateMailAction">generateMailAction</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#481"><abbr title="TicketingController::getBuyer">getBuyer</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TicketingBundle/Controller/TicketingController.php.html#502"><abbr title="TicketingController::getTransaction">getTransaction</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TicketingBundle/GeneratePdf/GeneratePdf.php.html#7"><abbr title="GeneratePdf::generateHtmlToPdf">generateHtmlToPdf</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 3.3.1</a> using <a href="https://secure.php.net/" target="_top">PHP 5.6.16</a> and <a href="https://phpunit.de/">PHPUnit 5.3.2</a> at Sun May 15 16:51:18 UTC 2016.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../js/holder.min.js" type="text/javascript"></script>
+  <script src="../js/d3.min.js" type="text/javascript"></script>
+  <script src="../js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([7,0,0,1,0,0,0,0,0,0,2,6], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([26,0,0,0,0,0,0,0,0,0,1,57], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[20.440251572327,42,"<a href=\"TicketingBundle\/Controller\/TicketingController.php.html#27\">TicketingController<\/a>"],[0,1,"<a href=\"TicketingBundle\/DependencyInjection\/Configuration.php.html#13\">Configuration<\/a>"],[0,1,"<a href=\"TicketingBundle\/DependencyInjection\/PepertTicketingExtension.php.html#15\">PepertTicketingExtension<\/a>"],[97.297297297297,25,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#13\">Ticket<\/a>"],[97.058823529412,19,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#13\">Transaction<\/a>"],[100,13,"<a href=\"TicketingBundle\/Entity\/User.php.html#13\">User<\/a>"],[0,2,"<a href=\"TicketingBundle\/Form\/Type\/TicketType.php.html#13\">TicketType<\/a>"],[100,2,"<a href=\"TicketingBundle\/Form\/Type\/UserType.php.html#14\">UserType<\/a>"],[0,8,"<a href=\"TicketingBundle\/GenerateApiPaypal\/GenerateApiPaypal.php.html#17\">GenerateApiPaypal<\/a>"],[0,2,"<a href=\"TicketingBundle\/GeneratePdf\/GeneratePdf.php.html#5\">GeneratePdf<\/a>"],[100,0,"<a href=\"TicketingBundle\/PepertTicketingBundle.php.html#7\">PepertTicketingBundle<\/a>"],[0,39,"<a href=\"TicketingBundle\/PriceCalculator\/PepertPriceCalculator.php.html#8\">PepertPriceCalculator<\/a>"],[100,0,"<a href=\"TicketingBundle\/Repository\/TicketRepository.php.html#11\">TicketRepository<\/a>"],[100,0,"<a href=\"TicketingBundle\/Repository\/TransactionRepository.php.html#11\">TransactionRepository<\/a>"],[100,0,"<a href=\"TicketingBundle\/Repository\/UserRepository.php.html#11\">UserRepository<\/a>"],[0,1,"<a href=\"TicketingBundle\/StripePaymentSystem\/StripePayment.php.html#7\">StripePayment<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[92.857142857143,12,"<a href=\"TicketingBundle\/Controller\/TicketingController.php.html#29\">TicketingController::indexAction<\/a>"],[0,6,"<a href=\"TicketingBundle\/Controller\/TicketingController.php.html#135\">TicketingController::ticketAction<\/a>"],[0,1,"<a href=\"TicketingBundle\/Controller\/TicketingController.php.html#224\">TicketingController::paymentRetryAction<\/a>"],[0,1,"<a href=\"TicketingBundle\/Controller\/TicketingController.php.html#251\">TicketingController::paypalAction<\/a>"],[0,4,"<a href=\"TicketingBundle\/Controller\/TicketingController.php.html#264\">TicketingController::paypalValidatedAction<\/a>"],[0,11,"<a href=\"TicketingBundle\/Controller\/TicketingController.php.html#330\">TicketingController::stripeValidatedAction<\/a>"],[0,1,"<a href=\"TicketingBundle\/Controller\/TicketingController.php.html#431\">TicketingController::paymentErrorAction<\/a>"],[0,2,"<a href=\"TicketingBundle\/Controller\/TicketingController.php.html#448\">TicketingController::generateMailAction<\/a>"],[0,2,"<a href=\"TicketingBundle\/Controller\/TicketingController.php.html#481\">TicketingController::getBuyer<\/a>"],[0,2,"<a href=\"TicketingBundle\/Controller\/TicketingController.php.html#502\">TicketingController::getTransaction<\/a>"],[0,1,"<a href=\"TicketingBundle\/DependencyInjection\/Configuration.php.html#18\">Configuration::getConfigTreeBuilder<\/a>"],[0,1,"<a href=\"TicketingBundle\/DependencyInjection\/PepertTicketingExtension.php.html#20\">PepertTicketingExtension::load<\/a>"],[0,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#113\">Ticket::getId<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#125\">Ticket::setName<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#137\">Ticket::getName<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#149\">Ticket::setFirstname<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#161\">Ticket::getFirstname<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#173\">Ticket::setCountry<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#185\">Ticket::getCountry<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#197\">Ticket::setVisitDay<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#209\">Ticket::getVisitDay<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#221\">Ticket::setBirthday<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#233\">Ticket::getBirthday<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#245\">Ticket::setTarifReduit<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#257\">Ticket::getTarifReduit<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#269\">Ticket::setTarifName<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#281\">Ticket::getTarifName<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#293\">Ticket::setPrice<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#305\">Ticket::getPrice<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#317\">Ticket::setTicketType<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#329\">Ticket::getTicketType<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#341\">Ticket::setStatus<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#353\">Ticket::getStatus<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#365\">Ticket::setReservationCode<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#377\">Ticket::getReservationCode<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#389\">Ticket::setTransaction<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Ticket.php.html#401\">Ticket::getTransaction<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#74\">Transaction::__construct<\/a>"],[0,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#87\">Transaction::getId<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#99\">Transaction::setTransactionId<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#111\">Transaction::getTransactionId<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#123\">Transaction::setTransactionSystem<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#135\">Transaction::getTransactionSystem<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#147\">Transaction::setTransactionDate<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#159\">Transaction::getTransactionDate<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#171\">Transaction::setTotalPrice<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#183\">Transaction::getTotalPrice<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#195\">Transaction::setUser<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#207\">Transaction::getUser<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#219\">Transaction::addTicket<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#233\">Transaction::removeTicket<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#238\">Transaction::removeAllTickets<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#248\">Transaction::getTickets<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#253\">Transaction::setTickets<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#265\">Transaction::setTicketNumber<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/Transaction.php.html#277\">Transaction::getTicketNumber<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#61\">User::__construct<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#71\">User::getId<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#83\">User::setVisitDay<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#95\">User::getVisitDay<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#107\">User::setTicketType<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#119\">User::getTicketType<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#131\">User::setTicketNumber<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#143\">User::getTicketNumber<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#155\">User::setEmail<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#167\">User::getEmail<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#179\">User::addTransaction<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#193\">User::removeTransaction<\/a>"],[100,1,"<a href=\"TicketingBundle\/Entity\/User.php.html#203\">User::getTransactions<\/a>"],[0,1,"<a href=\"TicketingBundle\/Form\/Type\/TicketType.php.html#15\">TicketType::buildForm<\/a>"],[0,1,"<a href=\"TicketingBundle\/Form\/Type\/TicketType.php.html#26\">TicketType::configureOptions<\/a>"],[100,1,"<a href=\"TicketingBundle\/Form\/Type\/UserType.php.html#16\">UserType::buildForm<\/a>"],[100,1,"<a href=\"TicketingBundle\/Form\/Type\/UserType.php.html#42\">UserType::configureOptions<\/a>"],[0,3,"<a href=\"TicketingBundle\/GenerateApiPaypal\/GenerateApiPaypal.php.html#19\">GenerateApiPaypal::setCheckoutApi<\/a>"],[0,5,"<a href=\"TicketingBundle\/GenerateApiPaypal\/GenerateApiPaypal.php.html#74\">GenerateApiPaypal::doCheckoutApi<\/a>"],[0,2,"<a href=\"TicketingBundle\/GeneratePdf\/GeneratePdf.php.html#7\">GeneratePdf::generateHtmlToPdf<\/a>"],[0,10,"<a href=\"TicketingBundle\/PriceCalculator\/PepertPriceCalculator.php.html#10\">PepertPriceCalculator::tarif<\/a>"],[0,6,"<a href=\"TicketingBundle\/PriceCalculator\/PepertPriceCalculator.php.html#67\">PepertPriceCalculator::definirTarifName<\/a>"],[0,9,"<a href=\"TicketingBundle\/PriceCalculator\/PepertPriceCalculator.php.html#110\">PepertPriceCalculator::calculerPrixTotal<\/a>"],[0,5,"<a href=\"TicketingBundle\/PriceCalculator\/PepertPriceCalculator.php.html#162\">PepertPriceCalculator::afficherCommande<\/a>"],[0,1,"<a href=\"TicketingBundle\/PriceCalculator\/PepertPriceCalculator.php.html#206\">PepertPriceCalculator::cmp<\/a>"],[0,1,"<a href=\"TicketingBundle\/PriceCalculator\/PepertPriceCalculator.php.html#211\">PepertPriceCalculator::cmpTarif<\/a>"],[0,7,"<a href=\"TicketingBundle\/PriceCalculator\/PepertPriceCalculator.php.html#216\">PepertPriceCalculator::occurrencesDepuisPosition<\/a>"],[0,1,"<a href=\"TicketingBundle\/StripePaymentSystem\/StripePayment.php.html#9\">StripePayment::setStripeApi<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

@@ -60,7 +60,7 @@ class User
      */
     public function __construct()
     {
-        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->transactions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
