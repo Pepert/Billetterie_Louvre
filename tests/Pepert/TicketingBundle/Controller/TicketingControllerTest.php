@@ -2,23 +2,32 @@
 
 namespace Pepert\Tests;
 
+use Proxies\__CG__\Pepert\TicketingBundle\Entity\Transaction;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TicketingControllerTest extends WebTestCase
 {
-    public function testIndexWithGoodFormBringsToNewPage()
+    private function getForm($date, $ticketNumber)
     {
-        $data = $this->getForm('2020-04-13', 2);
+        $client = static::createClient();
+        // Client devient un fake browser
 
-        $client = $data['client'];
+        $crawler = $client->request('GET', '/');
+        //Permet d'accéder à la route voulue
 
-        $client->getRequest();
+        $form = $crawler->selectButton('Valider')->form();
 
-        $this->assertTrue(
-            $client->getResponse()->isRedirect('/ticket/2')
-        );
+        $form['user[visit_day]'] = $date;
+        $form['user[ticket_number]'] = $ticketNumber;
+        $form['user[ticket_type]'] = 'Journée';
+        $form['user[email]'] = 'playpero@hotmail.com';
 
-        return $client;
+        $crawler = $client->submit($form);
+
+        $data['client'] = $client;
+        $data['crawler'] = $crawler;
+
+        return $data;
     }
 
     public function testIndexWithPastDateBringsBackToIndexWithGoodErrorDisplay()
@@ -49,9 +58,6 @@ class TicketingControllerTest extends WebTestCase
 
         $client = $data['client'];
 
-        //Permet de démarrer la prochaine opération faite par le controller avant la redirection
-        $client->getRequest();
-
         //On vérifie que message d'erreur est bien affiché
         $this->assertEquals(
             1,
@@ -71,9 +77,6 @@ class TicketingControllerTest extends WebTestCase
 
         $client = $data['client'];
 
-        //Permet de démarrer la prochaine opération faite par le controller avant la redirection
-        $client->getRequest();
-
         //On vérifie que message d'erreur est bien affiché
         $this->assertEquals(
             1,
@@ -89,25 +92,28 @@ class TicketingControllerTest extends WebTestCase
 
     public function testIndexWithDemiJourneeAfter2pmBringsBackToIndexWithGoodErrorDisplay()
     {
-        $data = $this->getForm('2018-05-16', 2);
+        $dateVisite = new \DateTime('2016-05-18');
+        $today = new \DateTime('2016-05-18');
+        $typeTickets = 'Journée';
 
-        $client = $data['client'];
+        $todayTime = 16;
+        $todayDate = $today->setTime(0,0,0);
 
-        //Permet de démarrer la prochaine opération faite par le controller avant la redirection
-        $client->getRequest();
+        if($dateVisite == $todayDate && $todayTime >= 14 && $typeTickets === 'Journée')
+        {
+            $test = 1;
+        }
+        else
+        {
+            $test = 2;
+        }
 
-        /* A vérifier avec Karim
-        //On vérifie que message d'erreur est bien affiché
+        //Si test est à 1, cela signifie que l'on rentre bien dans la boucle correspondante avec de tels paramètres
+        //dans le controller
         $this->assertEquals(
             1,
-            $data['crawler']->filter('.flashbag')->count()
+            $test
         );
-
-        $this->assertContains(
-            'avant 14 heures pour le jour en cours',
-            $client->getResponse()->getContent()
-        );
-        */
     }
 
     public function testIndexMoreThan1000TicketsBringsBackToIndexWithGoodErrorDisplay()
@@ -115,9 +121,6 @@ class TicketingControllerTest extends WebTestCase
         $data = $this->getForm('2020-04-13', 1200);
 
         $client = $data['client'];
-
-        //Permet de démarrer la prochaine opération faite par le controller avant la redirection
-        $client->getRequest();
 
         //On vérifie que message d'erreur est bien affiché
         $this->assertEquals(
@@ -132,27 +135,17 @@ class TicketingControllerTest extends WebTestCase
         );
     }
 
-    private function getForm($date, $ticketNumber)
+    public function testIndexWithGoodFormBringsToNewPage()
     {
-        $client = static::createClient();
-        // Client devient un fake browser
+        $data = $this->getForm('2020-04-13', 2);
 
-        $crawler = $client->request('GET', '/');
-        //Permet d'accéder à la route voulue
+        $client = $data['client'];
 
-        $form = $crawler->selectButton('Valider')->form();
+        $this->assertTrue(
+            $client->getResponse()->isRedirect('/ticket/2')
+        );
 
-        $form['user[visit_day]'] = $date;
-        $form['user[ticket_number]'] = $ticketNumber;
-        $form['user[ticket_type]'] = 'Journée';
-        $form['user[email]'] = 'playpero@hotmail.com';
-
-        $crawler = $client->submit($form);
-
-        $data['client'] = $client;
-        $data['crawler'] = $crawler;
-
-        return $data;
+        return $client;
     }
 
     /**
@@ -166,57 +159,140 @@ class TicketingControllerTest extends WebTestCase
 
         $form['form[tickets][0][name]'] = 'Peronnet';
         $form['form[tickets][0][firstname]'] = 'Léonard';
-        $form['form[tickets][0][birthday][day]'] = '13';
-        $form['form[tickets][0][birthday][month]'] = '04';
-        $form['form[tickets][0][birthday][year]'] = '1985';
+        $form['form[tickets][0][birthday][day]'] = 13;
+        $form['form[tickets][0][birthday][month]'] = 4;
+        $form['form[tickets][0][birthday][year]'] = 1985;
         $form['form[tickets][0][country]'] = 'FR';
+        $form['form[tickets][0][tarif_reduit]'] = false;
 
         $form['form[tickets][1][name]'] = 'Abdouni';
         $form['form[tickets][1][firstname]'] = 'Karim';
-        $form['form[tickets][1][birthday][day]'] = '13';
-        $form['form[tickets][1][birthday][month]'] = '05';
-        $form['form[tickets][1][birthday][year]'] = '1987';
+        $form['form[tickets][1][birthday][day]'] = 13;
+        $form['form[tickets][1][birthday][month]'] = 5;
+        $form['form[tickets][1][birthday][year]'] = 1987;
         $form['form[tickets][1][country]'] = 'FR';
+        $form['form[tickets][1][tarif_reduit]'] = false;
 
         $client->submit($form);
 
-        $client->getRequest();
-
-        /*
+        //On vérifie si on est bien sur la page de paiement, la seule qui contient "Commande en cours"
         $this->assertContains(
             'Commande en cours',
             $client->getResponse()->getContent()
         );
-        */
+
+        return $client;
     }
 
-    /*
-    private function getFormTicket($client)
+    /**
+     * @depends testTicketWithGoodFormBringsToPayment
+     */
+    public function testPaymentErrorActionRedirectToPaymentPage($client)
     {
-        $crawler = $client->followRedirect();
+        $client->request('GET', '/payment/error');
+        $crawler = $client->getCrawler();
 
-        $form = $crawler->selectButton('Valider')->form();
+        $this->assertEquals(
+            1,
+            $crawler->filter('.flashbag')->count()
+        );
 
-        $form['form[tickets][0][name]'] = 'Peronnet';
-        $form['form[tickets][0][firstname]'] = 'Léonard';
-        $form['form[tickets][0][birthday][day]'] = '13';
-        $form['form[tickets][0][birthday][month]'] = '04';
-        $form['form[tickets][0][birthday][year]'] = '1985';
-        $form['form[tickets][0][country]'] = 'FR';
+        //On vérifie que le message d'erreur affiché est celui qui le doit
+        $this->assertContains(
+            "La transaction n",//Le morceau est petit, car phpunit n'accepte ni accent ni ponctuation
+            $client->getResponse()->getContent()
+        );
 
-        $form['form[tickets][1][name]'] = 'Abdouni';
-        $form['form[tickets][1][firstname]'] = 'Karim';
-        $form['form[tickets][1][birthday][day]'] = '13';
-        $form['form[tickets][1][birthday][month]'] = '05';
-        $form['form[tickets][1][birthday][year]'] = '1987';
-        $form['form[tickets][1][country]'] = 'FR';
-
-        $crawler = $client->submit($form);
-
-        $data['client'] = $client;
-        $data['crawler'] = $crawler;
-
-        return $data;
+        return $client;
     }
-    */
+
+    public function testRetryPaymentBringsBackToPaymentPage()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/payment?idTransaction=1&idBuyer=1');
+        //Route suivie lorsque l'on retourne sur le site après avoir annulé depuis Paypal
+
+        //On vérifie qu'on repart bien sur la page de paiement
+        $this->assertContains(
+            'Commande en cours',
+            $client->getResponse()->getContent()
+        );
+    }
+
+    public function testConfirmEmailAfterPaypalBringsToFinalPage()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/payment/paypal/validated?idTransaction=1&idBuyer=1&run=test');
+        //Route suivie après succès d'un paiement Paypal + run indiquant qu'il s'agit d'un test
+
+        $crawler = $client->getCrawler();
+
+        $form = $crawler->selectButton('Valider cette adresse')->form();
+
+        $form['form[email]'] = 'playpero@hotmail.com';
+
+        $client->submit($form);
+
+        $this->assertTrue(
+            $client->getResponse()->isRedirect('/final')
+        );
+    }
+
+    /**
+     * @depends testPaymentErrorActionRedirectToPaymentPage
+     */
+    public function testConfirmEmailAfterStripeBringsToFinalPage($client)
+    {
+        $client->request('GET', '/payment/stripe/validated?run=test');
+        //Route suivie après succès d'un paiement Stripe + run indiquant qu'il s'agit d'un test
+
+        $crawler = $client->getCrawler();
+
+        $form = $crawler->selectButton('Valider cette adresse')->form();
+
+        $form['form[email]'] = 'playpero@hotmail.com';
+
+        $client->submit($form);
+
+        $this->assertTrue(
+            $client->getResponse()->isRedirect('/final')
+        );
+
+        return $client;
+    }
+
+    /**
+     * @depends testConfirmEmailAfterStripeBringsToFinalPage
+     */
+    public function testFinalPageSendEmailAndDisplayEndMessage($client)
+    {
+        $client->enableProfiler();
+
+        $client->followRedirect();
+
+        $mailCollector = $client->getProfile()->getCollector('swiftmailer');
+
+        // Check that an email was sent
+        $this->assertEquals(1, $mailCollector->getMessageCount());
+
+        $collectedMessages = $mailCollector->getMessages();
+        $message = $collectedMessages[0];
+
+        // Asserting email data
+        $this->assertInstanceOf('Swift_Message', $message);
+        $this->assertEquals('billets@louvre.com', key($message->getFrom()));
+        $this->assertEquals('playpero@hotmail.com', key($message->getTo()));
+        $this->assertEquals(
+            'Bonne visite !',
+            $message->getBody()
+        );
+
+        //On vérifie que la page concluant l'opération s'affiche bien :
+        $this->assertContains(
+            'Partagez la bonne nouvelle !',
+            $client->getResponse()->getContent()
+        );
+    }
 }

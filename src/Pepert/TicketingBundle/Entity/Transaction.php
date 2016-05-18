@@ -79,6 +79,7 @@ class Transaction
         $this->totalPrice = 0;
     }
 
+
     /**
      * Get id
      *

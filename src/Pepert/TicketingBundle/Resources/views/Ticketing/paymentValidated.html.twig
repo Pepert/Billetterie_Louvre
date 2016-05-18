@@ -12,9 +12,9 @@
                 <span id="step-final">Étape finale</span>
             </h3>
 
-            <div class="well">
-
             {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            <div class="well">
 
             {{ form_errors(form) }}
 
@@ -30,11 +30,11 @@
                 </div>
             </div>
             {{ form_widget(form.submit, {'label': 'Valider cette adresse', 'attr': {'class': 'btn-choice'}}) }}
+
+            {{ form_rest(form) }}
+
+            {{ form_end(form) }}
         </div>
-
-                {{ form_rest(form) }}
-
-                {{ form_end(form) }}
     </div>
 
 {% endblock %}

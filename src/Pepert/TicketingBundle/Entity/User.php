@@ -63,6 +63,7 @@ class User
         $this->transactions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
     /**
      * Get id
      *

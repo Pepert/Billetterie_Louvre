@@ -296,13 +296,17 @@ class TicketingController extends Controller
 
         $transaction = $this->getTransaction($request);
 
-        $service = $this->container->get('pepert_ticketing.paypal_api');
+        //Je n'appelle ce service que si je ne suis pas en train de faire un test fonctionnel
+        if($request->query->get('run') !== 'test')
+        {
+            $service = $this->container->get('pepert_ticketing.paypal_api');
 
-        $requete = $service->doCheckoutApi();
+            $requete = $service->doCheckoutApi();
 
-        $transaction->setTransactionDate(new \DateTime());
-        $transaction->setTransactionSystem('Paypal');
-        $transaction->setTransactionId($requete);
+            $transaction->setTransactionDate(new \DateTime());
+            $transaction->setTransactionSystem('Paypal');
+            $transaction->setTransactionId($requete);
+        }
 
         $tickets = $transaction->getTickets();
 
@@ -355,56 +359,60 @@ class TicketingController extends Controller
             return $this->redirectToRoute('pepert_ticketing_final');
         }
 
-        $service = $this->container->get('pepert_ticketing.stripe');
+        //Je n'appelle ce service que si je ne suis pas en train de faire un test fonctionnel
+        if($request->query->get('run') !== 'test')
+        {
+            $service = $this->container->get('pepert_ticketing.stripe');
 
-        $service->setStripeApi();
+            $service->setStripeApi();
 
-        $token  = $request->get('stripeToken');
+            $token = $request->get('stripeToken');
 
-        try {
-            $customer = Customer::create(array(
-                'email' => 'playpero@hotmail.com',
-                'card'  => $token
-            ));
+            try {
+                $customer = Customer::create(array(
+                    'email' => 'playpero@hotmail.com',
+                    'card'  => $token
+                ));
 
-            $charge = Charge::create(array(
-                'customer' => $customer->id,
-                'amount'   => $transaction->getTotalPrice()*100,
-                'currency' => 'eur'
-            ));
-        } catch(Card $e) {
-            $body = $e->getJsonBody();
-            $err  = $body['error'];
-            $messageErr = '';
+                $charge = Charge::create(array(
+                    'customer' => $customer->id,
+                    'amount'   => $transaction->getTotalPrice()*100,
+                    'currency' => 'eur'
+                ));
+            } catch(Card $e) {
+                $body = $e->getJsonBody();
+                $err  = $body['error'];
+                $messageErr = '';
 
-            $messageErr .= 'Status is:' . $e->getHttpStatus() . "\n";
-            $messageErr .='Type is:' . $err['type'] . "\n";
-            $messageErr .='Code is:' . $err['code'] . "\n";
-            $messageErr .='Param is:' . $err['param'] . "\n";
-            $messageErr .='Message is:' . $err['message'] . "\n";
+                $messageErr .= 'Status is:' . $e->getHttpStatus() . "\n";
+                $messageErr .='Type is:' . $err['type'] . "\n";
+                $messageErr .='Code is:' . $err['code'] . "\n";
+                $messageErr .='Param is:' . $err['param'] . "\n";
+                $messageErr .='Message is:' . $err['message'] . "\n";
 
-            $request->getSession()->getFlashBag()->add('erreur', $messageErr);
+                $request->getSession()->getFlashBag()->add('erreur', $messageErr);
 
-            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
-        } catch (RateLimit $e) {
-            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
-        } catch (InvalidRequest $e) {
-            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
-        } catch (Authentication $e) {
-            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
-        } catch (ApiConnection $e) {
-            $request->getSession()->getFlashBag()->add('erreur', 'Un problème de connexion avec Stripe est survenu.');
+                return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
+            } catch (RateLimit $e) {
+                return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
+            } catch (InvalidRequest $e) {
+                return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
+            } catch (Authentication $e) {
+                return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
+            } catch (ApiConnection $e) {
+                $request->getSession()->getFlashBag()->add('erreur', 'Un problème de connexion avec Stripe est survenu.');
 
-            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
-        } catch (Base $e) {
-            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
-        } catch (Exception $e) {
-            return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
+                return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
+            } catch (Base $e) {
+                return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
+            } catch (Exception $e) {
+                return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
+            }
+
+            $transaction->setTransactionDate(new \DateTime());
+            $transaction->setTransactionSystem('Stripe');
+            $transaction->setTransactionId($charge->id);
         }
-
-        $transaction->setTransactionDate(new \DateTime());
-        $transaction->setTransactionSystem('Stripe');
-        $transaction->setTransactionId($charge->id);
 
         $tickets = $transaction->getTickets();
 
@@ -443,6 +451,7 @@ class TicketingController extends Controller
         return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig', array(
             'publishable_key' => $pk,
             'price' => $transaction->getTotalPrice()*100,
+            'nbTickets' => $transaction->getTicketNumber(),
         ));
     }
 
@@ -483,7 +492,7 @@ class TicketingController extends Controller
     {
         $idBuyer = $request->getSession()->get('idBuyer');
 
-        if(!$idBuyer)
+        if($idBuyer == null)
         {
             $request->getSession()->getFlashBag()->clear();
             $request->getSession()->getFlashBag()->add('erreur', 'La session a expirée. Merci de réitérer votre commande.');
@@ -504,7 +513,7 @@ class TicketingController extends Controller
     {
         $idTransaction = $request->getSession()->get('idTransaction');
 
-        if(!$idTransaction)
+        if($idTransaction == null)
         {
             $request->getSession()->getFlashBag()->clear();
             $request->getSession()->getFlashBag()->add('erreur', 'La session a expirée. Merci de réitérer votre commande.');

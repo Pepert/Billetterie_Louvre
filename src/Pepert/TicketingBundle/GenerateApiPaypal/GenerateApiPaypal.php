@@ -18,7 +18,7 @@ class GenerateApiPaypal
 {
     public function setCheckoutApi(\Pepert\TicketingBundle\Entity\Transaction $currentTransaction, User $buyer)
     {
-        require __DIR__ . '/../../../../vendor/paypal/rest-api-sdk-php/sample/bootstrap.php';
+        require_once __DIR__ . '/../../../../vendor/paypal/rest-api-sdk-php/sample/bootstrap.php';
 
         $payer = new Payer();
         $payer->setPaymentMethod("paypal");
@@ -73,7 +73,7 @@ class GenerateApiPaypal
 
     public function doCheckoutApi()
     {
-        require __DIR__ . '/../../../../vendor/paypal/rest-api-sdk-php/sample/bootstrap.php';
+        require_once __DIR__ . '/../../../../vendor/paypal/rest-api-sdk-php/sample/bootstrap.php';
 
         $baseUrl = "http://127.0.0.1/BilletterieLouvre/web/app_dev.php";
 

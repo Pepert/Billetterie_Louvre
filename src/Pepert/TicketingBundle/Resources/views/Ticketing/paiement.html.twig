@@ -34,9 +34,11 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <p>Commande en cours :</p>
-                        {% for item in commande %}
-                            <p>{{ item }}</p>
-                        {% endfor %}
+                        {% if commande is defined %}
+                            {% for item in commande %}
+                                <p>{{ item }}</p>
+                            {% endfor %}
+                        {% endif %}
                         <hr/>
                         <p>Le montant total est de <strong>{{ price / 100 }} Euros</strong></p>
                         <p>Merci de sélectionner un système de paiement :</p>
