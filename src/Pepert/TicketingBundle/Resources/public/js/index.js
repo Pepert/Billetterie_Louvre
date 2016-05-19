@@ -23,6 +23,7 @@ $(function() {
         verticalbuttons: true,
         verticalupclass: 'glyphicon glyphicon-plus',
         verticaldownclass: 'glyphicon glyphicon-minus',
-        min: 1
+        min: 1,
+        max: 25
     });
 });

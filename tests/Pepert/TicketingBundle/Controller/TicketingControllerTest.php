@@ -130,7 +130,7 @@ class TicketingControllerTest extends WebTestCase
 
         //On vérifie que le message d'erreur affiché est celui qu'on attend
         $this->assertContains(
-            'plus de ticket disponible ce jour',
+            'au maximum pour cete date',
             $client->getResponse()->getContent()
         );
     }

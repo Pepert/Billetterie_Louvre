@@ -51,7 +51,7 @@
     background-color: #331107;
 }
 
-@media (min-width: 440px) {
+@media (min-width: 450px) {
     #content{
         margin-top: 10px;
     }
@@ -61,7 +61,7 @@
     }
 }
 
-@media (min-width: 540px) {
+@media (min-width: 560px) {
     #content{
         margin-top: 15px;
     }

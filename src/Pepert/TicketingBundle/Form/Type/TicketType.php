@@ -14,11 +14,15 @@ class TicketType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $today = new \DateTime();
+        $today->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $year = (int)$today->format('Y');
+
         $builder
             ->add('name',TextType::class)
             ->add('firstname',TextType::class)
             ->add('country',CountryType::class)
-            ->add('birthday',BirthdayType::class)
+            ->add('birthday',BirthdayType::class, array('years' => range(1902,$year)))
             ->add('tarif_reduit',CheckboxType::class, array('required' => false))
             ;
     }

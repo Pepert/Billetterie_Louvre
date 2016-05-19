@@ -41,7 +41,6 @@ class TicketingController extends Controller
             $typeTickets = $form["ticket_type"]->getData();
             $dateVisite = $form["visit_day"]->getData();
             $today = new \DateTime();
-            $today->setTimezone(new \DateTimeZone('Europe/Paris'));
             $todayTime = (int)$today->format('G');
             $visitDay = $dateVisite->format('D');
             $todayDate = $today->setTime(0,0,0);
@@ -69,7 +68,7 @@ class TicketingController extends Controller
             }
             else if($dateVisite == $todayDate && $todayTime >= 14 && $typeTickets === 'Journée')
             {
-                $request->getSession()->getFlashBag()->add('erreur', 'Les tickets \'Journée\' ne sont disponible qu\'avant
+                $request->getSession()->getFlashBag()->add('erreur', 'Les billets \'Journée\' ne sont disponible qu\'avant
                 14 heures pour le jour en cours. Merci de selectionner le type \'Demi-journée\' si vous souhaitez
                 visiter le musée aujourd\'hui.');
 
@@ -89,12 +88,24 @@ class TicketingController extends Controller
                     )
                 );
 
+            $ticketBought = count($compteurTickets);
+
             $nbTickets = $form["ticket_number"]->getData();
 
-            if((count($compteurTickets) + $nbTickets) >= 1000)
+            if(($ticketBought + $nbTickets) >= 1000)
             {
-                $request->getSession()->getFlashBag()->add('erreur', 'Il n\'y a plus de ticket disponible ce jour là.
-            Merci de choisir une autre date de visite.');
+                if($ticketBought == 1000)
+                {
+                    $request->getSession()->getFlashBag()->add('erreur', 'Il ne reste plus de billets disponibles ce jour là.
+                Merci de choisir une autre date de visite.');
+                }
+                else
+                {
+                    $ticketLeft = 1000 - $ticketBought;
+                    $request->getSession()->getFlashBag()->add('erreur', 'Il ne reste plus que '.$ticketLeft.' billet(s)
+                    disponible(s) ce jour là. Merci de choisir une autre date de visite, ou de n\'acheter que '.$ticketLeft.
+                        ' billet(s) au maximum pour cete date.');
+                }
 
                 return $this->render('PepertTicketingBundle:Ticketing:index.html.twig', array(
                     'form' => $form->createView(),
@@ -138,6 +149,11 @@ class TicketingController extends Controller
         if($nbTickets <= 0)
         {
             $request->getSession()->getFlashBag()->add('erreur', 'Vous devez acheter au moins un billet');
+            return $this->redirectToRoute('pepert_ticketing_homepage');
+        }
+        else if($nbTickets > 25)
+        {
+            $request->getSession()->getFlashBag()->add('erreur', 'Vous ne pouvez commander que 25 billets maximum par transaction');
             return $this->redirectToRoute('pepert_ticketing_homepage');
         }
 
@@ -206,7 +222,7 @@ class TicketingController extends Controller
             $pk = $service->setStripeApi();
 
             $request->getSession()->getFlashBag()->clear();
-            $request->getSession()->getFlashBag()->add('information', 'Les tickets sont validés.');
+            $request->getSession()->getFlashBag()->add('information', 'Les billets sont validés.');
 
             return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig', array(
                 'publishable_key' => $pk,

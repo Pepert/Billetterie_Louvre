@@ -1,8 +1,11 @@
 {% extends "PepertTicketingBundle::layout.html.twig" %}
 
-{% block content %}
-
+{% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/pepertticketing/css/error.css') }}" type="text/css">
+{% endblock %}
+
+{% block content %}
 
     <div class="container">
         <span id="title">Erreur</span>
@@ -30,8 +33,5 @@
 
         </div>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 {% endblock %}

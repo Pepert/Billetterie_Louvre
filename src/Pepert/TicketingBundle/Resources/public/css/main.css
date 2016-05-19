@@ -58,7 +58,7 @@ header{
     display: none;
 }
 
-@media (min-width: 440px) {
+@media (min-width: 450px) {
     body{
         background-position: 0 66px;
         margin-top: 60px;
@@ -90,7 +90,7 @@ header{
     }
 }
 
-@media (min-width: 540px) {
+@media (min-width: 560px) {
     body{
         background-position: 0 90px;
         margin-top: 90px;

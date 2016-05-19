@@ -1,8 +1,11 @@
 {% extends "PepertTicketingBundle::layout.html.twig" %}
 
-{% block content %}
-
+{% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/pepertticketing/css/ticket.css') }}" type="text/css">
+{% endblock %}
+
+{% block content %}
 
     <div class="container">
         <span id="title">Identification des visiteurs</span>
@@ -48,7 +51,7 @@
                                 {{ form_label(form.name, "Nom", {'label_attr': {'class': 'control-label'}}) }}
                                 <div class="row">
                                     <div class="col-xs-offset-1 col-xs-10 col-lg-offset-2 col-lg-8">
-                                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_widget(form.name, {'attr': {'class': 'input-empty form-control'}}) }}
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +64,7 @@
                                 {{ form_label(form.firstname, "Prénom", {'label_attr': {'class': 'control-label'}}) }}
                                 <div class="row">
                                     <div class="col-xs-offset-1 col-xs-10 col-lg-offset-2 col-lg-8">
-                                        {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_widget(form.firstname, {'attr': {'class': 'input-empty form-control'}}) }}
                                     </div>
                                 </div>
                             </div>
@@ -127,14 +130,16 @@
 
             {% endfor %}
 
-            <a href="{{ path('pepert_ticketing_homepage') }}"><button class="btn-choice btn-bottom">Retour</button></a>
+            <a id="link-retour" href="{{ path('pepert_ticketing_homepage') }}"><button id="retour" class="btn-choice btn-bottom">Retour</button></a>
             {{ form_widget(form.submit, {'label': 'Valider', 'attr': {'class': 'btn-choice btn-bottom'}}) }}
 
             {{ form_end(form) }}
         </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="{{ asset('bundles/pepertticketing/js/ticket.js') }}"></script>
+{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/pepertticketing/js/ticket.js') }}"></script>
 {% endblock %}

@@ -13,6 +13,11 @@ $(function() {
         });
     });
 
+    //Pour pouvoir rediriger avec Google Chrome, qui bloque la page autrement si les champs sont vides
+    $('#link-retour').click(function(){
+        window.location.href='http://localhost/BilletterieLouvre/web/app_dev.php';
+    });
+
     $(document).bind('ready', function() {
         var elements = $("input");
         for (var i = 0; i < elements.length; i++)

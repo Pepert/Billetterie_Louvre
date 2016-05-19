@@ -224,12 +224,12 @@ class PepertPriceCalculator
             if($tickets[$a]->getName() == $name)
             {
                 $age = $tickets[$a]->getVisitDay()->diff($tickets[$a]->getBirthday())->y;
-                if($age < 12 && $enfantDispo > 0)
+                if($age < 18 && $enfantDispo > 0)
                 {
                     $occurrences ++;
                     $enfantDispo --;
                 }
-                else if($age >= 12 && $adulteDispo > 0)
+                else if($age >= 18 && $adulteDispo > 0)
                 {
                     $occurrences ++;
                     $adulteDispo --;
