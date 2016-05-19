@@ -33,7 +33,7 @@ class GeneratePdf
 
             <?php foreach($tickets as $ticket){ ?>
                 <div class="background">
-                    <table style="border-bottom: none; padding-top: 4mm; padding-bottom: 10mm;">
+                    <table style="border-bottom: none; padding-top: 4mm; padding-bottom: 3mm;">
                         <tr>
                             <td style="width: 2%;">
                             </td>
@@ -49,10 +49,11 @@ class GeneratePdf
                             </td>
                         </tr>
                     </table>
-                    <table style="border-top: none; padding-bottom: 8mm; padding-left: 4mm; text-align: center;">
+                    <table style="border-top: none; padding-bottom: 5mm; padding-top: 3mm; padding-left: 4mm; text-align: center;">
                         <tr>
                             <td style="width: 20%;">
                                 <qrcode value="<?php echo $ticket->getReservationCode(); ?>" ec="H" style="width: 25mm; background-color: white; color: black;"></qrcode>
+                                <p style="color: #3c3c3c;"><?php echo $ticket->getReservationCode(); ?></p>
                             </td>
                             <td style="width: 58%; font-size: 18pt; text-align: center; color: black;">
                                 <?php echo $ticket->getFirstName(); ?> <?php echo strtoupper($ticket->getName()); ?>
