@@ -9,8 +9,8 @@ class StripePayment
     public function setStripeApi()
     {
         $stripe = array(
-            "secret_key"      => "sk_test_OxI0SpEBW14428ED1Z2llUp0",
-            "publishable_key" => "pk_test_xqkBN14wQxgvHZmHH5Xm9l3y"
+            "secret_key"      => "sk_test_zOQvDcnvJMLIyWyK0QUYxAxK",
+            "publishable_key" => "pk_test_yMYkdAAnYrIbPtrkCvrTM9mX"
         );
 
         Stripe::setApiKey($stripe['secret_key']);

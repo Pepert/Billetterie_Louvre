@@ -41,9 +41,11 @@ class TicketingController extends Controller
             $typeTickets = $form["ticket_type"]->getData();
             $dateVisite = $form["visit_day"]->getData();
             $today = new \DateTime();
+            $today->setTimezone(new \DateTimeZone('Europe/Paris'));
             $todayTime = (int)$today->format('G');
             $visitDay = $dateVisite->format('D');
-            $todayDate = $today->setTime(0,0,0);
+            $todayDate = $today->setTimezone(new \DateTimeZone('+00:00'));
+            $todayDate->setTime(0,0,0);
 
             if($dateVisite < $todayDate)
             {
@@ -66,7 +68,7 @@ class TicketingController extends Controller
                     'form' => $form->createView(),
                 ));
             }
-            else if($dateVisite == $todayDate && $todayTime >= 14 && $typeTickets === 'Journée')
+            else if($dateVisite == $todayDate && $todayTime >= 14 && $typeTickets == 'Journée')
             {
                 $request->getSession()->getFlashBag()->add('erreur', 'Les billets \'Journée\' ne sont disponible qu\'avant
                 14 heures pour le jour en cours. Merci de selectionner le type \'Demi-journée\' si vous souhaitez

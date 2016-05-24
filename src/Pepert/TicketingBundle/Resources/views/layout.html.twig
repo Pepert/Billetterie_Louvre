@@ -13,7 +13,9 @@
 
 <body style="background-image: url( {{ asset('bundles/pepertticketing/images/louvre_general_blur.jpg') }} ); height: 100%; ">
 <header>
-    <img id="logo" src="{{ asset('bundles/pepertticketing/images/logo_louvre.png') }}" alt="Musée du Louvre"/>
+    <a href="{{ path('pepert_ticketing_homepage') }}">
+        <img id="logo" src="{{ asset('bundles/pepertticketing/images/logo_louvre.png') }}" alt="Musée du Louvre"/>
+    </a>
     <div id="maintitle">
         <p id="smallmaintitle">Billetterie officielle</p>
         <p id="bigmaintitle">Musée du Louvre</p>
