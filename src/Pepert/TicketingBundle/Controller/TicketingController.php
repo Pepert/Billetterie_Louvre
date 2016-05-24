@@ -40,6 +40,7 @@ class TicketingController extends Controller
         {
             $typeTickets = $form["ticket_type"]->getData();
             $dateVisite = $form["visit_day"]->getData();
+            $nbTickets = $form["ticket_number"]->getData();
             $today = new \DateTime();
             $today->setTimezone(new \DateTimeZone('Europe/Paris'));
             $todayTime = (int)$today->format('G');
@@ -54,6 +55,7 @@ class TicketingController extends Controller
 
                 return $this->render('PepertTicketingBundle:Ticketing:index.html.twig', array(
                     'form' => $form->createView(),
+                    'nbTickets' => $nbTickets,
                 ));
             }
             else if($visitDay == 'Tue'
@@ -66,6 +68,7 @@ class TicketingController extends Controller
 
                 return $this->render('PepertTicketingBundle:Ticketing:index.html.twig', array(
                     'form' => $form->createView(),
+                    'nbTickets' => $nbTickets,
                 ));
             }
             else if($dateVisite == $todayDate && $todayTime >= 14 && $typeTickets == 'Journée')
@@ -76,6 +79,7 @@ class TicketingController extends Controller
 
                 return $this->render('PepertTicketingBundle:Ticketing:index.html.twig', array(
                     'form' => $form->createView(),
+                    'nbTickets' => $nbTickets,
                 ));
             }
 

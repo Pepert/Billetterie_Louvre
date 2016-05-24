@@ -1,5 +1,11 @@
 {% extends "PepertTicketingBundle::layout.html.twig" %}
 
+{% if nbTickets is defined %}
+    {% set value = nbTickets %}
+{% else %}
+    {% set value = 1 %}
+{% endif %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -57,7 +63,7 @@
                             <div class="row">
                                 <br class="hidden-xs"/>
                                 <div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4">
-                                    {{ form_widget(form.ticket_number, {'attr': {'class': 'form-control', 'value': '1'}}) }}
+                                    {{ form_widget(form.ticket_number, {'attr': {'class': 'form-control', 'value': value}}) }}
                                 </div>
                             </div>
                         </div>
