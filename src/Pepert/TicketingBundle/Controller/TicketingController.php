@@ -45,10 +45,10 @@ class TicketingController extends Controller
             $today->setTimezone(new \DateTimeZone('Europe/Paris'));
             $todayTime = (int)$today->format('G');
             $visitDay = $dateVisite->format('D');
-            $todayDate = $today->setTimezone(new \DateTimeZone('+00:00'));
+            $todayDate = $today;
             $todayDate->setTime(0,0,0);
 
-            if($dateVisite < $todayDate)
+            if($dateVisite < $today)
             {
                 $request->getSession()->getFlashBag()->add('erreur', 'Il est impossible de sélectionner une date
                 déjà passée. Merci de choisir un autre jour de visite.');
@@ -470,8 +470,14 @@ class TicketingController extends Controller
         $request->getSession()->getFlashBag()->add('information', 'La transaction n\'a pas pu être effectuée. Merci
          de réessayer.');
 
+        $priceCalculator = $this->container->get('pepert_ticketing.price_calculator');
+
+        $tickets = $transaction->getTickets();
+        $resumeTransaction = $priceCalculator->afficherCommande($tickets);
+
         return $this->render('PepertTicketingBundle:Ticketing:paiement.html.twig', array(
             'publishable_key' => $pk,
+            'commande' => $resumeTransaction,
             'price' => $transaction->getTotalPrice()*100,
             'nbTickets' => $transaction->getTicketNumber(),
         ));
@@ -490,20 +496,21 @@ class TicketingController extends Controller
         try{
             $pdf = new \HTML2PDF('P','A4','fr');
             $pdf->writeHTML($content);
-            $pdf->Output('billets.pdf', true);
+            $pdfToSend = $pdf->Output('', 'S');
         }catch(\HTML2PDF_exception $e){
             $request->getSession()->getFlashBag()->add('erreur', $e);
             return $this->render('PepertTicketingBundle:Ticketing:error.html.twig');
         }
 
-        $attachment = \Swift_Attachment::newInstance($pdf, 'billets.pdf', 'application/pdf');
+        $attachment = \Swift_Attachment::newInstance($pdfToSend, 'billets.pdf', 'application/pdf');
 
         $mail = \Swift_Message::newInstance()
-            ->setSubject('Billets Musée du Louvre')
-            ->setFrom('billets@louvre.com')
+            ->setFrom('send@example.com')
             ->setTo($buyer->getEmail())
-            ->setBody('Bonne visite !')
-            ->attach($attachment);
+            ->setSubject('Billets Musée du Louvre')
+            ->setBody('Vos billets ont été envoyés en pièce jointe. Bonne visite !')
+            ->attach($attachment)
+        ;
 
         $this->get('mailer')->send($mail);
 

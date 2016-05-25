@@ -20,6 +20,7 @@ class UserType extends AbstractType
             ->add('visit_day', DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'model_timezone' => 'Europe/Paris',
             ))
             ->add('ticket_type', ChoiceType::class, array(
                 'choices'  => array(
