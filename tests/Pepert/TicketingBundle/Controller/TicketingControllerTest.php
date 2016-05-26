@@ -282,10 +282,10 @@ class TicketingControllerTest extends WebTestCase
 
         // Asserting email data
         $this->assertInstanceOf('Swift_Message', $message);
-        $this->assertEquals('billets@louvre.com', key($message->getFrom()));
+        $this->assertEquals('send@example.com', key($message->getFrom()));
         $this->assertEquals('playpero@hotmail.com', key($message->getTo()));
         $this->assertEquals(
-            'Bonne visite !',
+            'Vos billets ont été envoyés en pièce jointe. Bonne visite !',
             $message->getBody()
         );
 

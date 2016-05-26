@@ -17,6 +17,6 @@ class StripePaymentTest extends WebTestCase
         $result = $service->setStripeApi();
 
         //On vérifie que le service retourne bien la clé test, c'est que tout fonctionne
-        $this->assertContains('pk_test_xqkBN14wQxgvHZmHH5Xm9l3y', $result);
+        $this->assertContains('pk_test_yMYkdAAnYrIbPtrkCvrTM9mX', $result);
     }
 }
