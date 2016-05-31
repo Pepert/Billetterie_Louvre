@@ -14,3 +14,6 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+/src/Pepert/TicketingBundle/Entity/User.php~
+/src/Pepert/TicketingBundle/Entity/Transaction.php~
+/src/Pepert/TicketingBundle/Entity/Ticket.php~

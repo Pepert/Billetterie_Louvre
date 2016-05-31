@@ -2,10 +2,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Billetterie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="{{ asset('bundles/pepertticketing/images/facebook_picture.jpg') }}"/>
+    <title>Billetterie - Musée du Louvre</title>
 
     {% block stylesheets %}
+        <link rel="icon" type="image/png" href="{{ asset('bundles/pepertticketing/images/favicon.png') }}" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ asset('bundles/pepertticketing/css/main.css') }}" type="text/css">
     {% endblock %}
@@ -13,9 +15,16 @@
 
 <body style="background-image: url( {{ asset('bundles/pepertticketing/images/louvre_general_blur.jpg') }} ); height: 100%; ">
 <header>
-    <a href="{{ path('pepert_ticketing_homepage') }}">
+
+    {% if (app.request.get('_route') == 'pepert_ticketing_paiement_stripe_validated') or
+    (app.request.get('_route') == 'pepert_ticketing_paiement_paypal_validated') %}
         <img id="logo" src="{{ asset('bundles/pepertticketing/images/logo_louvre.png') }}" alt="Musée du Louvre"/>
-    </a>
+    {% else %}
+        <a href="{{ path('pepert_ticketing_homepage') }}">
+            <img id="logo" src="{{ asset('bundles/pepertticketing/images/logo_louvre.png') }}" alt="Musée du Louvre"/>
+        </a>
+    {% endif %}
+
     <div id="maintitle">
         <p id="smallmaintitle">Billetterie officielle</p>
         <p id="bigmaintitle">Musée du Louvre</p>

@@ -97,9 +97,8 @@ class TicketingControllerTest extends WebTestCase
         $typeTickets = 'Journée';
 
         $todayTime = 16;
-        $todayDate = $today->setTime(0,0,0);
 
-        if($dateVisite == $todayDate && $todayTime >= 14 && $typeTickets === 'Journée')
+        if($dateVisite == $today && $todayTime >= 14 && $typeTickets === 'Journée')
         {
             $test = 1;
         }
